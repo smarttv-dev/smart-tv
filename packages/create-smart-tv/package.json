@@ -38,13 +38,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/foridpathan/smart-tv.git",
+    "url": "https://github.com/smarttv-dev/smart-tv.git",
     "directory": "packages/create-smart-tv"
   },
   "bugs": {
-    "url": "https://github.com/foridpathan/smart-tv/issues"
+    "url": "https://github.com/smarttv-dev/smart-tv/issues"
   },
-  "homepage": "https://github.com/foridpathan/smart-tv/tree/main/packages/create-smart-tv#readme",
+  "homepage": "https://github.com/smarttv-dev/smart-tv/tree/main/packages/create-smart-tv#readme",
   "engines": {
     "node": ">=16"
   },

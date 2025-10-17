@@ -46,13 +46,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/foridpathan/smart-tv.git",
+    "url": "https://github.com/smarttv-dev/smart-tv.git",
     "directory": "packages/player"
   },
   "bugs": {
-    "url": "https://github.com/foridpathan/smart-tv/issues"
+    "url": "https://github.com/smarttv-dev/smart-tv/issues"
   },
-  "homepage": "https://github.com/foridpathan/smart-tv/tree/main/packages/player#readme",
+  "homepage": "https://github.com/smarttv-dev/smart-tv/tree/main/packages/player#readme",
   "dependencies": {
     "@smart-tv/ui": "workspace:*",
     "shaka-player": "^4.10.1"

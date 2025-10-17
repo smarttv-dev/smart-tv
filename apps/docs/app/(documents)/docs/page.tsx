@@ -333,7 +333,7 @@ export default function DocsIndex(): React.ReactElement {
           </p>
           <div className="space-y-3">
             <a 
-              href="https://github.com/foridpathan/smart-tv"
+              href="https://github.com/smarttv-dev/smart-tv"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -344,7 +344,7 @@ export default function DocsIndex(): React.ReactElement {
               GitHub Repository
             </a>
             <a 
-              href="https://github.com/foridpathan/smart-tv/issues"
+              href="https://github.com/smarttv-dev/smart-tv/issues"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -355,7 +355,7 @@ export default function DocsIndex(): React.ReactElement {
               Report an Issue
             </a>
             <a 
-              href="https://github.com/foridpathan/smart-tv/blob/main/CONTRIBUTING.md"
+              href="https://github.com/smarttv-dev/smart-tv/blob/main/CONTRIBUTING.md"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"

@@ -68,7 +68,7 @@ export default function Page(): React.ReactElement {
             </Link>
 
             <Link
-              href="https://github.com/foridpathan/smart-tv"
+              href="https://github.com/smarttv-dev/smart-tv"
               target="_blank"
               className="group inline-flex items-center gap-3 px-10 py-5 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-2 border-gray-300 dark:border-gray-600 hover:border-gray-900 dark:hover:border-gray-300 text-gray-900 dark:text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
             >
@@ -552,7 +552,7 @@ export default function App() {
             </Link>
 
             <Link
-              href="https://github.com/foridpathan/smart-tv"
+              href="https://github.com/smarttv-dev/smart-tv"
               target="_blank"
               className="group inline-flex items-center gap-3 px-10 py-5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border-2 border-white/50 hover:border-white text-white font-black rounded-2xl transition-all transform hover:scale-105"
             >

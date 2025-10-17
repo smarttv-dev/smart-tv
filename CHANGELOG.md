@@ -56,5 +56,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tailwind CSS integration
 - Smart TV optimizations out of the box
 
-[unreleased]: https://github.com/foridpathan/smart-tv/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/foridpathan/smart-tv/releases/tag/v0.1.0
+[unreleased]: https://github.com/smarttv-dev/smart-tv/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/smarttv-dev/smart-tv/releases/tag/v0.1.0

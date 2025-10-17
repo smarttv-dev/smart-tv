@@ -180,7 +180,7 @@ async function main() {
     console.log('  🎮 Remote control navigation');
     console.log('  📱 Responsive design for all TV sizes');
     console.log('');
-    console.log('Visit https://github.com/foridpathan/smart-tv for documentation');
+    console.log('Visit https://github.com/smarttv-dev/smart-tv for documentation');
     process.exit(0);
   }
   
@@ -273,7 +273,7 @@ async function main() {
     console.log('  🔍 Data fetching utilities for TV apps');
     console.log('');
     console.log('📖 Documentation:');
-    console.log('  Visit https://github.com/foridpathan/smart-tv');
+    console.log('  Visit https://github.com/smarttv-dev/smart-tv');
     console.log('  Check the README.md in your project for more details');
     console.log('');
     console.log('🎬 Happy coding! Build something amazing for Smart TV! ✨');
@@ -289,7 +289,7 @@ async function main() {
     console.error('  • Try running with sudo if permission issues persist (not recommended)');
     console.error('  • Check if the destination folder already exists');
     console.error('');
-    console.error('💬 Need help? Visit https://github.com/foridpathan/smart-tv/issues');
+    console.error('💬 Need help? Visit https://github.com/smarttv-dev/smart-tv/issues');
     process.exit(4);
   }
 }

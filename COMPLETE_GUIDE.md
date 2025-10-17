@@ -130,7 +130,7 @@ git push origin v0.1.0
 
 ### 5️⃣ Create GitHub Release
 
-1. Go to: https://github.com/foridpathan/smart-tv/releases/new
+1. Go to: https://github.com/smarttv-dev/smart-tv/releases/new
 2. Select tag: `v0.1.0`
 3. Title: `v0.1.0 - Initial Release`
 4. Copy content from `CHANGELOG.md`
@@ -359,7 +359,7 @@ Security vulnerability reporting process
 Standardized pull request template
 
 ### Check Your Compliance
-Visit: `https://github.com/foridpathan/smart-tv/community`
+Visit: `https://github.com/smarttv-dev/smart-tv/community`
 
 ---
 
@@ -377,7 +377,7 @@ Visit: `https://github.com/foridpathan/smart-tv/community`
 
 #### Step 2: Add Token to GitHub
 
-1. Go to https://github.com/foridpathan/smart-tv
+1. Go to https://github.com/smarttv-dev/smart-tv
 2. Click Settings
 3. Secrets and variables → Actions
 4. Click "New repository secret"
@@ -582,9 +582,9 @@ pnpm publish:cli             # Publish CLI only
 - 📝 [Changelog](./CHANGELOG.md)
 
 ### Community
-- 💬 [GitHub Discussions](https://github.com/foridpathan/smart-tv/discussions)
-- 🐛 [Issue Tracker](https://github.com/foridpathan/smart-tv/issues)
-- ⭐ [Star on GitHub](https://github.com/foridpathan/smart-tv)
+- 💬 [GitHub Discussions](https://github.com/smarttv-dev/smart-tv/discussions)
+- 🐛 [Issue Tracker](https://github.com/smarttv-dev/smart-tv/issues)
+- ⭐ [Star on GitHub](https://github.com/smarttv-dev/smart-tv)
 
 ### External Resources
 - [npm Documentation](https://docs.npmjs.com/)

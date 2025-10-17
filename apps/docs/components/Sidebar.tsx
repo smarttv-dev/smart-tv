@@ -226,7 +226,7 @@ export default function Sidebar(): React.ReactElement {
         </h4>
         <div className="space-y-2">
           <a
-            href="https://github.com/foridpathan/smart-tv"
+            href="https://github.com/smarttv-dev/smart-tv"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"

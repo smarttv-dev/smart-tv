@@ -156,7 +156,7 @@ Choose one method:
 ## 📝 Phase 8: GitHub Release
 
 ### Create Release
-- [ ] Go to https://github.com/foridpathan/smart-tv/releases/new
+- [ ] Go to https://github.com/smarttv-dev/smart-tv/releases/new
 - [ ] Select tag: v0.1.0
 - [ ] Title: "v0.1.0 - Initial Release"
 - [ ] Copy content from CHANGELOG.md
@@ -239,7 +239,7 @@ git tag -a v0.1.0 -m "Release v0.1.0"
 git push origin v0.1.0
 
 # 5. Create GitHub Release (via web interface)
-# https://github.com/foridpathan/smart-tv/releases/new
+# https://github.com/smarttv-dev/smart-tv/releases/new
 ```
 
 ---

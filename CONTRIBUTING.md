@@ -43,7 +43,7 @@ This project and everyone participating in it is governed by our [Code of Conduc
 
 3. **Add upstream remote**:
    ```bash
-   git remote add upstream https://github.com/foridpathan/smart-tv.git
+   git remote add upstream https://github.com/smarttv-dev/smart-tv.git
    ```
 
 4. **Install dependencies**:
@@ -91,7 +91,7 @@ The following packages are published to npm:
 
 ### Reporting Bugs
 
-Before creating bug reports, please check the [issue tracker](https://github.com/foridpathan/smart-tv/issues) as you might find that you don't need to create one.
+Before creating bug reports, please check the [issue tracker](https://github.com/smarttv-dev/smart-tv/issues) as you might find that you don't need to create one.
 
 When creating a bug report, include:
 
@@ -339,9 +339,9 @@ We follow [Semantic Versioning](https://semver.org/):
 
 ### Getting Help
 
-- 📖 [Documentation](https://github.com/foridpathan/smart-tv)
-- 💬 [GitHub Discussions](https://github.com/foridpathan/smart-tv/discussions)
-- 🐛 [Issue Tracker](https://github.com/foridpathan/smart-tv/issues)
+- 📖 [Documentation](https://github.com/smarttv-dev/smart-tv)
+- 💬 [GitHub Discussions](https://github.com/smarttv-dev/smart-tv/discussions)
+- 🐛 [Issue Tracker](https://github.com/smarttv-dev/smart-tv/issues)
 
 ### Communication Channels
 

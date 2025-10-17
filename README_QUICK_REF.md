@@ -68,7 +68,7 @@ git push origin v0.1.0
 ```
 
 ### Step 5: Create GitHub Release
-Go to: https://github.com/foridpathan/smart-tv/releases/new
+Go to: https://github.com/smarttv-dev/smart-tv/releases/new
 
 **That's it! Done! 🎉**
 

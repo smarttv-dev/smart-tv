@@ -117,7 +117,7 @@ Ensure each package has:
   "author": "ForidPathan",
   "repository": {
     "type": "git",
-    "url": "https://github.com/foridpathan/smart-tv.git",
+    "url": "https://github.com/smarttv-dev/smart-tv.git",
     "directory": "packages/package-name"
   },
   "keywords": [
@@ -127,9 +127,9 @@ Ensure each package has:
     "..."
   ],
   "bugs": {
-    "url": "https://github.com/foridpathan/smart-tv/issues"
+    "url": "https://github.com/smarttv-dev/smart-tv/issues"
   },
-  "homepage": "https://github.com/foridpathan/smart-tv#readme"
+  "homepage": "https://github.com/smarttv-dev/smart-tv#readme"
 }
 ```
 
@@ -294,7 +294,7 @@ git push --tags
 
 ### 3. Create GitHub Release
 
-1. Go to: https://github.com/foridpathan/smart-tv/releases/new
+1. Go to: https://github.com/smarttv-dev/smart-tv/releases/new
 2. Choose the tag created above
 3. Set release title: "v0.1.0 - Initial Release"
 4. Add release notes from CHANGELOG.md

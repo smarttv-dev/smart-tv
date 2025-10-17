@@ -350,10 +350,10 @@ Make sure your `tsconfig.json` includes:
 
 ## Getting Help
 
-- 📖 [Documentation](https://github.com/foridpathan/smart-tv)
-- 💬 [GitHub Discussions](https://github.com/foridpathan/smart-tv/discussions)
-- 🐛 [Issue Tracker](https://github.com/foridpathan/smart-tv/issues)
-- ⭐ [Star on GitHub](https://github.com/foridpathan/smart-tv)
+- 📖 [Documentation](https://github.com/smarttv-dev/smart-tv)
+- 💬 [GitHub Discussions](https://github.com/smarttv-dev/smart-tv/discussions)
+- 🐛 [Issue Tracker](https://github.com/smarttv-dev/smart-tv/issues)
+- ⭐ [Star on GitHub](https://github.com/smarttv-dev/smart-tv)
 
 ## Community
 

@@ -325,7 +325,7 @@ The project now meets GitHub's community standards:
 - ✅ Pull request template
 
 Check your compliance at:
-`https://github.com/foridpathan/smart-tv/community`
+`https://github.com/smarttv-dev/smart-tv/community`
 
 ## 🎯 npm Package Standards
 

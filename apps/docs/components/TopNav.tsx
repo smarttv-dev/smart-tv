@@ -78,7 +78,7 @@ export default function TopNav(): React.ReactElement {
                         </select>
 
                         <a
-                            href="https://github.com/foridpathan/smart-tv"
+                            href="https://github.com/smarttv-dev/smart-tv"
                             target="_blank"
                             rel="noreferrer"
                             className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
