@@ -53,13 +53,12 @@
     "url": "https://github.com/smarttv-dev/smart-tv/issues"
   },
   "homepage": "https://github.com/smarttv-dev/smart-tv/tree/main/packages/player#readme",
-  "dependencies": {
-    "@smart-tv/ui": "workspace:*",
-    "shaka-player": "^4.10.1"
-  },
+  "dependencies": {},
   "peerDependencies": {
+    "@smart-tv/ui": "workspace:*",
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "shaka-player": "^4.10.0"
   },
   "devDependencies": {
     "@smart-tv/eslint-config": "workspace:*",

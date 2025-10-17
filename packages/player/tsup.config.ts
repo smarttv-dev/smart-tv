@@ -5,11 +5,11 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
-  sourcemap: true,
+  sourcemap: false, // Disable sourcemaps for smaller bundle
   clean: true,
-  external: ['react', 'react-dom'],
-  target: 'es5', // Use ES2018 for better compatibility with modern dependencies
-  minify: false, // Keep readable for debugging
+  external: ['react', 'react-dom', 'shaka-player', '@smart-tv/ui'],
+  target: 'es5', 
+  minify: true, // Enable minification for production
   esbuildOptions(options) {
     options.banner = {
       js: '"use client"',
