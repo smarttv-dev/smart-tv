@@ -1,0 +1,21 @@
+/*
+  Shared Tailwind styles for the monorepo.
+
+  For older browsers that don't support modern CSS features (gap in flexbox,
+  CSS logical properties, etc.), include `tailwind-legacy.css` before this
+  file to apply fallbacks and PostCSS-transpiled rules.
+
+  Example (in your app's entry CSS):
+    @import "@smart-tv/tailwind-config/tailwind-legacy.css"; // legacy fallbacks
+    @import "@smart-tv/tailwind-config"; // main shared styles
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  --color-blue-1000: #2a8af6;
+  --color-purple-1000: #a853ba;
+  --color-red-1000: #e92a67;
+}

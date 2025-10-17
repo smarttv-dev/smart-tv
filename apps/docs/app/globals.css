@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "@smart-tv/tailwind-config";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --surface-rgb: 255, 255, 255;
+  --muted-rgb: 99, 102, 241;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* explicit theme overrides using data-theme attribute */
+html[data-theme="dark"], .dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 6, 7, 10;
+  --background-end-rgb: 12, 14, 19;
+  --surface-rgb: 12, 14, 19;
+  --muted-rgb: 99, 102, 241;
+}
+
+html[data-theme="light"], .light {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 240, 242, 245;
+  --background-end-rgb: 255, 255, 255;
+  --surface-rgb: 255, 255, 255;
+  --muted-rgb: 79, 70, 229;
+}
+
+/* layout helpers */
+.max-w-4xl {
+  max-width: 64rem;
+}
+
+.max-w-7xl {
+  max-width: 80rem;
+}
+
+/* make pre/code monospace */
+pre, code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+}
+
+/* surface helpers */
+.surface {
+  background-color: rgb(var(--surface-rgb));
+}
+
+.text-accent { color: rgb(var(--muted-rgb)); }
+
+/* elevated content panel used in layout */
+.content-panel {
+  background: white;
+  color: rgb(0,0,0);
+}
+
+html[data-theme="dark"] .content-panel, .dark .content-panel {
+  background: transparent;
+  color: rgb(255,255,255);
+}

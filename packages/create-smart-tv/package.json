@@ -1,0 +1,57 @@
+{
+  "name": "create-smart-tv-app",
+  "version": "1.0.0",
+  "description": "Create Smart TV applications with React and Smart TV packages - official CLI scaffolding tool",
+  "author": "ForidPathan",
+  "license": "MIT",
+  "bin": {
+    "create-smart-tv-app": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "template",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "echo \"no tests yet\""
+  },
+  "keywords": [
+    "smart-tv", 
+    "react", 
+    "vite", 
+    "tv", 
+    "ott", 
+    "streaming", 
+    "television", 
+    "scaffold", 
+    "template", 
+    "cli", 
+    "typescript",
+    "tailwindcss",
+    "remote-control",
+    "focus-management",
+    "media-player",
+    "create-app",
+    "boilerplate",
+    "starter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foridpathan/smart-tv.git",
+    "directory": "packages/create-smart-tv"
+  },
+  "bugs": {
+    "url": "https://github.com/foridpathan/smart-tv/issues"
+  },
+  "homepage": "https://github.com/foridpathan/smart-tv/tree/main/packages/create-smart-tv#readme",
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "minimist": "^1.2.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

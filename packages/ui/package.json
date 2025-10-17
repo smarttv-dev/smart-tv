@@ -1,0 +1,149 @@
+{
+  "name": "@smart-tv/ui",
+  "version": "0.1.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.mjs"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./core": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.mjs"
+    },
+    "./core/*": "./dist/*.js",
+    "./components": {
+      "import": "./dist/components/index.js",
+      "require": "./dist/components/index.js",
+      "default": "./dist/components/index.js"
+    },
+    "./components/*": "./dist/components/*.js",
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "require": "./dist/hooks/index.js",
+      "default": "./dist/hooks/index.js"
+    },
+    "./hooks/*": "./dist/hooks/*.js",
+    "./layout": {
+      "import": "./dist/layout/index.js",
+      "require": "./dist/layout/index.js",
+      "default": "./dist/layout/index.js"
+    },
+    "./layout/*": "./dist/layout/*.js",
+    "./overlay": {
+      "import": "./dist/overlay/index.js",
+      "require": "./dist/overlay/index.js",
+      "default": "./dist/overlay/index.js"
+    },
+    "./overlay/*": "./dist/overlay/*.js",
+    "./search": {
+      "import": "./dist/search/index.js",
+      "require": "./dist/search/index.js",
+      "default": "./dist/search/index.js"
+    },
+    "./search/*": "./dist/search/*.js",
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "require": "./dist/utils/index.js",
+      "default": "./dist/utils/index.js"
+    },
+    "./utils/*": "./dist/utils/*.js"
+  },
+  "typesVersions": {
+    "*": {
+      "core": [
+        "dist/core/index.d.ts"
+      ],
+      "core/*": [
+        "dist/core/*.d.ts"
+      ],
+      "components": [
+        "dist/components/index.d.ts"
+      ],
+      "components/*": [
+        "dist/components/*.d.ts"
+      ],
+      "hooks": [
+        "dist/hooks/index.d.ts"
+      ],
+      "hooks/*": [
+        "dist/hooks/*.d.ts"
+      ],
+      "layout": [
+        "dist/layout/index.d.ts"
+      ],
+      "layout/*": [
+        "dist/layout/*.d.ts"
+      ],
+      "overlay": [
+        "dist/overlay/index.d.ts"
+      ],
+      "overlay/*": [
+        "dist/overlay/*.d.ts"
+      ],
+      "search": [
+        "dist/search/index.d.ts"
+      ],
+      "search/*": [
+        "dist/search/*.d.ts"
+      ],
+      "utils": [
+        "dist/utils/index.d.ts"
+      ],
+      "utils/*": [
+        "dist/utils/*.d.ts"
+      ],
+      "*": [
+        "dist/*.d.ts",
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "license": "MIT",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "pnpm run build:components && pnpm run build:bundle && pnpm run build:styles",
+    "build:styles": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --no-layer",
+    "build:components": "tsc",
+    "build:bundle": "tsup src/index.ts --format cjs,esm --dts --out-dir dist --clean --target es5 --minify",
+    "check-types": "tsc --noEmit",
+    "dev:styles": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
+    "dev:components": "tsc --watch",
+    "lint": "eslint src"
+  },
+  "peerDependencies": {
+    "react": "^18",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@smart-tv/eslint-config": "workspace:*",
+    "@smart-tv/tailwind-config": "workspace:*",
+    "@smart-tv/typescript-config": "workspace:*",
+    "@swc/core": "^1.3.0",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.5.2",
+    "@types/react": "^18.2.0",
+    "autoprefixer": "^10.4.21",
+    "clsx": "^2.1.1",
+    "eslint": "^9.33.0",
+    "postcss": "8.4.35",
+    "postcss-discard-empty": "^7.0.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^3.4.13",
+    "tsup": "^8.5.0",
+    "typescript": "5.9.2"
+  },
+  "dependencies": {
+    "core-js": "^3.45.1",
+    "lodash": "^4.17.21",
+    "shaka-player": "^4.16.3"
+  }
+}

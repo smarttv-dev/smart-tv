@@ -1,0 +1,64 @@
+{
+  "name": "@smart-tv/query",
+  "version": "0.1.0",
+  "description": "Lightweight data fetching and caching utilities for Smart TV applications",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist",
+    "lint": "eslint",
+    "check-types": "tsc --noEmit",
+    "test": "echo \"no tests yet\""
+  },
+  "keywords": [
+    "smart-tv",
+    "react",
+    "query",
+    "data-fetching",
+    "cache",
+    "hooks",
+    "typescript"
+  ],
+  "author": "ForidPathan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foridpathan/smart-tv.git",
+    "directory": "packages/query"
+  },
+  "bugs": {
+    "url": "https://github.com/foridpathan/smart-tv/issues"
+  },
+  "homepage": "https://github.com/foridpathan/smart-tv/tree/main/packages/query#readme",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@smart-tv/eslint-config": "workspace:*",
+    "@types/react": "^18.2.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "core-js": "^3.45.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
