@@ -62,34 +62,66 @@ jobs:
       # - name: Run tests
       #   run: pnpm test
       
+      - name: Bump version
+        run: |
+          if [ "${{ github.event.inputs.packages }}" = "all" ]; then
+            pnpm version:${{ github.event.inputs.version }}
+          else
+            if [ "${{ github.event.inputs.packages }}" = "player" ]; then
+              cd packages/player && npm version ${{ github.event.inputs.version }} --no-git-tag-version
+            elif [ "${{ github.event.inputs.packages }}" = "query" ]; then
+              cd packages/query && npm version ${{ github.event.inputs.version }} --no-git-tag-version
+            elif [ "${{ github.event.inputs.packages }}" = "cli" ]; then
+              cd packages/create-smart-tv && npm version ${{ github.event.inputs.version }} --no-git-tag-version
+            fi
+          fi
+      
+      - name: Commit version changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "chore: bump version to ${{ github.event.inputs.version }}" || echo "No changes to commit"
+      
       - name: Publish all packages
         if: github.event.inputs.packages == 'all'
-        run: pnpm publish:packages
+        run: pnpm publish:packages --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Publish player package
         if: github.event.inputs.packages == 'player'
-        run: pnpm publish:player
+        run: pnpm publish:player --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Publish query package
         if: github.event.inputs.packages == 'query'
-        run: pnpm publish:query
+        run: pnpm publish:query --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Publish CLI package
         if: github.event.inputs.packages == 'cli'
-        run: pnpm publish:cli
+        run: pnpm publish:cli --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
-      - name: Create git tag
+      - name: Get published version and create tag
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          VERSION=$(node -p "require('./package.json').version")
+          
+          # Get version from the first published package
+          if [ "${{ github.event.inputs.packages }}" = "all" ] || [ "${{ github.event.inputs.packages }}" = "player" ]; then
+            VERSION=$(node -p "require('./packages/player/package.json').version")
+          elif [ "${{ github.event.inputs.packages }}" = "query" ]; then
+            VERSION=$(node -p "require('./packages/query/package.json').version")
+          elif [ "${{ github.event.inputs.packages }}" = "cli" ]; then
+            VERSION=$(node -p "require('./packages/create-smart-tv/package.json').version")
+          fi
+          
+          echo "Creating tag v$VERSION"
           git tag -a "v$VERSION" -m "Release v$VERSION"
           git push origin "v$VERSION"
+          git push origin main
