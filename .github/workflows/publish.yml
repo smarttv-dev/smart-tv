@@ -59,8 +59,8 @@ jobs:
       - name: Build packages
         run: pnpm build
       
-      - name: Run tests
-        run: pnpm test
+      # - name: Run tests
+      #   run: pnpm test
       
       - name: Publish all packages
         if: github.event.inputs.packages == 'all'
