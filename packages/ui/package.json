@@ -110,13 +110,12 @@
   "license": "MIT",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "pnpm run build:components && pnpm run build:bundle && pnpm run build:styles",
+    "build": "pnpm run build:bundle && pnpm run build:styles",
     "build:styles": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --no-layer",
-    "build:components": "tsc",
     "build:bundle": "tsup src/index.ts --format cjs,esm --dts --out-dir dist --clean --target es5 --minify",
     "check-types": "tsc --noEmit",
     "dev:styles": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
-    "dev:components": "tsc --watch",
+    "dev:bundle": "tsc --watch",
     "lint": "eslint src"
   },
   "peerDependencies": {
