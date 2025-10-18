@@ -1,6 +1,163 @@
 
 import Link from "next/link";
 
+// Platform brands configuration
+const platformBrands = [
+  {
+    id: "samsung-tizen",
+    name: "Samsung",
+    subtitle: "Tizen OS",
+    version: "v2.4+",
+    hoverColor: "blue",
+    logo: (
+      <svg className="w-auto h-10 group-hover:scale-110 transition-transform" viewBox="0 0 120 40" fill="none">
+        <text x="60" y="28" fontFamily="Arial, sans-serif" fontSize="24" fontWeight="bold" fill="currentColor" textAnchor="middle" className="fill-blue-600 dark:fill-blue-400">SAMSUNG</text>
+      </svg>
+    ),
+  },
+  {
+    id: "lg-webos",
+    name: "LG",
+    subtitle: "webOS",
+    version: "v3.0+",
+    hoverColor: "purple",
+    logo: (
+      <svg className="w-auto h-10 group-hover:scale-110 transition-transform" viewBox="0 0 80 40" fill="none">
+        <circle cx="20" cy="20" r="15" className="fill-purple-600 dark:fill-purple-400"/>
+        <text x="45" y="28" fontFamily="Arial, sans-serif" fontSize="22" fontWeight="bold" fill="currentColor" className="fill-purple-600 dark:fill-purple-400">LG</text>
+      </svg>
+    ),
+  },
+  {
+    id: "hisense-vidaa",
+    name: "Hisense",
+    subtitle: "VIDAA",
+    version: "v3+",
+    hoverColor: "green",
+    logo: (
+      <svg className="w-auto h-10 group-hover:scale-110 transition-transform" viewBox="0 0 120 40" fill="none">
+        <text x="60" y="28" fontFamily="Arial, sans-serif" fontSize="20" fontWeight="bold" fill="currentColor" textAnchor="middle" className="fill-green-600 dark:fill-green-400">VIDAA</text>
+      </svg>
+    ),
+  },
+  {
+    id: "android-tv",
+    name: "Android TV",
+    subtitle: "Android TV",
+    version: "v5.0+",
+    hoverColor: "emerald",
+    logo: (
+      <svg className="w-auto h-12 group-hover:scale-110 transition-transform" viewBox="0 0 48 48" fill="none">
+        <path d="M6 34.5V12.5C6 10.6 7.6 9 9.5 9H38.5C40.4 9 42 10.6 42 12.5V34.5C42 36.4 40.4 38 38.5 38H9.5C7.6 38 6 36.4 6 34.5Z" className="fill-emerald-600 dark:fill-emerald-400"/>
+        <path d="M13 21L19 21M13 27L29 27M35 21C35 19.3 33.7 18 32 18C30.3 18 29 19.3 29 21C29 22.7 30.3 24 32 24C33.7 24 35 22.7 35 21Z" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    id: "amazon-fire-tv",
+    name: "Amazon",
+    subtitle: "Fire TV",
+    version: "All Versions",
+    hoverColor: "orange",
+    logo: (
+      <svg className="w-auto h-10 group-hover:scale-110 transition-transform" viewBox="0 0 100 40" fill="none">
+        <path d="M15 8L8 20L15 32M25 12L28 28M38 12L35 28" className="stroke-orange-600 dark:stroke-orange-400" strokeWidth="3" strokeLinecap="round"/>
+        <text x="50" y="28" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" fill="currentColor" className="fill-orange-600 dark:fill-orange-400">amazon</text>
+      </svg>
+    ),
+  },
+  {
+    id: "apple-tv",
+    name: "Apple",
+    subtitle: "Apple TV",
+    version: "tvOS 10+",
+    hoverColor: "pink",
+    logo: (
+      <svg className="w-auto h-12 group-hover:scale-110 transition-transform" viewBox="0 0 48 48" fill="none">
+        <path d="M32 12.5C30.5 10.5 28 9.5 25.5 9.5C22.5 9.5 20 11 19 13.5C18.5 13.5 18 13.5 17.5 13.5C14.5 13.5 12 16 12 19C12 22 14.5 24.5 17.5 24.5H30.5C33.5 24.5 36 22 36 19C36 16.5 34.5 14 32 12.5Z" className="fill-gray-400 dark:fill-gray-500"/>
+        <path d="M24 26V38M24 38L19 33M24 38L29 33" className="stroke-pink-600 dark:stroke-pink-400" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M28 10C28 10 29 6 25 4" className="stroke-pink-600 dark:stroke-pink-400" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    id: "roku-tv",
+    name: "Roku",
+    subtitle: "Roku TV",
+    version: "OS 9.0+",
+    hoverColor: "violet",
+    logo: (
+      <svg className="w-auto h-10 group-hover:scale-110 transition-transform" viewBox="0 0 100 40" fill="none">
+        <text x="50" y="28" fontFamily="Arial, sans-serif" fontSize="22" fontWeight="bold" fill="currentColor" textAnchor="middle" className="fill-violet-600 dark:fill-violet-400">ROKU</text>
+      </svg>
+    ),
+  },
+  {
+    id: "vizio-smartcast",
+    name: "Vizio",
+    subtitle: "SmartCast",
+    version: "v3.0+",
+    hoverColor: "cyan",
+    logo: (
+      <svg className="w-auto h-10 group-hover:scale-110 transition-transform" viewBox="0 0 100 40" fill="none">
+        <text x="50" y="28" fontFamily="Arial, sans-serif" fontSize="22" fontWeight="bold" fill="currentColor" textAnchor="middle" className="fill-cyan-600 dark:fill-cyan-400">VIZIO</text>
+      </svg>
+    ),
+  },
+  {
+    id: "xbox",
+    name: "Xbox",
+    subtitle: "Xbox",
+    version: "All Versions",
+    hoverColor: "lime",
+    logo: (
+      <svg className="w-auto h-12 group-hover:scale-110 transition-transform" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="18" className="fill-lime-600 dark:fill-lime-400"/>
+        <path d="M24 12C24 12 18 16 18 24C18 24 18 18 24 18M24 12C24 12 30 16 30 24C30 24 30 18 24 18M24 18V36" className="stroke-white" strokeWidth="2.5" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    id: "playstation",
+    name: "PlayStation",
+    subtitle: "PlayStation",
+    version: "PS4/PS5",
+    hoverColor: "indigo",
+    logo: (
+      <svg className="w-auto h-10 group-hover:scale-110 transition-transform" viewBox="0 0 100 40" fill="none">
+        <text x="50" y="28" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" fill="currentColor" textAnchor="middle" className="fill-indigo-600 dark:fill-indigo-400">PlayStation</text>
+      </svg>
+    ),
+  },
+  {
+    id: "opera-tv",
+    name: "Opera",
+    subtitle: "Opera TV",
+    version: "All Versions",
+    hoverColor: "red",
+    logo: (
+      <svg className="w-auto h-12 group-hover:scale-110 transition-transform" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="16" className="fill-red-600 dark:fill-red-400"/>
+        <text x="24" y="30" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" fill="white" textAnchor="middle">O</text>
+      </svg>
+    ),
+  },
+  {
+    id: "html5-universal",
+    name: "Universal",
+    subtitle: "Any HTML5 Platform",
+    version: "Universal Support",
+    hoverColor: "blue",
+    isSpecial: true,
+    logo: (
+      <svg className="w-auto h-12 group-hover:scale-110 transition-transform" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="4" className="fill-gradient-to-br from-blue-500 to-purple-500"/>
+        <path d="M16 18L24 24L16 30M26 30H32" className="stroke-white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+];
+
 export default function Page(): React.ReactElement {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-950">
@@ -101,6 +258,155 @@ export default function Page(): React.ReactElement {
                 <div className="text-5xl font-black bg-gradient-to-r from-pink-600 to-red-600 dark:from-pink-400 dark:to-red-400 bg-clip-text text-transparent mb-2">MIT</div>
                 <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">Open Source</div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Platform Support Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 dark:from-gray-900 dark:via-blue-950/20 dark:to-purple-950/20 relative overflow-hidden border-y border-gray-200/50 dark:border-gray-800/50">
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 bg-grid-gray-200/50 dark:bg-grid-gray-800/30 opacity-30"></div>
+        
+        {/* Floating Gradient Orbs */}
+        <div className="absolute top-0 left-1/3 w-72 h-72 bg-blue-400/20 dark:bg-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/3 w-72 h-72 bg-purple-400/20 dark:bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 backdrop-blur-sm border border-green-200/50 dark:border-green-800/50 text-green-700 dark:text-green-300 text-sm font-bold mb-6 shadow-lg">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Universal Compatibility
+            </div>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
+              Works on{" "}
+              <span className="relative inline-block">
+                <span className="absolute inset-0 blur-xl bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 opacity-30"></span>
+                <span className="relative bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 dark:from-green-400 dark:via-emerald-400 dark:to-teal-400 bg-clip-text text-transparent">
+                  Every Platform
+                </span>
+              </span>
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              Built for <span className="font-bold text-green-600 dark:text-green-400">Chromium 30+</span> and legacy browsers. 
+              Supports all major Smart TV platforms including{" "}
+              <span className="font-semibold">Tizen, webOS, VIDAA, Android TV, Fire TV</span>, and any platform that runs HTML, CSS & JavaScript.
+            </p>
+          </div>
+
+          {/* Platform Logos Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
+            {platformBrands.map((platform) => (
+              <div
+                key={platform.id}
+                className={`group relative ${
+                  platform.isSpecial
+                    ? "bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 dark:from-blue-500/5 dark:via-purple-500/5 dark:to-pink-500/5 border-dashed"
+                    : "bg-white/80 dark:bg-gray-900/80"
+                } backdrop-blur-xl rounded-2xl p-6 border-2 border-gray-200/50 dark:border-gray-700/50 hover:border-${platform.hoverColor}-500 dark:hover:border-${platform.hoverColor}-400 transition-all duration-300 hover:shadow-xl hover:shadow-${platform.hoverColor}-500/20 hover:-translate-y-2 flex flex-col items-center justify-center min-h-[140px]`}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br from-${platform.hoverColor}-500/0 to-${platform.hoverColor}-500/0 group-hover:from-${platform.hoverColor}-500/5 group-hover:to-${platform.hoverColor}-500/10 rounded-2xl transition-all`}></div>
+                <div className="relative text-center w-full">
+                  <div className="mb-3 flex items-center justify-center h-12">
+                    {platform.logo}
+                  </div>
+                  <h4 className={`font-black ${
+                    platform.isSpecial
+                      ? "bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent"
+                      : "text-gray-900 dark:text-white"
+                  } text-sm mb-1`}>
+                    {platform.subtitle}
+                  </h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+                    {platform.version}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Technical Details Cards */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Legacy Browser Support */}
+            <div className="group relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl p-6 border-2 border-gray-200/50 dark:border-gray-700/50 hover:border-green-500 dark:hover:border-green-400 transition-all duration-300 hover:shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-emerald-500/0 group-hover:from-green-500/5 group-hover:to-emerald-500/5 rounded-2xl transition-all"></div>
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center text-white mb-4 shadow-lg shadow-green-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all">
+                  <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                  Legacy Browser Support
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">
+                  Optimized for <span className="font-bold text-green-600 dark:text-green-400">Chromium 30+</span> and older browser engines found in Smart TVs from 2013+
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs font-bold">ES5 Compatible</span>
+                  <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-xs font-bold">Polyfills Included</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Standards-Based */}
+            <div className="group relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl p-6 border-2 border-gray-200/50 dark:border-gray-700/50 hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-300 hover:shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/5 group-hover:to-purple-500/5 rounded-2xl transition-all"></div>
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white mb-4 shadow-lg shadow-blue-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all">
+                  <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  Standards-Based
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">
+                  Built on web standards (HTML5, CSS3, ES6+) that work on any platform supporting modern web technologies
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs font-bold">HTML5</span>
+                  <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-bold">CSS3</span>
+                  <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-xs font-bold">JavaScript</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Performance Optimized */}
+            <div className="group relative bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl p-6 border-2 border-gray-200/50 dark:border-gray-700/50 hover:border-orange-500 dark:hover:border-orange-400 transition-all duration-300 hover:shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-red-500/0 group-hover:from-orange-500/5 group-hover:to-red-500/5 rounded-2xl transition-all"></div>
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center text-white mb-4 shadow-lg shadow-orange-500/30 group-hover:scale-110 group-hover:rotate-3 transition-all">
+                  <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-black text-gray-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                  Performance Optimized
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">
+                  Lightweight bundle, minimal dependencies, and optimized rendering for smooth performance on low-powered TV hardware
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-xs font-bold">Tree-Shakeable</span>
+                  <span className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-xs font-bold">60fps UI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Note */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 backdrop-blur-sm rounded-xl border border-green-200/50 dark:border-green-800/50">
+              <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-sm text-gray-700 dark:text-gray-300">
+                <span className="font-bold">Works everywhere:</span> If your TV can run HTML, CSS, and JavaScript, it can run Smart TV Library
+              </p>
             </div>
           </div>
         </div>
@@ -310,6 +616,365 @@ export default function Page(): React.ReactElement {
                   </svg>
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bundle Size Comparison Section */}
+      <section className="py-32 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute inset-0 bg-grid-gray-100 dark:bg-grid-gray-900 opacity-20"></div>
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-green-400/10 dark:bg-green-600/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-400/10 dark:bg-blue-600/5 rounded-full blur-3xl"></div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 backdrop-blur-sm border border-green-200/50 dark:border-green-800/50 text-green-700 dark:text-green-300 text-sm font-bold mb-6 shadow-lg">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Incredibly Lightweight
+            </div>
+            <h2 className="text-5xl sm:text-6xl font-black text-gray-900 dark:text-white mb-6 leading-tight">
+              Optimized{" "}
+              <span className="relative inline-block">
+                <span className="absolute inset-0 blur-xl bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 opacity-30"></span>
+                <span className="relative bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 dark:from-green-400 dark:via-emerald-400 dark:to-teal-400 bg-clip-text text-transparent">
+                  Bundle Sizes
+                </span>
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Minimal footprint, maximum performance. Our packages are tree-shakeable and optimized for Smart TV constraints.
+            </p>
+          </div>
+
+          {/* Bundle Size Cards */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {/* UI Package */}
+            <div className="group relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border-2 border-gray-200/50 dark:border-gray-700/50 hover:border-blue-500 dark:hover:border-blue-400 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 transform hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-blue-500/0 group-hover:from-blue-500/5 group-hover:via-purple-500/5 group-hover:to-blue-500/5 rounded-3xl transition-all duration-500" />
+              
+              <div className="relative">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-xl shadow-blue-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343" />
+                  </svg>
+                </div>
+
+                <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-4">
+                  @smart-tv/ui
+                </h3>
+
+                {/* Bundle Size */}
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-5xl font-black bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+                      45
+                    </span>
+                    <span className="text-2xl font-bold text-gray-600 dark:text-gray-400">KB</span>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                    gzipped • tree-shakeable
+                  </p>
+                </div>
+
+                {/* Size Bar */}
+                <div className="relative h-3 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden mb-4">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" style={{ width: '45%' }}></div>
+                </div>
+
+                {/* Features */}
+                <div className="space-y-2">
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    17+ Components
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Spatial Navigation
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Zero Dependencies
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Query Package */}
+            <div className="group relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border-2 border-gray-200/50 dark:border-gray-700/50 hover:border-purple-500 dark:hover:border-purple-400 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 transform hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-pink-500/0 to-purple-500/0 group-hover:from-purple-500/5 group-hover:via-pink-500/5 group-hover:to-purple-500/5 rounded-3xl transition-all duration-500" />
+              
+              <div className="relative">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-xl shadow-purple-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                </div>
+
+                <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-4">
+                  @smart-tv/query
+                </h3>
+
+                {/* Bundle Size */}
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-5xl font-black bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+                      12
+                    </span>
+                    <span className="text-2xl font-bold text-gray-600 dark:text-gray-400">KB</span>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                    gzipped • tree-shakeable
+                  </p>
+                </div>
+
+                {/* Size Bar */}
+                <div className="relative h-3 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden mb-4">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full" style={{ width: '12%' }}></div>
+                </div>
+
+                {/* Features */}
+                <div className="space-y-2">
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Smart Caching
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Auto Refetching
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Minimal Overhead
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Player Package */}
+            <div className="group relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border-2 border-gray-200/50 dark:border-gray-700/50 hover:border-pink-500 dark:hover:border-pink-400 transition-all duration-500 hover:shadow-2xl hover:shadow-pink-500/20 transform hover:-translate-y-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/0 via-red-500/0 to-pink-500/0 group-hover:from-pink-500/5 group-hover:via-red-500/5 group-hover:to-pink-500/5 rounded-3xl transition-all duration-500" />
+              
+              <div className="relative">
+                {/* Icon */}
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-xl shadow-pink-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+
+                <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-4">
+                  @smart-tv/player
+                </h3>
+
+                {/* Bundle Size */}
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-5xl font-black bg-gradient-to-r from-pink-600 to-red-600 dark:from-pink-400 dark:to-red-400 bg-clip-text text-transparent">
+                      78
+                    </span>
+                    <span className="text-2xl font-bold text-gray-600 dark:text-gray-400">KB</span>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                    gzipped • includes Shaka Player
+                  </p>
+                </div>
+
+                {/* Size Bar */}
+                <div className="relative h-3 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden mb-4">
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-red-600 rounded-full" style={{ width: '78%' }}></div>
+                </div>
+
+                {/* Features */}
+                <div className="space-y-2">
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Adaptive Streaming
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    DRM Support
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700 dark:text-gray-300">
+                    <svg className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Full Controls
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Comparison Chart */}
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border-2 border-gray-200/50 dark:border-gray-700/50 shadow-2xl">
+            <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-8 text-center">
+              How We Compare
+            </h3>
+            
+            <div className="space-y-6">
+              {/* Our Library - Combined */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Smart TV Library</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">All 3 packages combined</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">
+                      135 KB
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
+                  </div>
+                </div>
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full shadow-lg" style={{ width: '27%' }}></div>
+                </div>
+              </div>
+
+              {/* Competitor 1 */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xs">A</span>
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Material-UI</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Popular UI framework</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
+                      350 KB
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
+                  </div>
+                </div>
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '70%' }}></div>
+                </div>
+              </div>
+
+              {/* Competitor 2 */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xs">B</span>
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Ant Design</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Enterprise UI library</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
+                      500 KB
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
+                  </div>
+                </div>
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+
+              {/* Competitor 3 */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xs">C</span>
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Chakra UI</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Modular UI framework</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
+                      280 KB
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
+                  </div>
+                </div>
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '56%' }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Stats Summary */}
+            <div className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
+              <div className="grid grid-cols-3 gap-6 text-center">
+                <div className="group">
+                  <div className="text-4xl font-black bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent mb-2">
+                    2.6x
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
+                    Smaller than Material-UI
+                  </p>
+                </div>
+                <div className="group">
+                  <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-2">
+                    3.7x
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
+                    Smaller than Ant Design
+                  </p>
+                </div>
+                <div className="group">
+                  <div className="text-4xl font-black bg-gradient-to-r from-pink-600 to-red-600 dark:from-pink-400 dark:to-red-400 bg-clip-text text-transparent mb-2">
+                    2.1x
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
+                    Smaller than Chakra UI
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Note */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10 backdrop-blur-sm rounded-2xl border border-green-200/50 dark:border-green-800/50">
+              <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <p className="text-gray-700 dark:text-gray-300">
+                <span className="font-bold">Performance matters:</span> Optimized for low-powered TV hardware with minimal bundle size and maximum efficiency
+              </p>
             </div>
           </div>
         </div>

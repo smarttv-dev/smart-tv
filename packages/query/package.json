@@ -53,9 +53,7 @@
     "@smart-tv/eslint-config": "workspace:*",
     "@types/react": "^18.2.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.6.0"
-  },
-  "dependencies": {
+    "typescript": "^5.6.0",
     "core-js": "^3.45.1"
   },
   "publishConfig": {
