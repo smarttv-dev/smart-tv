@@ -6,6 +6,8 @@ A comprehensive toolkit for building Smart TV applications with React, TypeScrip
 [![Node Version](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://pnpm.io/)
 
+> **📚 [Documentation](./apps/docs)** | **🚀 [Quick Deploy](./DEPLOY_NOW.md)** | **📖 [Getting Started](./GETTING_STARTED.md)**
+
 ## 🌟 Features
 
 - **📦 Modular Packages**: Three core packages for different aspects of Smart TV development
