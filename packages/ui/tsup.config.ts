@@ -5,7 +5,7 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
-  sourcemap: true,
+  sourcemap: false, // Disabled to reduce package size (was adding 1.5MB)
   clean: true,
   external: ['react', 'react-dom'],
   target: 'es5', 
