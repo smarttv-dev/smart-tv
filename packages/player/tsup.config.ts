@@ -5,7 +5,7 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,
-  sourcemap: false, // Disable sourcemaps for smaller bundle
+  sourcemap: false, 
   clean: true,
   external: ['react', 'react-dom', 'shaka-player', '@smart-tv/ui'],
   target: 'es5', 

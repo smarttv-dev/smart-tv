@@ -673,7 +673,7 @@ export default function Page(): React.ReactElement {
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2 mb-2">
                     <span className="text-5xl font-black bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
-                      45
+                      350
                     </span>
                     <span className="text-2xl font-bold text-gray-600 dark:text-gray-400">KB</span>
                   </div>
@@ -731,7 +731,7 @@ export default function Page(): React.ReactElement {
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2 mb-2">
                     <span className="text-5xl font-black bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
-                      12
+                      124
                     </span>
                     <span className="text-2xl font-bold text-gray-600 dark:text-gray-400">KB</span>
                   </div>
@@ -790,7 +790,7 @@ export default function Page(): React.ReactElement {
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2 mb-2">
                     <span className="text-5xl font-black bg-gradient-to-r from-pink-600 to-red-600 dark:from-pink-400 dark:to-red-400 bg-clip-text text-transparent">
-                      78
+                      400
                     </span>
                     <span className="text-2xl font-bold text-gray-600 dark:text-gray-400">KB</span>
                   </div>
@@ -829,78 +829,85 @@ export default function Page(): React.ReactElement {
             </div>
           </div>
 
-          {/* Comparison Chart */}
-          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border-2 border-gray-200/50 dark:border-gray-700/50 shadow-2xl">
-            <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-8 text-center">
-              How We Compare
-            </h3>
+          {/* Query Comparison Chart */}
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border-2 border-purple-200/50 dark:border-purple-700/50 shadow-2xl mb-8">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+              </div>
+              <h3 className="text-3xl font-black text-gray-900 dark:text-white">
+                Data Fetching Libraries
+              </h3>
+            </div>
             
             <div className="space-y-6">
-              {/* Our Library - Combined */}
+              {/* Smart TV Query */}
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Smart TV Library</h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">All 3 packages combined</p>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">@smart-tv/query</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">TV-optimized data fetching</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-black bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">
-                      135 KB
+                    <div className="text-3xl font-black bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+                      124 KB
                     </div>
                     <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
                   </div>
                 </div>
                 <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full shadow-lg" style={{ width: '27%' }}></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full shadow-lg" style={{ width: '25%' }}></div>
                 </div>
               </div>
 
-              {/* Competitor 1 */}
+              {/* React Query */}
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <span className="text-white font-black text-xs">A</span>
+                      <span className="text-white font-black text-xs">RQ</span>
                     </div>
                     <div>
-                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Material-UI</h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">Popular UI framework</p>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">React Query</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">TanStack Query v5</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
-                      350 KB
+                      733 KB
                     </div>
                     <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
                   </div>
                 </div>
                 <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '70%' }}></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '90%' }}></div>
                 </div>
               </div>
 
-              {/* Competitor 2 */}
+              {/* RTK Query */}
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <span className="text-white font-black text-xs">B</span>
+                      <span className="text-white font-black text-xs">RTK</span>
                     </div>
                     <div>
-                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Ant Design</h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">Enterprise UI library</p>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">RTK Query</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Redux Toolkit Query</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
-                      500 KB
+                      6870 KB
                     </div>
                     <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
                   </div>
@@ -910,27 +917,27 @@ export default function Page(): React.ReactElement {
                 </div>
               </div>
 
-              {/* Competitor 3 */}
+              {/* SWR */}
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
-                      <span className="text-white font-black text-xs">C</span>
+                      <span className="text-white font-black text-xs">SW</span>
                     </div>
                     <div>
-                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Chakra UI</h4>
-                      <p className="text-xs text-gray-600 dark:text-gray-400">Modular UI framework</p>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">SWR</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Vercel&apos;s data fetching</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
-                      280 KB
+                      267 KB
                     </div>
                     <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
                   </div>
                 </div>
                 <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '56%' }}></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '58%' }}></div>
                 </div>
               </div>
             </div>
@@ -939,30 +946,152 @@ export default function Page(): React.ReactElement {
             <div className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
               <div className="grid grid-cols-3 gap-6 text-center">
                 <div className="group">
-                  <div className="text-4xl font-black bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent mb-2">
-                    2.6x
+                  <div className="text-4xl font-black bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
+                    3.5x
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
-                    Smaller than Material-UI
+                    Smaller than React Query
                   </p>
                 </div>
                 <div className="group">
-                  <div className="text-4xl font-black bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-2">
-                    3.7x
+                  <div className="text-4xl font-black bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
+                    14x
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
-                    Smaller than Ant Design
+                    Smaller than RTK Query
                   </p>
                 </div>
                 <div className="group">
-                  <div className="text-4xl font-black bg-gradient-to-r from-pink-600 to-red-600 dark:from-pink-400 dark:to-red-400 bg-clip-text text-transparent mb-2">
-                    2.1x
+                  <div className="text-4xl font-black bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
+                    2.3x
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 font-semibold">
-                    Smaller than Chakra UI
+                    Smaller than SWR
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Player Comparison Chart */}
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-8 border-2 border-pink-200/50 dark:border-pink-700/50 shadow-2xl">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="w-12 h-12 bg-gradient-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-3xl font-black text-gray-900 dark:text-white">
+                Video Player Libraries
+              </h3>
+            </div>
+            
+            <div className="space-y-6">
+              {/* Smart TV Player */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">@smart-tv/player</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Shaka + TV controls + DRM</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black bg-gradient-to-r from-pink-600 to-red-600 dark:from-pink-400 dark:to-red-400 bg-clip-text text-transparent">
+                      400 KB
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
+                  </div>
+                </div>
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-red-600 rounded-full shadow-lg" style={{ width: '10%' }}></div>
+                </div>
+              </div>
+
+              {/* Shaka Player Core */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xs">SP</span>
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Shaka Player</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Core library only</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
+                      34200 KB
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
+                  </div>
+                </div>
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '99%' }}></div>
+                </div>
+              </div>
+
+              {/* Video.js */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xs">VJ</span>
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">Video.js</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Popular HTML5 player</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
+                      15800 KB
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
+                  </div>
+                </div>
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '75%' }}></div>
+                </div>
+              </div>
+
+              {/* HLS.js */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-500 rounded-xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-black text-xs">HL</span>
+                    </div>
+                    <div>
+                      <h4 className="font-black text-gray-900 dark:text-white text-lg">HLS.js</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">HLS streaming library</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-gray-700 dark:text-gray-300">
+                      24500 KB
+                    </div>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 font-medium">gzipped</p>
+                  </div>
+                </div>
+                <div className="relative h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full" style={{ width: '85%' }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Info Note */}
+            <div className="mt-8 p-4 bg-pink-50 dark:bg-pink-900/20 border border-pink-200 dark:border-pink-800 rounded-xl">
+              <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                <span className="font-bold text-pink-600 dark:text-pink-400">Complete Solution:</span> @smart-tv/player includes Shaka Player core + React components + TV-optimized controls + DRM support + spatial navigation integration - all in one package!
+              </p>
             </div>
           </div>
 
