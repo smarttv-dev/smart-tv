@@ -134,8 +134,8 @@ importers:
   apps/docs:
     dependencies:
       '@smart-tv/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
+        specifier: ^1.1.0
+        version: 1.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       next:
         specifier: ^15.4.2
         version: 15.5.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -1822,6 +1822,12 @@ packages:
     resolution: {integrity: sha512-6iKDCVSIUQ8jPMoIV0OytRKniaYyy5EbY/RRydmLW8ZR3cEBhxbWl5ro0rkUNe0ef6sScvhbY79HrjRm8i3vDQ==}
     cpu: [x64]
     os: [win32]
+
+  '@smart-tv/ui@1.1.0':
+    resolution: {integrity: sha512-xg51uqvrEnsR3d2Pzk6oflg48UoDlUpzBmfqvsGCwXXzpugqZiJoIIxG2yx3bcfbcKO1mGewWiDpuWifgQLJGg==}
+    peerDependencies:
+      react: ^18
+      react-dom: ^18.3.1
 
   '@swc/core-darwin-arm64@1.13.5':
     resolution: {integrity: sha512-lKNv7SujeXvKn16gvQqUQI5DdyY8v7xcoO3k06/FJbHJS90zEwZdQiMNRiqpYw/orU543tPaWgz7cIYWhbopiQ==}
@@ -4329,7 +4335,6 @@ packages:
 
   shaka-player@4.16.3:
     resolution: {integrity: sha512-KFvcg78uwoAyYJAlEa8y673XpPZeQCVG9L1ikoCSUMhCHeNNkNiG1FB4LZwGYN1IrwVEPH3IJVpWoB7RU4d0HA==}
-    engines: {node: '>=18'}
 
   sharp@0.34.4:
     resolution: {integrity: sha512-FUH39xp3SBPnxWvd5iib1X8XY7J0K0X7d93sie9CJg2PO8/7gmg89Nve6OjItK53/MlAushNNxteBYfM6DEuoA==}
@@ -6167,6 +6172,14 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.52.0':
     optional: true
+
+  '@smart-tv/ui@1.1.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      core-js: 3.45.1
+      lodash: 4.17.21
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      shaka-player: 4.16.3
 
   '@swc/core-darwin-arm64@1.13.5':
     optional: true
