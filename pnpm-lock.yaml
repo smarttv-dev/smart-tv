@@ -233,18 +233,12 @@ importers:
 
   packages/player:
     dependencies:
-      '@smart-tv/ui':
-        specifier: workspace:*
-        version: link:../ui
       react:
         specifier: '>=16.8.0'
         version: 19.1.1
       react-dom:
         specifier: '>=16.8.0'
         version: 19.1.1(react@19.1.1)
-      shaka-player:
-        specifier: ^4.10.1
-        version: 4.16.3
     devDependencies:
       '@babel/core':
         specifier: ^7.28.3
@@ -255,6 +249,9 @@ importers:
       '@smart-tv/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@smart-tv/ui':
+        specifier: workspace:*
+        version: link:../ui
       '@tailwindcss/postcss7-compat':
         specifier: ^2.2.17
         version: 2.2.17
@@ -309,6 +306,9 @@ importers:
       postcss-preset-env:
         specifier: ^7.8.3
         version: 7.8.3(postcss@8.5.6)
+      shaka-player:
+        specifier: ^4.10.0
+        version: 4.16.3
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1

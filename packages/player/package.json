@@ -60,6 +60,7 @@
     "shaka-player": "^4.10.0"
   },
   "devDependencies": {
+    "shaka-player": "^4.10.0",
     "@smart-tv/ui": "workspace:*",
     "@smart-tv/eslint-config": "workspace:*",
     "@babel/core": "^7.28.3",
