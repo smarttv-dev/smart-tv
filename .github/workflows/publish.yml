@@ -52,12 +52,12 @@ jobs:
       
       - name: Run linting
         run: pnpm lint
-      
-      - name: Run type checking
-        run: pnpm check-types
-      
+       
       - name: Build packages
         run: pnpm build
+        
+      - name: Run type checking
+        run: pnpm check-types
       
       # - name: Run tests
       #   run: pnpm test
