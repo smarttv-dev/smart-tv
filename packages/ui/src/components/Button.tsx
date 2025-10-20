@@ -1,5 +1,4 @@
-
-import * as React from "react";
+import { CSSProperties, ReactNode, RefObject, useEffect } from "react";
 import { KeyPressDetails } from "../core";
 import { useFocusable } from "../hooks";
 import type {
@@ -14,13 +13,13 @@ import { cn } from "../utils";
 type RenderProps = {
   focused: boolean;
   focusSelf: () => void;
-  ref: React.RefObject<HTMLElement> | null;
+  ref: RefObject<HTMLElement> | null;
   focusKey: string;
   payload?: Record<string, unknown>;
 };
 
 type ButtonProps = {
-  children?: React.ReactNode | ((props: RenderProps) => React.ReactNode);
+  children?: ReactNode | ((props: RenderProps) => ReactNode);
   onBlur?: BlurHandler;
   onEnterPress?: EnterPressHandler | undefined;
   onFocus?: FocusHandler;
@@ -29,7 +28,7 @@ type ButtonProps = {
   focusKey: string;
   className?: string;
   active?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   disabled?: boolean;
   forceFocus?: boolean;
   hover?: boolean;
@@ -65,7 +64,7 @@ export function Button(props: ButtonProps) {
       focusKey,
     },
   });
-  React.useEffect(() => {
+  useEffect(() => {
     if (forceFocus) {
       focusSelf();
     }

@@ -1,5 +1,4 @@
-import * as React from "react";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, createElement, ReactNode, useContext, useMemo, useState } from "react";
 import {
     getCurrentFocusKey,
     InitOptions,
@@ -31,7 +30,7 @@ export function AppProvider({
         debug: false,
     },
 }: {
-    children: React.ReactNode;
+    children: ReactNode;
     initialLabel?: string;
     init?: InitOptions
 }) {
@@ -53,7 +52,7 @@ export function AppProvider({
         setRtl: (rtl: boolean) => navigationUpdateRtl(rtl),
     }), [label]);
 
-    return React.createElement(AppContext.Provider, { value }, children);
+    return createElement(AppContext.Provider, { value }, children);
 }
 
 export function useAppProvider() {

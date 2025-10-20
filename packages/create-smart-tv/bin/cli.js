@@ -172,15 +172,7 @@ async function main() {
     console.log('  pnpm create smart-tv-app streaming-platform');
     console.log('  yarn create smart-tv-app cinema-hub');
     console.log('');
-    console.log('🌟 Features:');
-    console.log('  📺 Smart TV optimized components');
-    console.log('  ⚡ Vite for lightning-fast development');
-    console.log('  🎨 TailwindCSS for modern styling');
-    console.log('  🔧 Full TypeScript support');
-    console.log('  🎮 Remote control navigation');
-    console.log('  📱 Responsive design for all TV sizes');
-    console.log('');
-    console.log('Visit https://github.com/smarttv-dev/smart-tv for documentation');
+    console.log('Visit https://smart-tv-docs.vercel.app for documentation');
     process.exit(0);
   }
   
@@ -247,36 +239,12 @@ async function main() {
     await updatePackageJson(packageJsonPath, name, dest);
     
     console.log('');
-    console.log('🎉 Smart TV project created successfully!');
+    console.log('Smart TV project created successfully!');
     console.log('');
-    console.log(`📁 Project location: ${dest}`);
-    console.log('');
-    console.log('🚀 Get started:');
+    console.log('Get started:');
     console.log(`  cd ${name}`);
     console.log('  npm install     # Install dependencies');
     console.log('  npm run dev     # Start development server');
-    console.log('');
-    console.log('📚 Available scripts:');
-    console.log('  npm run dev     # Start development server (usually http://localhost:5173)');
-    console.log('  npm run build   # Build for production');
-    console.log('  npm run preview # Preview production build');
-    console.log('  npm run lint    # Run ESLint for code quality');
-    console.log('');
-    console.log('🌟 What you get:');
-    console.log('  📺 Smart TV optimized navigation with focus management');
-    console.log('  ⚡ Vite for lightning-fast development and HMR');
-    console.log('  🎨 TailwindCSS for beautiful, responsive styling');
-    console.log('  🔧 Full TypeScript support with strict mode');
-    console.log('  🎮 Remote control navigation (arrow keys, enter)');
-    console.log('  📱 Responsive design for all TV screen sizes');
-    console.log('  🎬 Media player components ready to use');
-    console.log('  🔍 Data fetching utilities for TV apps');
-    console.log('');
-    console.log('📖 Documentation:');
-    console.log('  Visit https://github.com/smarttv-dev/smart-tv');
-    console.log('  Check the README.md in your project for more details');
-    console.log('');
-    console.log('🎬 Happy coding! Build something amazing for Smart TV! ✨');
     console.log('');
   } catch (err) {
     console.error('');

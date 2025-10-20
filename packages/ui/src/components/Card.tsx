@@ -1,25 +1,25 @@
-import * as React from "react";
+import { forwardRef, HTMLAttributes, ReactNode, RefObject, useImperativeHandle } from "react";
 import { FocusContext, useFocusable, UseFocusableConfig } from "../hooks";
 import { cn } from "../utils";
 
 type RenderProps = {
   focused: boolean;
   focusSelf: () => void;
-  ref: React.RefObject<HTMLElement> | null;
+  ref: RefObject<HTMLElement> | null;
   focusKey: string;
   payload?: unknown;
 };
 
-type CardProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> & {
+type CardProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> & {
   onSelect?: () => void;
   focusKey?: string;
   focusable?: boolean;
-  children?: React.ReactNode | ((props: RenderProps) => React.ReactNode);
+  children?: ReactNode | ((props: RenderProps) => ReactNode);
   payload?: unknown;
   active?: string;
 } & Partial<UseFocusableConfig>;
 
-const Card = React.forwardRef<
+const Card = forwardRef<
   HTMLDivElement,
   CardProps
 >(({ className, focusable = true, active, children, ...rest }, ref) => {
@@ -41,7 +41,7 @@ const Card = React.forwardRef<
     onBlur,
     extraProps,
     ...htmlProps
-  } = rest as Partial<UseFocusableConfig> & React.HTMLAttributes<HTMLDivElement>;
+  } = rest as Partial<UseFocusableConfig> & HTMLAttributes<HTMLDivElement>;
 
   const focusConfig: UseFocusableConfig = {
     focusable,
@@ -66,7 +66,7 @@ const Card = React.forwardRef<
     focusConfig
   );
 
-  React.useImperativeHandle(ref, () => innerRef.current, [innerRef]);
+  useImperativeHandle(ref, () => innerRef.current, [innerRef]);
 
   // Provide the Card's focusKey to nested focusables via FocusContext
   return (
@@ -78,7 +78,7 @@ const Card = React.forwardRef<
           className,
           focused && active,
         )}
-        {...(htmlProps as React.HTMLAttributes<HTMLDivElement>)}
+        {...(htmlProps as HTMLAttributes<HTMLDivElement>)}
       >
         {typeof children === "function"
           ? children({ focused, focusSelf, ref: innerRef, focusKey })
@@ -89,15 +89,15 @@ const Card = React.forwardRef<
 });
 Card.displayName = "Card"
 
-type SubcomponentProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> &
+type SubcomponentProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> &
   Partial<UseFocusableConfig> & {
     focusable?: boolean;
     focusKey?: string;
     active?: string;
-    children?: React.ReactNode | ((props: RenderProps) => React.ReactNode);
+    children?: ReactNode | ((props: RenderProps) => ReactNode);
   };
 
-const CardHeader = React.forwardRef<HTMLDivElement, SubcomponentProps>(
+const CardHeader = forwardRef<HTMLDivElement, SubcomponentProps>(
   ({ className, focusable = false, children, active, ...props }, ref) => {
     const {
       saveLastFocusedChild,
@@ -116,7 +116,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, SubcomponentProps>(
       onBlur,
       extraProps,
       ...htmlProps
-    } = props as Partial<UseFocusableConfig> & React.HTMLAttributes<HTMLDivElement>;
+    } = props as Partial<UseFocusableConfig> & HTMLAttributes<HTMLDivElement>;
 
     const focusConfig: UseFocusableConfig = {
       focusable,
@@ -141,13 +141,13 @@ const CardHeader = React.forwardRef<HTMLDivElement, SubcomponentProps>(
       focusConfig
     );
 
-    React.useImperativeHandle(ref, () => innerRef.current, [innerRef]);
+    useImperativeHandle(ref, () => innerRef.current, [innerRef]);
 
     return (
       <div
         ref={innerRef}
         className={cn("flex flex-col space-y-1.5 p-6", className, focused && active)}
-        {...(htmlProps as React.HTMLAttributes<HTMLDivElement>)}
+        {...(htmlProps as HTMLAttributes<HTMLDivElement>)}
       >
         {typeof children === "function"
           ? children({ focused, focusSelf, ref: innerRef, focusKey })
@@ -158,14 +158,14 @@ const CardHeader = React.forwardRef<HTMLDivElement, SubcomponentProps>(
 );
 CardHeader.displayName = "CardHeader"
 
-const CardTitle = React.forwardRef<
+const CardTitle = forwardRef<
   HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement> &
+  HTMLAttributes<HTMLHeadingElement> &
   Partial<UseFocusableConfig> & {
     focusable?: boolean;
     focusKey?: string;
     active?: string;
-    children?: React.ReactNode | ((props: RenderProps) => React.ReactNode);
+    children?: ReactNode | ((props: RenderProps) => ReactNode);
   }
 >(({ className, focusable = false, children, active, ...props }, ref) => {
   const {
@@ -185,7 +185,7 @@ const CardTitle = React.forwardRef<
     onBlur,
     extraProps,
     ...htmlProps
-  } = props as Partial<UseFocusableConfig> & React.HTMLAttributes<HTMLHeadingElement>;
+  } = props as Partial<UseFocusableConfig> & HTMLAttributes<HTMLHeadingElement>;
 
   const focusConfig: UseFocusableConfig = {
     focusable,
@@ -210,7 +210,7 @@ const CardTitle = React.forwardRef<
     focusConfig
   );
 
-  React.useImperativeHandle(ref, () => innerRef.current, [innerRef]);
+  useImperativeHandle(ref, () => innerRef.current, [innerRef]);
 
   return (
     <h3
@@ -220,7 +220,7 @@ const CardTitle = React.forwardRef<
         className,
         focused && active
       )}
-      {...(htmlProps as React.HTMLAttributes<HTMLHeadingElement>)}
+      {...(htmlProps as HTMLAttributes<HTMLHeadingElement>)}
     >
       {typeof children === "function"
         ? children({ focused, focusSelf, ref: innerRef, focusKey })
@@ -230,9 +230,9 @@ const CardTitle = React.forwardRef<
 })
 CardTitle.displayName = "CardTitle"
 
-const CardDescription = React.forwardRef<
+const CardDescription = forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
+  HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
@@ -242,7 +242,7 @@ const CardDescription = React.forwardRef<
 ))
 CardDescription.displayName = "CardDescription"
 
-const CardContent = React.forwardRef<HTMLDivElement, SubcomponentProps>(
+const CardContent = forwardRef<HTMLDivElement, SubcomponentProps>(
   ({ className, focusable = false, children, active, ...props }, ref) => {
     const {
       saveLastFocusedChild,
@@ -261,7 +261,7 @@ const CardContent = React.forwardRef<HTMLDivElement, SubcomponentProps>(
       onBlur,
       extraProps,
       ...htmlProps
-    } = props as Partial<UseFocusableConfig> & React.HTMLAttributes<HTMLHeadingElement>;
+    } = props as Partial<UseFocusableConfig> & HTMLAttributes<HTMLHeadingElement>;
 
     const focusConfig: UseFocusableConfig = {
       focusable,
@@ -286,13 +286,13 @@ const CardContent = React.forwardRef<HTMLDivElement, SubcomponentProps>(
       focusConfig
     );
 
-    React.useImperativeHandle(ref, () => innerRef.current, [innerRef]);
+    useImperativeHandle(ref, () => innerRef.current, [innerRef]);
 
     return (
       <div
         ref={innerRef}
         className={cn("p-6 pt-0", className, focused && active)}
-        {...(htmlProps as React.HTMLAttributes<HTMLDivElement>)}
+        {...(htmlProps as HTMLAttributes<HTMLDivElement>)}
       >
         {typeof children === "function"
           ? children({ focused, focusSelf, ref: innerRef, focusKey })
@@ -303,7 +303,7 @@ const CardContent = React.forwardRef<HTMLDivElement, SubcomponentProps>(
 )
 CardContent.displayName = "CardContent"
 
-const CardFooter = React.forwardRef<HTMLDivElement, SubcomponentProps>(
+const CardFooter = forwardRef<HTMLDivElement, SubcomponentProps>(
   ({ className, focusable = false, children, active, ...props }, ref) => {
     const {
       saveLastFocusedChild,
@@ -322,7 +322,7 @@ const CardFooter = React.forwardRef<HTMLDivElement, SubcomponentProps>(
       onBlur,
       extraProps,
       ...htmlProps
-    } = props as Partial<UseFocusableConfig> & React.HTMLAttributes<HTMLDivElement>;
+    } = props as Partial<UseFocusableConfig> & HTMLAttributes<HTMLDivElement>;
 
     const focusConfig: UseFocusableConfig = {
       focusable,
@@ -347,13 +347,13 @@ const CardFooter = React.forwardRef<HTMLDivElement, SubcomponentProps>(
       focusConfig
     );
 
-    React.useImperativeHandle(ref, () => innerRef.current, [innerRef]);
+    useImperativeHandle(ref, () => innerRef.current, [innerRef]);
 
     return (
       <div
         ref={innerRef}
         className={cn("flex items-center p-6 pt-0", className, focused && active)}
-        {...(htmlProps as React.HTMLAttributes<HTMLDivElement>)}
+        {...(htmlProps as HTMLAttributes<HTMLDivElement>)}
       >
         {typeof children === "function"
           ? children({ focused, focusSelf, ref: innerRef, focusKey })

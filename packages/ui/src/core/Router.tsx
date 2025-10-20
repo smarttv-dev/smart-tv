@@ -1,6 +1,5 @@
 'use client';
-import type { ReactNode } from "react";
-import * as React from "react";
+import { ComponentType, createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 type RouteState = any;
 
@@ -21,7 +20,7 @@ interface RouterContextValue {
     getParamsForPath: (path: string) => Params;
 }
 
-const RouterContext = React.createContext<RouterContextValue | undefined>(undefined);
+const RouterContext = createContext<RouterContextValue | undefined>(undefined);
 
 function pathToSegments(path: string) {
     return path.replace(/^\//, "").split("/").filter(Boolean);
@@ -59,15 +58,15 @@ function matchPath(pattern: string, path: string): { params: Params; matched: bo
 }
 
 export function RouterProvider({ children, initial = "/", maxStack = 50, collapseSameBase = true, skipDuplicates = true }: { children: ReactNode; initial?: string; maxStack?: number; collapseSameBase?: boolean; skipDuplicates?: boolean; }) {
-    const routesRef = React.useRef<Set<string>>(new Set());
-    const skippableRoutesRef = React.useRef<Set<string>>(new Set());
-    const stackRef = React.useRef<RouteEntry[]>([{ path: initial, state: undefined, base: pathToSegments(initial)[0] ?? '' }]);
-    const [, tick] = React.useState(0);
+    const routesRef = useRef<Set<string>>(new Set());
+    const skippableRoutesRef = useRef<Set<string>>(new Set());
+    const stackRef = useRef<RouteEntry[]>([{ path: initial, state: undefined, base: pathToSegments(initial)[0] ?? '' }]);
+    const [, tick] = useState(0);
 
     // current is always defined because stackRef is initialized with at least one entry
     const current: RouteEntry = stackRef.current[stackRef.current.length - 1] || { path: initial, state: undefined };
 
-    const push = React.useCallback((path: string, state?: RouteState) => {
+    const push = useCallback((path: string, state?: RouteState) => {
         const top = stackRef.current[stackRef.current.length - 1];
         const base = pathToSegments(path)[0] ?? '';
 
@@ -117,12 +116,12 @@ export function RouterProvider({ children, initial = "/", maxStack = 50, collaps
         tick((n) => n + 1);
     }, [collapseSameBase, maxStack, skipDuplicates]);
 
-    const replace = React.useCallback((path: string, state?: RouteState) => {
+    const replace = useCallback((path: string, state?: RouteState) => {
         stackRef.current[stackRef.current.length - 1] = { path, state };
         tick((n) => n + 1);
     }, []);
 
-    const back = React.useCallback(() => {
+    const back = useCallback(() => {
         if (stackRef.current.length <= 1) return;
 
         // pop current
@@ -136,7 +135,7 @@ export function RouterProvider({ children, initial = "/", maxStack = 50, collaps
         tick((n) => n + 1);
     }, []);
 
-    const go = React.useCallback((n: number) => {
+    const go = useCallback((n: number) => {
         if (n === 0) return;
         const idx = stackRef.current.length - 1 + n;
         if (idx < 0) {
@@ -150,7 +149,7 @@ export function RouterProvider({ children, initial = "/", maxStack = 50, collaps
         tick((x) => x + 1);
     }, []);
 
-    const registerRoute = React.useCallback((pattern: string, opts?: { skippable?: boolean }) => {
+    const registerRoute = useCallback((pattern: string, opts?: { skippable?: boolean }) => {
         routesRef.current.add(pattern);
         if (opts?.skippable) skippableRoutesRef.current.add(pattern);
         return () => {
@@ -159,7 +158,7 @@ export function RouterProvider({ children, initial = "/", maxStack = 50, collaps
         };
     }, []);
 
-    const getParamsForPath = React.useCallback((path: string) => {
+    const getParamsForPath = useCallback((path: string) => {
         for (const pattern of Array.from(routesRef.current)) {
             const { params, matched } = matchPath(pattern, path);
             if (matched) return params;
@@ -167,12 +166,12 @@ export function RouterProvider({ children, initial = "/", maxStack = 50, collaps
         return {} as Params;
     }, []);
 
-    const value = React.useMemo(() => ({ current, push, replace, back, go, registerRoute, getParamsForPath }), [current, push, replace, back, go, registerRoute, getParamsForPath]);
+    const value = useMemo(() => ({ current, push, replace, back, go, registerRoute, getParamsForPath }), [current, push, replace, back, go, registerRoute, getParamsForPath]);
     return <RouterContext.Provider value={value}>{children}</RouterContext.Provider>;
 }
 
 export function useRouter() {
-    const ctx = React.useContext(RouterContext);
+    const ctx = useContext(RouterContext);
     if (!ctx) throw new Error("useRouter must be used inside RouterProvider");
     return ctx;
 }
@@ -213,7 +212,7 @@ export function Route({
     skippable,
 }: {
     path: string;
-    component?: React.ComponentType<{ params?: Params; state?: RouteState }>;
+    component?: ComponentType<{ params?: Params; state?: RouteState }>;
     element?: ReactNode | ((props: { params: Params; state?: RouteState }) => ReactNode);
     children?: ReactNode | ((props: { params: Params; state?: RouteState }) => ReactNode);
     skippable?: boolean;
@@ -221,7 +220,7 @@ export function Route({
     const { current } = useRouter();
     const { registerRoute } = useRouter();
 
-    React.useEffect(() => registerRoute(path, { skippable }), [path, registerRoute, skippable]);
+    useEffect(() => registerRoute(path, { skippable }), [path, registerRoute, skippable]);
 
     const { params, matched } = matchPath(path, current.path);
 
@@ -242,7 +241,7 @@ export function Route({
 
 export function useParams() {
     const { current, getParamsForPath } = useRouter();
-    return React.useMemo(() => getParamsForPath(current.path), [current.path, getParamsForPath]);
+    return useMemo(() => getParamsForPath(current.path), [current.path, getParamsForPath]);
 }
 
 export function useRoute() {

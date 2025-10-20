@@ -1,5 +1,4 @@
-
-import * as React from "react";
+import { CSSProperties, ReactNode, RefObject, useEffect } from "react";
 import { KeyPressDetails, useRouter } from "../core";
 import { useFocusable } from "../hooks";
 import type {
@@ -14,13 +13,13 @@ import { cn } from "../utils";
 type RenderProps = {
   focused: boolean;
   focusSelf: () => void;
-  ref: React.RefObject<HTMLElement> | null;
+  ref: RefObject<HTMLElement> | null;
   focusKey: string;
   payload?: any;
 };
 
 type MenuProps = {
-  children?: React.ReactNode | ((props: RenderProps) => React.ReactNode);
+  children?: ReactNode | ((props: RenderProps) => ReactNode);
   onBlur?: BlurHandler<any>;
   onEnterPress?: EnterPressHandler<any> ;
   onFocus?: FocusHandler<any>;
@@ -29,7 +28,7 @@ type MenuProps = {
   focusKey: string;
   className?: string;
   active?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   disabled?: boolean;
   selfFocus?: boolean;
   hover?: boolean;
@@ -102,7 +101,7 @@ export function Menu(props: MenuProps) {
       focusKey,
     },
   });
-  React.useEffect(() => {
+  useEffect(() => {
     if (selfFocus) {
       focusSelf();
     }
