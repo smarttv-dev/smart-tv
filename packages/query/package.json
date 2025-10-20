@@ -1,6 +1,6 @@
 {
   "name": "@smart-tv/query",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Lightweight data fetching and caching utilities for Smart TV applications",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
