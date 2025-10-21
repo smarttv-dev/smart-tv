@@ -108,6 +108,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Get published version and create tag
+        id: get_version
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
@@ -121,7 +122,29 @@ jobs:
             VERSION=$(node -p "require('./packages/create-smart-tv/package.json').version")
           fi
 
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Creating tag v$VERSION"
           git tag -a "v$VERSION" -m "Release v$VERSION"
           git push origin "v$VERSION"
           git push origin main
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          release_name: Release v${{ steps.get_version.outputs.version }}
+          body: |
+            ## What's Changed
+
+            ### Published Packages
+            ${{ github.event.inputs.packages == 'all' && '- @smart-tv/player\n- @smart-tv/query\n- create-smart-tv' || format('- {0}', github.event.inputs.packages) }}
+
+            ### Version Bump
+            - Type: ${{ github.event.inputs.version }}
+            - Version: v${{ steps.get_version.outputs.version }}
+
+            **Full Changelog**: https://github.com/${{ github.repository }}/compare/v${{ steps.get_version.outputs.version }}...v${{ steps.get_version.outputs.version }}
+          draft: false
+          prerelease: false
