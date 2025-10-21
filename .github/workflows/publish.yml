@@ -98,11 +98,13 @@ jobs:
           git add .
           git commit -m "chore: bump version to v${{ steps.get_version.outputs.version }}" || echo "No changes to commit"
 
+          # Create and push release branch
+          BRANCH_NAME="release-v${{ steps.get_version.outputs.version }}"
+          git checkout -b $BRANCH_NAME
+          git push origin $BRANCH_NAME
+
           echo "Creating tag v${{ steps.get_version.outputs.version }}"
           git tag -a "v${{ steps.get_version.outputs.version }}" -m "Release v${{ steps.get_version.outputs.version }}"
-
-          echo "Pushing changes to main and tag"
-          git push origin main
           git push origin "v${{ steps.get_version.outputs.version }}"
 
       - name: Create GitHub Release
