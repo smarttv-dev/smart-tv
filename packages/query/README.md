@@ -36,20 +36,20 @@ yarn add @smart-tv/query
 Wrap your app with `QueryClientProvider` and create a `QueryClient` instance:
 
 ```tsx
-import { QueryClient, QueryClientProvider } from '@smart-tv/query'
+import { QueryClient, QueryClientProvider } from "@smart-tv/query";
 
 const queryClient = new QueryClient({
-  staleTime: 1000 * 60 * 5,  // 5 minutes
+  staleTime: 1000 * 60 * 5, // 5 minutes
   cacheTime: 1000 * 60 * 10, // 10 minutes
-  retry: 3,                   // Retry failed requests 3 times
-})
+  retry: 3, // Retry failed requests 3 times
+});
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <YourApp />
     </QueryClientProvider>
-  )
+  );
 }
 ```
 
@@ -58,24 +58,23 @@ function App() {
 Use `useQuery` to fetch and cache data:
 
 ```tsx
-import { useQuery } from '@smart-tv/query'
+import { useQuery } from "@smart-tv/query";
 
 function Movies() {
-  const { data, error, status, refetch } = useQuery(
-    ['movies'],
-    () => fetch('/api/movies').then(res => res.json())
-  )
+  const { data, error, status, refetch } = useQuery(["movies"], () =>
+    fetch("/api/movies").then((res) => res.json())
+  );
 
-  if (status === 'loading') return <div>Loading...</div>
-  if (status === 'error') return <div>Error: {error.message}</div>
+  if (status === "loading") return <div>Loading...</div>;
+  if (status === "error") return <div>Error: {error.message}</div>;
 
   return (
     <div>
-      {data.map(movie => (
+      {data.map((movie) => (
         <div key={movie.id}>{movie.title}</div>
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -86,28 +85,28 @@ function Movies() {
 The `QueryClient` is the core of the library. It manages cache, handles deduplication, and coordinates all queries.
 
 ```tsx
-import { QueryClient } from '@smart-tv/query'
+import { QueryClient } from "@smart-tv/query";
 
 const queryClient = new QueryClient({
-  staleTime: 1000 * 60 * 5,     // Data is fresh for 5 minutes
-  cacheTime: 1000 * 60 * 10,    // Cache persists for 10 minutes after unused
-  retry: 3,                      // Retry failed requests 3 times
-  enabled: true,                 // Enable queries by default
-  keepPreviousData: false,       // Whether to keep previous data during refetch
-})
+  staleTime: 1000 * 60 * 5, // Data is fresh for 5 minutes
+  cacheTime: 1000 * 60 * 10, // Cache persists for 10 minutes after unused
+  retry: 3, // Retry failed requests 3 times
+  enabled: true, // Enable queries by default
+  keepPreviousData: false, // Whether to keep previous data during refetch
+});
 ```
 
 **Configuration Options:**
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `staleTime` | number | 0 | Time in ms before data is considered stale |
-| `cacheTime` | number | 5min | Time in ms before unused cache is garbage collected |
-| `retry` | number | 0 | Number of retry attempts for failed requests |
-| `enabled` | boolean | true | Enable/disable queries globally |
-| `keepPreviousData` | boolean | false | Keep previous data during refetch |
-| `refetchOnWindowFocus` | boolean | false | Refetch when window regains focus |
-| `refetchOnMount` | boolean | true | Refetch on component mount if stale |
+| Option                 | Type    | Default | Description                                         |
+| ---------------------- | ------- | ------- | --------------------------------------------------- |
+| `staleTime`            | number  | 0       | Time in ms before data is considered stale          |
+| `cacheTime`            | number  | 5min    | Time in ms before unused cache is garbage collected |
+| `retry`                | number  | 0       | Number of retry attempts for failed requests        |
+| `enabled`              | boolean | true    | Enable/disable queries globally                     |
+| `keepPreviousData`     | boolean | false   | Keep previous data during refetch                   |
+| `refetchOnWindowFocus` | boolean | false   | Refetch when window regains focus                   |
+| `refetchOnMount`       | boolean | true    | Refetch on component mount if stale                 |
 
 ## API Reference
 
@@ -116,12 +115,7 @@ const queryClient = new QueryClient({
 Fetch and cache data with automatic cache management.
 
 ```tsx
-const {
-  data,
-  error,
-  status,
-  refetch
-} = useQuery(queryKey, queryFn, options)
+const { data, error, status, refetch } = useQuery(queryKey, queryFn, options);
 ```
 
 **Parameters:**
@@ -142,16 +136,16 @@ const {
 ```tsx
 function MovieDetails({ movieId }) {
   const { data, status } = useQuery(
-    ['movie', movieId],
-    () => fetch(`/api/movies/${movieId}`).then(res => res.json()),
+    ["movie", movieId],
+    () => fetch(`/api/movies/${movieId}`).then((res) => res.json()),
     {
       staleTime: 1000 * 60 * 10, // 10 minutes
-      enabled: !!movieId,         // Only fetch if movieId exists
+      enabled: !!movieId, // Only fetch if movieId exists
     }
-  )
+  );
 
-  if (status === 'loading') return <Spinner />
-  return <div>{data.title}</div>
+  if (status === "loading") return <Spinner />;
+  return <div>{data.title}</div>;
 }
 ```
 
@@ -159,12 +153,12 @@ function MovieDetails({ movieId }) {
 
 ```tsx
 const { data } = useQuery(
-  ['movies'],
-  () => fetch('/api/movies').then(res => res.json()),
+  ["movies"],
+  () => fetch("/api/movies").then((res) => res.json()),
   {
-    select: (data) => data.filter(movie => movie.rating > 4),
+    select: (data) => data.filter((movie) => movie.rating > 4),
   }
-)
+);
 ```
 
 ### useMutation
@@ -172,12 +166,7 @@ const { data } = useQuery(
 Execute mutations (POST, PUT, DELETE) with success/error callbacks.
 
 ```tsx
-const {
-  mutate,
-  data,
-  error,
-  status
-} = useMutation(mutationFn, options)
+const { mutate, data, error, status } = useMutation(mutationFn, options);
 ```
 
 **Parameters:**
@@ -195,39 +184,40 @@ const {
 **Example:**
 
 ```tsx
-import { useMutation } from '@smart-tv/query'
+import { useMutation } from "@smart-tv/query";
 
 function AddMovieForm() {
   const { mutate, status } = useMutation(
-    (newMovie) => fetch('/api/movies', {
-      method: 'POST',
-      body: JSON.stringify(newMovie),
-      headers: { 'Content-Type': 'application/json' },
-    }).then(res => res.json()),
+    (newMovie) =>
+      fetch("/api/movies", {
+        method: "POST",
+        body: JSON.stringify(newMovie),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json()),
     {
       onSuccess: (data) => {
-        console.log('Movie added:', data)
+        console.log("Movie added:", data);
         // Invalidate and refetch movies list
-        queryClient.invalidateQueries(['movies'], { refetch: true })
+        queryClient.invalidateQueries(["movies"], { refetch: true });
       },
       onError: (error) => {
-        console.error('Failed to add movie:', error)
+        console.error("Failed to add movie:", error);
       },
     }
-  )
+  );
 
   const handleSubmit = (movie) => {
-    mutate(movie)
-  }
+    mutate(movie);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       {/* form fields */}
-      <button type="submit" disabled={status === 'loading'}>
-        {status === 'loading' ? 'Adding...' : 'Add Movie'}
+      <button type="submit" disabled={status === "loading"}>
+        {status === "loading" ? "Adding..." : "Add Movie"}
       </button>
     </form>
-  )
+  );
 }
 ```
 
@@ -236,12 +226,11 @@ function AddMovieForm() {
 Fetch paginated data with infinite scroll support.
 
 ```tsx
-const {
-  data,
-  isFetching,
-  fetchNext,
-  hasNextPage
-} = useInfiniteQuery(queryKey, fetchPageFn, options)
+const { data, isFetching, fetchNext, hasNextPage } = useInfiniteQuery(
+  queryKey,
+  fetchPageFn,
+  options
+);
 ```
 
 **Parameters:**
@@ -260,14 +249,14 @@ const {
 **Example:**
 
 ```tsx
-import { useInfiniteQuery } from '@smart-tv/query'
+import { useInfiniteQuery } from "@smart-tv/query";
 
 function MovieList() {
   const { data, isFetching, fetchNext, hasNextPage } = useInfiniteQuery(
-    ['movies', 'infinite'],
+    ["movies", "infinite"],
     async (cursor) => {
-      const res = await fetch(`/api/movies?cursor=${cursor || ''}`)
-      return res.json()
+      const res = await fetch(`/api/movies?cursor=${cursor || ""}`);
+      return res.json();
     },
     {
       mapPage: (raw) => ({
@@ -275,25 +264,25 @@ function MovieList() {
         nextCursor: raw.nextCursor,
       }),
       getHasNext: (pages) => {
-        const lastPage = pages[pages.length - 1]
-        return !!lastPage?.nextCursor
+        const lastPage = pages[pages.length - 1];
+        return !!lastPage?.nextCursor;
       },
     }
-  )
+  );
 
   return (
     <div>
-      {data.map(movie => (
+      {data.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
-      
+
       {hasNextPage && (
         <button onClick={fetchNext} disabled={isFetching}>
-          {isFetching ? 'Loading...' : 'Load More'}
+          {isFetching ? "Loading..." : "Load More"}
         </button>
       )}
     </div>
-  )
+  );
 }
 ```
 
@@ -305,13 +294,13 @@ Invalidate queries to mark them as stale and optionally refetch.
 
 ```tsx
 // Invalidate and refetch a specific query
-queryClient.invalidateQueries(['movies'], { refetch: true })
+queryClient.invalidateQueries(["movies"], { refetch: true });
 
 // Invalidate without refetching
-queryClient.invalidateQueries(['movies'])
+queryClient.invalidateQueries(["movies"]);
 
 // Invalidate all queries
-queryClient.invalidateQueries()
+queryClient.invalidateQueries();
 ```
 
 #### getQueryData
@@ -319,7 +308,7 @@ queryClient.invalidateQueries()
 Get cached data for a specific query.
 
 ```tsx
-const cachedMovies = queryClient.getQueryData(['movies'])
+const cachedMovies = queryClient.getQueryData(["movies"]);
 ```
 
 #### setQueryData
@@ -328,12 +317,12 @@ Manually update cached data.
 
 ```tsx
 // Direct update
-queryClient.setQueryData(['movies'], newMoviesArray)
+queryClient.setQueryData(["movies"], newMoviesArray);
 
 // Update with function
-queryClient.setQueryData(['movies'], (oldData) => {
-  return [...oldData, newMovie]
-})
+queryClient.setQueryData(["movies"], (oldData) => {
+  return [...oldData, newMovie];
+});
 ```
 
 #### fetchQuery
@@ -342,10 +331,10 @@ Imperatively fetch a query (useful outside of React components).
 
 ```tsx
 const movies = await queryClient.fetchQuery(
-  ['movies'],
-  () => fetch('/api/movies').then(res => res.json()),
+  ["movies"],
+  () => fetch("/api/movies").then((res) => res.json()),
   { staleTime: 1000 * 60 }
-)
+);
 ```
 
 ## Advanced Features
@@ -355,32 +344,31 @@ const movies = await queryClient.fetchQuery(
 The library includes a powerful XHR-based fetcher with progress tracking and timeout support:
 
 ```tsx
-import { xhrFetcher, tvFetch } from '@smart-tv/query'
+import { xhrFetcher, tvFetch } from "@smart-tv/query";
 
 // Basic usage
-const { data } = useQuery(
-  ['movie', id],
-  () => xhrFetcher(`/api/movies/${id}`, {
-    method: 'GET',
-    headers: { 'Authorization': 'Bearer token' },
+const { data } = useQuery(["movie", id], () =>
+  xhrFetcher(`/api/movies/${id}`, {
+    method: "GET",
+    headers: { Authorization: "Bearer token" },
   })
-)
+);
 
 // With progress tracking
-const { mutate } = useMutation(
-  (file) => xhrFetcher('/upload', {
-    method: 'POST',
+const { mutate } = useMutation((file) =>
+  xhrFetcher("/upload", {
+    method: "POST",
     body: file,
     timeout: 30000, // 30 seconds
     onUploadProgress: (sent, total) => {
-      console.log(`Uploaded ${sent} / ${total}`)
+      console.log(`Uploaded ${sent} / ${total}`);
     },
   })
-)
+);
 
 // With abort signal
-const controller = new AbortController()
-xhrFetcher('/api/data', { signal: controller.signal })
+const controller = new AbortController();
+xhrFetcher("/api/data", { signal: controller.signal });
 // Later: controller.abort()
 ```
 
@@ -403,13 +391,13 @@ Automatically refetch stale data when the TV app regains focus:
 ```tsx
 const queryClient = new QueryClient({
   refetchOnWindowFocus: true,
-})
+});
 
 // Or per-query
-const { data } = useQuery(['movies'], fetchMovies, {
+const { data } = useQuery(["movies"], fetchMovies, {
   refetchOnWindowFocus: true,
   staleTime: 1000 * 60 * 5, // Only refetch if older than 5 minutes
-})
+});
 ```
 
 ### Optimistic Updates
@@ -418,27 +406,28 @@ Update UI optimistically before mutation completes:
 
 ```tsx
 const { mutate } = useMutation(
-  (updatedMovie) => fetch(`/api/movies/${updatedMovie.id}`, {
-    method: 'PUT',
-    body: JSON.stringify(updatedMovie),
-  }),
+  (updatedMovie) =>
+    fetch(`/api/movies/${updatedMovie.id}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedMovie),
+    }),
   {
     onSuccess: (newData) => {
       // Update cache with server response
-      queryClient.setQueryData(['movie', newData.id], newData)
-      queryClient.invalidateQueries(['movies'])
+      queryClient.setQueryData(["movie", newData.id], newData);
+      queryClient.invalidateQueries(["movies"]);
     },
   }
-)
+);
 
 // Optimistic update before mutation
 const handleUpdate = (movie) => {
   // Update cache immediately
-  queryClient.setQueryData(['movie', movie.id], movie)
-  
+  queryClient.setQueryData(["movie", movie.id], movie);
+
   // Then trigger mutation
-  mutate(movie)
-}
+  mutate(movie);
+};
 ```
 
 ### Dependent Queries
@@ -447,16 +436,16 @@ Execute queries that depend on other queries:
 
 ```tsx
 // First query
-const { data: user } = useQuery(['user'], fetchUser)
+const { data: user } = useQuery(["user"], fetchUser);
 
 // Second query depends on first
 const { data: posts } = useQuery(
-  ['posts', user?.id],
+  ["posts", user?.id],
   () => fetchUserPosts(user.id),
   {
     enabled: !!user?.id, // Only run when user.id exists
   }
-)
+);
 ```
 
 ### Parallel Queries
@@ -465,12 +454,12 @@ Execute multiple queries in parallel:
 
 ```tsx
 function Dashboard() {
-  const movies = useQuery(['movies'], fetchMovies)
-  const shows = useQuery(['shows'], fetchShows)
-  const trending = useQuery(['trending'], fetchTrending)
+  const movies = useQuery(["movies"], fetchMovies);
+  const shows = useQuery(["shows"], fetchShows);
+  const trending = useQuery(["trending"], fetchTrending);
 
-  if (movies.status === 'loading' || shows.status === 'loading') {
-    return <Spinner />
+  if (movies.status === "loading" || shows.status === "loading") {
+    return <Spinner />;
   }
 
   return (
@@ -479,7 +468,7 @@ function Dashboard() {
       <ShowSection data={shows.data} />
       <TrendingSection data={trending.data} />
     </div>
-  )
+  );
 }
 ```
 
@@ -488,7 +477,12 @@ function Dashboard() {
 Here's a comprehensive example showing various features:
 
 ```tsx
-import { QueryClient, QueryClientProvider, useQuery, useMutation } from '@smart-tv/query'
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+  useMutation,
+} from "@smart-tv/query";
 
 // Create client
 const queryClient = new QueryClient({
@@ -496,62 +490,57 @@ const queryClient = new QueryClient({
   cacheTime: 1000 * 60 * 10,
   retry: 3,
   refetchOnWindowFocus: true,
-})
+});
 
 // API functions
-const fetchMovies = () => fetch('/api/movies').then(res => res.json())
-const fetchMovie = (id) => fetch(`/api/movies/${id}`).then(res => res.json())
+const fetchMovies = () => fetch("/api/movies").then((res) => res.json());
+const fetchMovie = (id) => fetch(`/api/movies/${id}`).then((res) => res.json());
 const addToWatchlist = (movieId) =>
-  fetch('/api/watchlist', {
-    method: 'POST',
+  fetch("/api/watchlist", {
+    method: "POST",
     body: JSON.stringify({ movieId }),
-    headers: { 'Content-Type': 'application/json' },
-  }).then(res => res.json())
+    headers: { "Content-Type": "application/json" },
+  }).then((res) => res.json());
 
 // Components
 function MovieList() {
-  const { data, status, refetch } = useQuery(['movies'], fetchMovies, {
-    select: (data) => data.filter(m => m.rating > 3),
-  })
+  const { data, status, refetch } = useQuery(["movies"], fetchMovies, {
+    select: (data) => data.filter((m) => m.rating > 3),
+  });
 
-  if (status === 'loading') return <Spinner />
-  if (status === 'error') return <Error />
+  if (status === "loading") return <Spinner />;
+  if (status === "error") return <Error />;
 
   return (
     <div>
       <button onClick={refetch}>Refresh</button>
-      {data.map(movie => (
+      {data.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}
     </div>
-  )
+  );
 }
 
 function MovieDetails({ movieId }) {
-  const { data } = useQuery(
-    ['movie', movieId],
-    () => fetchMovie(movieId),
-    { enabled: !!movieId }
-  )
+  const { data } = useQuery(["movie", movieId], () => fetchMovie(movieId), {
+    enabled: !!movieId,
+  });
 
   const { mutate, status } = useMutation(addToWatchlist, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['watchlist'])
-      alert('Added to watchlist!')
+      queryClient.invalidateQueries(["watchlist"]);
+      alert("Added to watchlist!");
     },
-  })
+  });
 
   return (
     <div>
       <h1>{data?.title}</h1>
-      <button
-        onClick={() => mutate(movieId)}
-        disabled={status === 'loading'}
-      >
+      <button onClick={() => mutate(movieId)} disabled={status === "loading"}>
         Add to Watchlist
       </button>
     </div>
-  )
+  );
 }
 
 // App
@@ -560,7 +549,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <MovieList />
     </QueryClientProvider>
-  )
+  );
 }
 ```
 
@@ -569,28 +558,27 @@ function App() {
 Full TypeScript support with excellent type inference:
 
 ```tsx
-import { useQuery, QueryClient, QueryOptions } from '@smart-tv/query'
+import { useQuery, QueryClient, QueryOptions } from "@smart-tv/query";
 
 interface Movie {
-  id: number
-  title: string
-  rating: number
+  id: number;
+  title: string;
+  rating: number;
 }
 
 // Type-safe query
-const { data } = useQuery<Movie[]>(
-  ['movies'],
-  () => fetch('/api/movies').then(res => res.json())
-)
+const { data } = useQuery<Movie[]>(["movies"], () =>
+  fetch("/api/movies").then((res) => res.json())
+);
 // data is typed as Movie[] | undefined
 
 // Type-safe mutation
-const { mutate } = useMutation<Movie, { title: string }>(
-  (newMovie) => fetch('/api/movies', {
-    method: 'POST',
+const { mutate } = useMutation<Movie, { title: string }>((newMovie) =>
+  fetch("/api/movies", {
+    method: "POST",
     body: JSON.stringify(newMovie),
-  }).then(res => res.json())
-)
+  }).then((res) => res.json())
+);
 // mutate expects { title: string }
 ```
 
@@ -644,7 +632,7 @@ See [CONTRIBUTING.md](../../CONTRIBUTING.md) for more details.
 
 ## License
 
-MIT License - see [LICENSE](../../LICENSE) for details.
+BSD 3-Clause License - see [LICENSE](../../LICENSE) for details.
 
 ## Support
 

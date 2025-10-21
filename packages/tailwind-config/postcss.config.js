@@ -9,12 +9,12 @@ export const postcssConfig = {
       features: {
         // Enable fallbacks for CSS gap in flexbox and logical properties
         "gap-properties": true,
-        "logical-properties-and-values": true
-      }
+        "logical-properties-and-values": true,
+      },
     },
     autoprefixer: {
       // Consumers should set a browserslist; this adds broad support including IE11 when requested
-      overrideBrowserslist: ["defaults", "ie 11"]
-    }
+      overrideBrowserslist: ["defaults", "ie 11"],
+    },
   },
 };

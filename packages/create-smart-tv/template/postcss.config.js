@@ -1,29 +1,24 @@
 export default {
   plugins: {
-    'postcss-preset-env': {
+    "postcss-preset-env": {
       stage: 1,
-      browsers: [
-        'chrome >= 30',
-        'firefox >= 20',
-        'safari >= 6',
-        'ie >= 9'
-      ],
+      browsers: ["chrome >= 30", "firefox >= 20", "safari >= 6", "ie >= 9"],
       features: {
-        'custom-properties': {
-          preserve: true
-        }
-      }
+        "custom-properties": {
+          preserve: true,
+        },
+      },
     },
-    'postcss-flexbugs-fixes': {},
+    "postcss-flexbugs-fixes": {},
     tailwindcss: {},
     autoprefixer: {
       overrideBrowserslist: [
-        'chrome >= 30',
-        'firefox >= 20',
-        'safari >= 6',
-        'ie >= 9'
+        "chrome >= 30",
+        "firefox >= 20",
+        "safari >= 6",
+        "ie >= 9",
       ],
-      flexbox: 'no-2009'
+      flexbox: "no-2009",
     },
   },
-}
+};

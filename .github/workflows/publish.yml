@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version bump type'
+        description: "Version bump type"
         required: true
         type: choice
         options:
@@ -12,7 +12,7 @@ on:
           - minor
           - major
       packages:
-        description: 'Packages to publish'
+        description: "Packages to publish"
         required: true
         type: choice
         options:
@@ -28,40 +28,40 @@ jobs:
     permissions:
       contents: write
       id-token: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9.2.0
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
-      
+          node-version: "22"
+          cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Run linting
         run: pnpm lint
-       
+
       - name: Build packages
         run: pnpm build
-        
+
       - name: Run type checking
         run: pnpm check-types
-      
+
       # - name: Run tests
       #   run: pnpm test
-      
+
       - name: Bump version
         run: |
           if [ "${{ github.event.inputs.packages }}" = "all" ]; then
@@ -75,43 +75,43 @@ jobs:
               cd packages/create-smart-tv && npm version ${{ github.event.inputs.version }} --no-git-tag-version
             fi
           fi
-      
+
       - name: Commit version changes
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
           git commit -m "chore: bump version to ${{ github.event.inputs.version }}" || echo "No changes to commit"
-      
+
       - name: Publish all packages
         if: github.event.inputs.packages == 'all'
         run: pnpm publish:packages --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
+
       - name: Publish player package
         if: github.event.inputs.packages == 'player'
         run: pnpm publish:player --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
+
       - name: Publish query package
         if: github.event.inputs.packages == 'query'
         run: pnpm publish:query --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
+
       - name: Publish CLI package
         if: github.event.inputs.packages == 'cli'
         run: pnpm publish:cli --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
+
       - name: Get published version and create tag
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          
+
           # Get version from the first published package
           if [ "${{ github.event.inputs.packages }}" = "all" ] || [ "${{ github.event.inputs.packages }}" = "player" ]; then
             VERSION=$(node -p "require('./packages/player/package.json').version")
@@ -120,7 +120,7 @@ jobs:
           elif [ "${{ github.event.inputs.packages }}" = "cli" ]; then
             VERSION=$(node -p "require('./packages/create-smart-tv/package.json').version")
           fi
-          
+
           echo "Creating tag v$VERSION"
           git tag -a "v$VERSION" -m "Release v$VERSION"
           git push origin "v$VERSION"

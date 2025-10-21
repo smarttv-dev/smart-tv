@@ -1,25 +1,30 @@
-import { CodePreview } from '../../../../../components';
+import { CodePreview } from "@/components";
 
 export default function PlayerUsage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Usage & Configuration</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-          Learn how to use and configure the Smart TV Player components for your specific needs.
+        <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Usage & Configuration
+        </h1>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-300">
+          Learn how to use and configure the Smart TV Player components for your
+          specific needs.
         </p>
       </div>
 
       {/* Basic Usage */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Basic Usage</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Basic Usage
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           The simplest way to get started with the Smart TV Player:
         </p>
-        
-        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4">
-          <h3 className="text-lg font-semibold mb-3">Minimal Setup</h3>
-          <CodePreview 
+
+        <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800/50">
+          <h3 className="mb-3 text-lg font-semibold">Minimal Setup</h3>
+          <CodePreview
             code={`import React from 'react';
 import { VideoPlayer, MediaProvider } from '@smart-tv/player';
 import '@smart-tv/player/styles.css';
@@ -27,7 +32,7 @@ import '@smart-tv/player/styles.css';
 function BasicPlayer() {
   return (
     <MediaProvider>
-      <VideoPlayer 
+      <VideoPlayer
         src="https://example.com/video.m3u8"
         autoPlay={false}
       />
@@ -41,13 +46,16 @@ function BasicPlayer() {
 
       {/* MediaProvider Configuration */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">MediaProvider Configuration</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          The MediaProvider component manages the player state and provides context to all child components. 
-          It should wrap all player-related components.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          MediaProvider Configuration
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          The MediaProvider component manages the player state and provides
+          context to all child components. It should wrap all player-related
+          components.
         </p>
-        
-        <CodePreview 
+
+        <CodePreview
           code={`import React from 'react';
 import { MediaProvider, VideoPlayer, PlayerController } from '@smart-tv/player';
 
@@ -70,7 +78,7 @@ function ConfiguredPlayer() {
       }}
     >
       <div className="relative">
-        <VideoPlayer 
+        <VideoPlayer
           src="https://example.com/video.m3u8"
           poster="https://example.com/poster.jpg"
         />
@@ -85,12 +93,14 @@ function ConfiguredPlayer() {
 
       {/* VideoPlayer Configuration */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">VideoPlayer Configuration</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          VideoPlayer Configuration
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           The VideoPlayer component supports various configuration options:
         </p>
-        
-        <CodePreview 
+
+        <CodePreview
           code={`import React from 'react';
 import { VideoPlayer, MediaProvider } from '@smart-tv/player';
 
@@ -100,20 +110,20 @@ function AdvancedVideoPlayer() {
       <VideoPlayer
         // Required: Video source
         src="https://example.com/video.m3u8"
-        
+
         // Optional: Poster image
         poster="https://example.com/poster.jpg"
-        
+
         // Playback options
         autoPlay={false}
         muted={false}
         loop={false}
         preload="metadata" // 'none' | 'metadata' | 'auto'
-        
+
         // Player configuration
         className="w-full h-full"
         controls={false} // Hide native controls
-        
+
         // DRM Configuration (for protected content)
         drm={{
           servers: {
@@ -127,7 +137,7 @@ function AdvancedVideoPlayer() {
             }
           }
         }}
-        
+
         // Event handlers
         onReady={(player) => console.log('Player ready')}
         onPlay={() => console.log('Started playing')}
@@ -153,27 +163,32 @@ function AdvancedVideoPlayer() {
 
       {/* PlayerController Configuration */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">PlayerController Configuration</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          The PlayerController provides customizable video controls with multiple layout styles:
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          PlayerController Configuration
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          The PlayerController provides customizable video controls with
+          multiple layout styles:
         </p>
-        
+
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Predefined Layout Styles</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Predefined Layout Styles
+            </h3>
+            <CodePreview
               code={`import React from 'react';
 import { PlayerController } from '@smart-tv/player';
 
 // YouTube-style layout
-<PlayerController 
+<PlayerController
   layoutStyle="youtube"
   title="Video Title"
   subtitle="Episode 1"
 />
 
 // Netflix-style layout
-<PlayerController 
+<PlayerController
   layoutStyle="netflix"
   title="Series Name"
   subtitle="Season 1, Episode 1"
@@ -183,7 +198,7 @@ import { PlayerController } from '@smart-tv/player';
 <PlayerController layoutStyle="minimal" />
 
 // TV Remote layout (optimized for TV apps)
-<PlayerController 
+<PlayerController
   layoutStyle="tv-remote"
   title="TV Show"
   subtitle="Premium Channel"
@@ -194,10 +209,12 @@ import { PlayerController } from '@smart-tv/player';
               language="tsx"
             />
           </div>
-          
+
           <div>
-            <h3 className="text-lg font-semibold mb-3">Custom Layout Configuration</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Custom Layout Configuration
+            </h3>
+            <CodePreview
               code={`import React from 'react';
 import { PlayerController, PlayerControllerLayout } from '@smart-tv/player';
 
@@ -247,12 +264,14 @@ function CustomPlayerController() {
 
       {/* Custom Buttons */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Custom Buttons</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Custom Buttons
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Add custom buttons to any layout style:
         </p>
-        
-        <CodePreview 
+
+        <CodePreview
           code={`import React from 'react';
 import { PlayerController, PlayerButtonConfig } from '@smart-tv/player';
 
@@ -310,19 +329,21 @@ function PlayerWithCustomButtons() {
 
       {/* Playlist Configuration */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Playlist Configuration</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Playlist Configuration
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Configure playlist functionality for series and multiple videos:
         </p>
-        
-        <CodePreview 
+
+        <CodePreview
           code={`import React from 'react';
-import { 
-  MediaProvider, 
-  VideoPlayer, 
+import {
+  MediaProvider,
+  VideoPlayer,
   PlayerController,
   PlaylistProvider,
-  PlaylistManager 
+  PlaylistManager
 } from '@smart-tv/player';
 
 const playlistItems = [
@@ -359,7 +380,7 @@ function PlayerWithPlaylist() {
         <div className="flex">
           <div className="flex-1">
             <VideoPlayer />
-            <PlayerController 
+            <PlayerController
               layoutStyle="netflix"
               customButtons={[
                 {
@@ -375,7 +396,7 @@ function PlayerWithPlaylist() {
               ]}
             />
           </div>
-          
+
           <div className="w-80">
             <PlaylistManager />
           </div>
@@ -390,28 +411,31 @@ function PlayerWithPlaylist() {
 
       {/* Responsive Design */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Responsive Design</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          The player automatically adapts to different screen sizes. You can also create responsive configurations:
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Responsive Design
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          The player automatically adapts to different screen sizes. You can
+          also create responsive configurations:
         </p>
-        
-        <CodePreview 
+
+        <CodePreview
           code={`import React, { useState, useEffect } from 'react';
 import { PlayerController } from '@smart-tv/player';
 
 function ResponsivePlayer() {
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-  
+
   return (
     <PlayerController
       layoutStyle={isMobile ? 'mobile' : 'youtube'}
@@ -435,16 +459,19 @@ function ResponsivePlayer() {
 
       {/* Focus Management */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Focus Management (TV Apps)</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          For TV applications, the player includes built-in spatial navigation support:
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Focus Management (TV Apps)
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          For TV applications, the player includes built-in spatial navigation
+          support:
         </p>
-        
-        <CodePreview 
+
+        <CodePreview
           code={`import React from 'react';
-import { 
-  MediaProvider, 
-  VideoPlayer, 
+import {
+  MediaProvider,
+  VideoPlayer,
   PlayerController,
   init // Initialize focus management
 } from '@smart-tv/player';
@@ -480,30 +507,32 @@ function TVPlayer() {
 
       {/* Error Handling */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Error Handling</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Error Handling
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Implement robust error handling for a better user experience:
         </p>
-        
-        <CodePreview 
+
+        <CodePreview
           code={`import React, { useState } from 'react';
 import { MediaProvider, VideoPlayer, PlayerController } from '@smart-tv/player';
 
 function PlayerWithErrorHandling() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const handleError = (error) => {
     console.error('Player error:', error);
     setError(error);
     setIsLoading(false);
   };
-  
+
   const handleReady = () => {
     setError(null);
     setIsLoading(false);
   };
-  
+
   if (error) {
     return (
       <div className="flex items-center justify-center h-64 bg-gray-100 rounded-lg">
@@ -512,7 +541,7 @@ function PlayerWithErrorHandling() {
             Playback Error
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mb-4">{error.message}</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
           >
@@ -522,7 +551,7 @@ function PlayerWithErrorHandling() {
       </div>
     );
   }
-  
+
   return (
     <MediaProvider onError={handleError}>
       <div className="relative">
@@ -531,13 +560,13 @@ function PlayerWithErrorHandling() {
             <div className="text-white">Loading...</div>
           </div>
         )}
-        
+
         <VideoPlayer
           src="https://example.com/video.m3u8"
           onReady={handleReady}
           onError={handleError}
         />
-        
+
         <PlayerController layoutStyle="youtube" />
       </div>
     </MediaProvider>
@@ -549,34 +578,43 @@ function PlayerWithErrorHandling() {
 
       {/* Performance Optimization */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Performance Optimization</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Performance Optimization
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Tips for optimizing player performance:
         </p>
-        
+
         <div className="space-y-4">
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
-            <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">Lazy Loading</h3>
-            <p className="text-blue-700 dark:text-blue-300 text-sm mb-2">
+          <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-700 dark:bg-blue-900/20">
+            <h3 className="mb-2 font-semibold text-blue-800 dark:text-blue-200">
+              Lazy Loading
+            </h3>
+            <p className="mb-2 text-sm text-blue-700 dark:text-blue-300">
               Use preload settings to control when video data is loaded:
             </p>
-            <code className="text-xs bg-blue-100 dark:bg-blue-800 px-2 py-1 rounded">
+            <code className="rounded bg-blue-100 px-2 py-1 text-xs dark:bg-blue-800">
               {'<VideoPlayer preload="none" />'}
             </code>
           </div>
-          
-          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4">
-            <h3 className="font-semibold text-green-800 dark:text-green-200 mb-2">Memory Management</h3>
-            <p className="text-green-700 dark:text-green-300 text-sm">
-              The player automatically cleans up resources when unmounted. 
-              Avoid creating multiple player instances unnecessarily.
+
+          <div className="rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-700 dark:bg-green-900/20">
+            <h3 className="mb-2 font-semibold text-green-800 dark:text-green-200">
+              Memory Management
+            </h3>
+            <p className="text-sm text-green-700 dark:text-green-300">
+              The player automatically cleans up resources when unmounted. Avoid
+              creating multiple player instances unnecessarily.
             </p>
           </div>
-          
-          <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg p-4">
-            <h3 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">Optimized Hooks</h3>
-            <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-              Use specific hooks instead of the general useMediaContext to prevent unnecessary re-renders.
+
+          <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-700 dark:bg-yellow-900/20">
+            <h3 className="mb-2 font-semibold text-yellow-800 dark:text-yellow-200">
+              Optimized Hooks
+            </h3>
+            <p className="text-sm text-yellow-700 dark:text-yellow-300">
+              Use specific hooks instead of the general useMediaContext to
+              prevent unnecessary re-renders.
             </p>
           </div>
         </div>
@@ -584,28 +622,42 @@ function PlayerWithErrorHandling() {
 
       {/* Next Steps */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Next Steps</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a 
-            href="/components/player/components" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Next Steps
+        </h2>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <a
+            href="/components/player/components"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Components</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">Explore all available components and their props</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Components
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Explore all available components and their props
+            </p>
           </a>
-          <a 
-            href="/components/player/hooks" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+          <a
+            href="/components/player/hooks"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Hooks</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">Learn about state management hooks</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Hooks
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Learn about state management hooks
+            </p>
           </a>
-          <a 
-            href="/components/player/examples" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+          <a
+            href="/components/player/examples"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Examples</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">See complete implementation examples</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Examples
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              See complete implementation examples
+            </p>
           </a>
         </div>
       </div>

@@ -92,9 +92,22 @@ export function Button(props: ButtonProps) {
       })}
       onClick={handleClick}
       ref={ref}
-      onMouseUp={hover ? () => { if (!disabled) onEnterRelease?.({ ...payload, focusKey }); } : undefined}
-      onMouseEnter={hover ? () => { if (!disabled) focusSelf(); } : undefined}
-      disabled={disabled}>
+      onMouseUp={
+        hover
+          ? () => {
+              if (!disabled) onEnterRelease?.({ ...payload, focusKey });
+            }
+          : undefined
+      }
+      onMouseEnter={
+        hover
+          ? () => {
+              if (!disabled) focusSelf();
+            }
+          : undefined
+      }
+      disabled={disabled}
+    >
       {typeof children === "function"
         ? children({ focused, focusSelf, ref, focusKey, payload })
         : children}

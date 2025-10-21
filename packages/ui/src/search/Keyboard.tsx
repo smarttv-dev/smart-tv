@@ -1,11 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { FocusContext, useFocusable } from '../hooks';
-import { getKeyboardLayout } from './KeyboardLayouts';
-import { getKeyboardThemeClasses, getKeySizeClasses } from './KeyboardThemes';
-import {
-  KeyboardProps,
-  KeyButtonProps,
-} from './KeyboardTypes';
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { FocusContext, useFocusable } from "../hooks";
+import { getKeyboardLayout } from "./KeyboardLayouts";
+import { getKeyboardThemeClasses, getKeySizeClasses } from "./KeyboardThemes";
+import { KeyboardProps, KeyButtonProps } from "./KeyboardTypes";
 
 // Individual Key Button Component
 const KeyButton: React.FC<KeyButtonProps> = ({
@@ -13,8 +10,8 @@ const KeyButton: React.FC<KeyButtonProps> = ({
   onPress,
   theme,
   size,
-  className = '',
-  focusedClassName = '',
+  className = "",
+  focusedClassName = "",
   parentFocusKey,
   index,
 }) => {
@@ -33,7 +30,7 @@ const KeyButton: React.FC<KeyButtonProps> = ({
 
   const keyClasses = `
     ${themeClasses.key}
-    ${focused ? focusedClassName || themeClasses.keyFocused : ''}
+    ${focused ? focusedClassName || themeClasses.keyFocused : ""}
     ${sizeClasses.text}
     ${sizeClasses.padding}
     ${className}
@@ -44,11 +41,7 @@ const KeyButton: React.FC<KeyButtonProps> = ({
   const displayLabel = keyConfig.label || keyConfig.value;
 
   return (
-    <button
-      ref={ref}
-      className={keyClasses.trim()}
-      type="button"
-    >
+    <button ref={ref} className={keyClasses.trim()} type="button">
       {displayLabel}
     </button>
   );
@@ -60,24 +53,24 @@ export const Keyboard: React.FC<KeyboardProps> = ({
   onSubmit,
   onBackspace,
   onClear,
-  value = '',
-  layout = 'qwerty',
-  theme = 'modern',
-  size = 'md',
+  value = "",
+  layout = "qwerty",
+  theme = "modern",
+  size = "md",
   customKeys,
   showPreview = true,
   autoFocus = true,
-  className = '',
-  keyClassName = '',
-  focusedKeyClassName = '',
-  placeholder = 'Type here...',
+  className = "",
+  keyClassName = "",
+  focusedKeyClassName = "",
+  placeholder = "Type here...",
   maxLength,
   disabled = false,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   const [shift, setShift] = useState(false);
 
-  const keyboardFocusKey = 'tv-keyboard-main';
+  const keyboardFocusKey = "tv-keyboard-main";
 
   const { ref, focusKey, focusSelf } = useFocusable({
     focusKey: keyboardFocusKey,
@@ -103,7 +96,7 @@ export const Keyboard: React.FC<KeyboardProps> = ({
   // Get keyboard layout
   const keyboardConfig = useMemo(() => {
     if (customKeys) {
-      return { layout: 'custom', rows: customKeys };
+      return { layout: "custom", rows: customKeys };
     }
     return getKeyboardLayout(layout);
   }, [layout, customKeys]);
@@ -114,7 +107,7 @@ export const Keyboard: React.FC<KeyboardProps> = ({
       if (disabled) return;
 
       switch (action) {
-        case 'backspace': {
+        case "backspace": {
           const newValue = inputValue.slice(0, -1);
           setInputValue(newValue);
           onBackspace?.();
@@ -122,35 +115,35 @@ export const Keyboard: React.FC<KeyboardProps> = ({
           break;
         }
 
-        case 'space': {
-          const withSpace = inputValue + ' ';
+        case "space": {
+          const withSpace = inputValue + " ";
           setInputValue(withSpace);
           onInput?.(withSpace);
           break;
         }
 
-        case 'enter':
+        case "enter":
           onSubmit?.(inputValue);
           break;
 
-        case 'clear':
-          setInputValue('');
+        case "clear":
+          setInputValue("");
           onClear?.();
-          onInput?.('');
+          onInput?.("");
           break;
 
-        case 'shift':
+        case "shift":
           setShift(!shift);
           break;
 
         default: {
           if (maxLength && inputValue.length >= maxLength) return;
-          
+
           const charToAdd = shift ? value.toUpperCase() : value.toLowerCase();
           const updatedValue = inputValue + charToAdd;
           setInputValue(updatedValue);
           onInput?.(updatedValue);
-          
+
           // Auto-reset shift after one character
           if (shift) {
             setShift(false);
@@ -158,7 +151,16 @@ export const Keyboard: React.FC<KeyboardProps> = ({
         }
       }
     },
-    [inputValue, disabled, maxLength, shift, onInput, onSubmit, onBackspace, onClear]
+    [
+      inputValue,
+      disabled,
+      maxLength,
+      shift,
+      onInput,
+      onSubmit,
+      onBackspace,
+      onClear,
+    ]
   );
 
   const themeClasses = getKeyboardThemeClasses(theme);
@@ -172,11 +174,11 @@ export const Keyboard: React.FC<KeyboardProps> = ({
         {/* Input Preview */}
         {showPreview && (
           <div className={themeClasses.preview}>
-            <span className={inputValue ? '' : 'ui-opacity-50'}>
+            <span className={inputValue ? "" : "ui-opacity-50"}>
               {inputValue || placeholder}
             </span>
             <span className="ui-ml-auto ui-text-sm ui-opacity-60">
-              {maxLength ? `${inputValue.length}/${maxLength}` : ''}
+              {maxLength ? `${inputValue.length}/${maxLength}` : ""}
             </span>
           </div>
         )}
@@ -184,13 +186,16 @@ export const Keyboard: React.FC<KeyboardProps> = ({
         {/* Keyboard Rows */}
         <div className="ui-keyboard-rows ui-space-y-2">
           {keyboardConfig.rows.map((row, rowIndex) => {
-            const totalWidth = row.keys.reduce((sum, key) => sum + (key.width || 1), 0);
+            const totalWidth = row.keys.reduce(
+              (sum, key) => sum + (key.width || 1),
+              0
+            );
             const gridCols = `ui-grid-cols-${totalWidth}`;
-            
+
             return (
               <div
                 key={`row-${rowIndex}`}
-                className={`ui-grid ${gridCols} ${themeClasses.rowGap} ${row.className || ''}`.trim()}
+                className={`ui-grid ${gridCols} ${themeClasses.rowGap} ${row.className || ""}`.trim()}
               >
                 {row.keys.map((keyConfig, keyIndex) => (
                   <KeyButton

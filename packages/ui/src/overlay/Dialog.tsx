@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useCallback, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 // Lightweight focus trap and util hooks to keep renders minimal
 function useOnKey(handler: (e: KeyboardEvent) => void, active: boolean) {
   useEffect(() => {
     if (!active) return;
     const fn = (e: KeyboardEvent) => handler(e);
-    window.addEventListener('keydown', fn);
-    return () => window.removeEventListener('keydown', fn);
+    window.addEventListener("keydown", fn);
+    return () => window.removeEventListener("keydown", fn);
   }, [handler, active]);
 }
 
-const defaultRootId = 'smart-tv-overlay-root';
+const defaultRootId = "smart-tv-overlay-root";
 function getRoot() {
   let root = document.getElementById(defaultRootId);
   if (!root) {
-    root = document.createElement('div');
+    root = document.createElement("div");
     root.id = defaultRootId;
     document.body.appendChild(root);
   }
@@ -40,7 +40,7 @@ export const Dialog = React.memo(function Dialog({
   closeOnBackdrop = true,
   closeOnEsc = true,
   ariaLabel,
-  className = '',
+  className = "",
 }: DialogProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -48,7 +48,7 @@ export const Dialog = React.memo(function Dialog({
   const handleClose = useCallback(() => onClose?.(), [onClose]);
 
   useOnKey((e) => {
-    if (e.key === 'Escape' && closeOnEsc && open) handleClose();
+    if (e.key === "Escape" && closeOnEsc && open) handleClose();
   }, open && closeOnEsc);
 
   useEffect(() => {
@@ -56,19 +56,23 @@ export const Dialog = React.memo(function Dialog({
     previouslyFocused.current = document.activeElement as HTMLElement | null;
     const el = dialogRef.current;
     const focusable = el?.querySelector<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
     (focusable ?? el)?.focus();
 
     const onFocus = (e: FocusEvent) => {
       if (!el) return;
       if (!el.contains(e.target as Node)) {
-        (el.querySelector<HTMLElement>('button, [tabindex]:not([tabindex="-1"])') ?? el).focus();
+        (
+          el.querySelector<HTMLElement>(
+            'button, [tabindex]:not([tabindex="-1"])'
+          ) ?? el
+        ).focus();
       }
     };
-    document.addEventListener('focus', onFocus, true);
+    document.addEventListener("focus", onFocus, true);
     return () => {
-      document.removeEventListener('focus', onFocus, true);
+      document.removeEventListener("focus", onFocus, true);
       previouslyFocused.current?.focus?.();
     };
   }, [open]);
@@ -81,16 +85,18 @@ export const Dialog = React.memo(function Dialog({
       aria-modal="true"
       aria-label={ariaLabel}
       className={`fixed inset-0 z-50 flex items-center justify-center bg-black/50 ${className}`}
-      onMouseDown={(e) => closeOnBackdrop && e.target === e.currentTarget && handleClose()}
+      onMouseDown={(e) =>
+        closeOnBackdrop && e.target === e.currentTarget && handleClose()
+      }
     >
       <div
         ref={dialogRef}
         tabIndex={-1}
-        className="max-w-3xl w-full mx-4 bg-white dark:bg-neutral-900 rounded-lg shadow-lg focus:outline-none"
+        className="mx-4 w-full max-w-3xl rounded-lg bg-white shadow-lg focus:outline-none dark:bg-neutral-900"
       >
         {children}
       </div>
     </div>,
-    getRoot(),
+    getRoot()
   );
 });

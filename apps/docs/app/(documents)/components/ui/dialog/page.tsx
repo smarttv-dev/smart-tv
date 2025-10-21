@@ -1,20 +1,25 @@
 import React from "react";
-import CodePreview from "../../../../../components/CodePreview";
+import CodePreview from "@/components/CodePreview";
 
 export default function DialogDoc(): React.ReactElement {
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">Dialog</h1>
+        <h1 className="mb-2 text-4xl font-bold text-gray-900 dark:text-gray-100">
+          Dialog
+        </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300">
-          A modal dialog component for displaying important information, confirmations, and forms that require user attention.
+          A modal dialog component for displaying important information,
+          confirmations, and forms that require user attention.
         </p>
       </div>
 
       {/* Import */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Import</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Import
+        </h2>
         <CodePreview
           language="tsx"
           code={`import { Dialog } from '@smart-tv/ui';`}
@@ -23,8 +28,10 @@ export default function DialogDoc(): React.ReactElement {
 
       {/* Basic Usage */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Basic Usage</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Basic Usage
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Create a simple dialog with title and content.
         </p>
         <CodePreview
@@ -35,7 +42,7 @@ export default function DialogDoc(): React.ReactElement {
   <Button focusKey="open-dialog" onEnterPress={() => setIsOpen(true)}>
     Open Dialog
   </Button>
-  
+
   <Dialog
     focusKey="basic-dialog"
     open={isOpen}
@@ -60,8 +67,10 @@ export default function DialogDoc(): React.ReactElement {
 
       {/* Alert Dialog */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Alert Dialog</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Alert Dialog
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Display important alerts or warnings.
         </p>
         <CodePreview
@@ -87,8 +96,10 @@ export default function DialogDoc(): React.ReactElement {
 
       {/* Form Dialog */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Form Dialog</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Form Dialog
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Use dialogs for collecting user input.
         </p>
         <CodePreview
@@ -101,14 +112,14 @@ export default function DialogDoc(): React.ReactElement {
   <Dialog.Title>Edit Profile</Dialog.Title>
   <Dialog.Content>
     <form>
-      <input 
-        type="text" 
+      <input
+        type="text"
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <input 
-        type="email" 
+      <input
+        type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -129,53 +140,111 @@ export default function DialogDoc(): React.ReactElement {
 
       {/* Props Reference */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Props</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Props
+        </h2>
         <div className="overflow-x-auto">
           <table className="min-w-full border border-gray-200 dark:border-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-800">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Prop</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Type</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Default</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Description</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Prop
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Type
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Default
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Description
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">focusKey</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">required</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Unique identifier</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  focusKey
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  required
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Unique identifier
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">open</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">boolean</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">false</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Dialog visibility state</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  open
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  boolean
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  false
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Dialog visibility state
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">onClose</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">function</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Close callback</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  onClose
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  function
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Close callback
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">variant</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">default</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Visual variant (default, alert, confirm)</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  variant
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  default
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Visual variant (default, alert, confirm)
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">closeOnBackdropClick</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">boolean</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">true</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Close when clicking backdrop</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  closeOnBackdropClick
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  boolean
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  true
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Close when clicking backdrop
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">className</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Additional CSS classes</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  className
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Additional CSS classes
+                </td>
               </tr>
             </tbody>
           </table>
@@ -184,8 +253,10 @@ export default function DialogDoc(): React.ReactElement {
 
       {/* Best Practices */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Best Practices</h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Best Practices
+        </h2>
+        <ul className="list-inside list-disc space-y-2 text-gray-600 dark:text-gray-300">
           <li>Use dialogs sparingly for important information only</li>
           <li>Always provide a clear way to close the dialog</li>
           <li>Focus the primary action button when dialog opens</li>

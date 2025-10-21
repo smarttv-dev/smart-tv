@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 // Player state types
 export interface PlayerState {
@@ -50,9 +50,9 @@ export interface TextTrack {
   id: string;
   language: string;
   label: string;
-  kind: 'subtitles' | 'captions' | 'descriptions' | 'chapters' | 'metadata';
+  kind: "subtitles" | "captions" | "descriptions" | "chapters" | "metadata";
   active: boolean;
-  mode: 'disabled' | 'hidden' | 'showing';
+  mode: "disabled" | "hidden" | "showing";
 }
 
 // Player source types
@@ -80,8 +80,8 @@ export interface MediaPlayerProps {
   style?: React.CSSProperties;
   volume?: number;
   playbackRate?: number;
-  crossOrigin?: 'anonymous' | 'use-credentials';
-  preload?: 'none' | 'metadata' | 'auto';
+  crossOrigin?: "anonymous" | "use-credentials";
+  preload?: "none" | "metadata" | "auto";
   children?: ReactNode;
   onReady?: () => void;
   onPlay?: () => void;
@@ -127,8 +127,8 @@ export interface PlayButtonProps {
   className?: string;
   style?: React.CSSProperties;
   focusKey?: string;
-  size?: 'sm' | 'md' | 'lg';
-  variant?: 'default' | 'ghost' | 'outline';
+  size?: "sm" | "md" | "lg";
+  variant?: "default" | "ghost" | "outline";
   showIcon?: boolean;
   playIcon?: ReactNode;
   pauseIcon?: ReactNode;
@@ -154,7 +154,7 @@ export interface VolumeControlProps {
   className?: string;
   style?: React.CSSProperties;
   focusKey?: string;
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
   showMuteButton?: boolean;
   step?: number;
   onVolumeChange?: (volume: number) => void;
@@ -165,7 +165,7 @@ export interface TrackSelectorProps {
   className?: string;
   style?: React.CSSProperties;
   focusKey?: string;
-  type: 'audio' | 'video' | 'text';
+  type: "audio" | "video" | "text";
   title?: string;
   onTrackSelect?: (trackId: string) => void;
   onClose?: () => void;
@@ -203,27 +203,27 @@ export interface MediaPlayerInstance {
 
 // Event types
 export type PlayerEventType =
-  | 'ready'
-  | 'play'
-  | 'pause'
-  | 'ended'
-  | 'error'
-  | 'timeupdate'
-  | 'durationchange'
-  | 'volumechange'
-  | 'progress'
-  | 'seeking'
-  | 'seeked'
-  | 'waiting'
-  | 'loadstart'
-  | 'loadeddata'
-  | 'loadedmetadata'
-  | 'canplay'
-  | 'canplaythrough'
-  | 'fullscreenchange'
-  | 'pictureinpicturechange'
-  | 'playbackratechange'
-  | 'trackschange';
+  | "ready"
+  | "play"
+  | "pause"
+  | "ended"
+  | "error"
+  | "timeupdate"
+  | "durationchange"
+  | "volumechange"
+  | "progress"
+  | "seeking"
+  | "seeked"
+  | "waiting"
+  | "loadstart"
+  | "loadeddata"
+  | "loadedmetadata"
+  | "canplay"
+  | "canplaythrough"
+  | "fullscreenchange"
+  | "pictureinpicturechange"
+  | "playbackratechange"
+  | "trackschange";
 
 export interface PlayerEvent {
   type: PlayerEventType;
@@ -239,7 +239,7 @@ export interface PlaylistItem {
   thumbnail?: string;
   duration?: number;
   url: string;
-  type?: 'video' | 'audio';
+  type?: "video" | "audio";
   metadata?: Record<string, any>;
   isActive?: boolean;
   progress?: number; // 0-100
@@ -267,7 +267,7 @@ export interface PlaylistItem {
 export interface PlaylistRail {
   id: string;
   title: string;
-  type: 'queue' | 'related' | 'recommendations' | 'history' | 'custom';
+  type: "queue" | "related" | "recommendations" | "history" | "custom";
   items: PlaylistItem[];
   isCollapsible?: boolean;
   isCollapsed?: boolean;
@@ -303,7 +303,7 @@ export interface PlaylistConfig {
   globalDrm?: DrmConfig; // Global DRM config applied to all items without specific DRM
   drmFallback?: boolean; // Try to play without DRM if DRM fails
   // Quality settings
-  preferredQuality?: 'auto' | 'highest' | 'lowest' | string;
+  preferredQuality?: "auto" | "highest" | "lowest" | string;
   adaptiveStreaming?: boolean;
   // Preload settings
   preloadNext?: boolean; // Preload the next item in queue

@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
-import { FocusContext, useFocusable, UseFocusableConfig } from '../hooks';
-import { FocusableComponentLayout } from './Navigation';
+import React, { forwardRef } from "react";
+import { FocusContext, useFocusable, UseFocusableConfig } from "../hooks";
+import { FocusableComponentLayout } from "./Navigation";
 
 type SectionProps = {
   children?: React.ReactNode;
@@ -17,25 +17,29 @@ type SectionProps = {
 } & Partial<UseFocusableConfig>;
 
 // Section for grouping TV UI elements and providing a FocusContext
-export const Section = forwardRef<HTMLDivElement, SectionProps>(function Section(
-  {
-    children,
-    className = '',
-    focusKey,
-    viewOnly = false,
-    onEnterPress,
-    onFocus,
-    onBlur,
-    trackChildren = true,
-    saveLastFocusedChild = true,
-    style,
-    ...rest
-  },
-  ref
-) {
-  // useFocusable returns a ref and focus helpers for the section
-  const { ref: innerRef, focusKey: providedFocusKey, focused } =
-    useFocusable({
+export const Section = forwardRef<HTMLDivElement, SectionProps>(
+  function Section(
+    {
+      children,
+      className = "",
+      focusKey,
+      viewOnly = false,
+      onEnterPress,
+      onFocus,
+      onBlur,
+      trackChildren = true,
+      saveLastFocusedChild = true,
+      style,
+      ...rest
+    },
+    ref
+  ) {
+    // useFocusable returns a ref and focus helpers for the section
+    const {
+      ref: innerRef,
+      focusKey: providedFocusKey,
+      focused,
+    } = useFocusable({
       focusKey,
       focusable: !viewOnly,
       trackChildren,
@@ -46,26 +50,27 @@ export const Section = forwardRef<HTMLDivElement, SectionProps>(function Section
       ...rest,
     } as UseFocusableConfig);
 
-  // If the hook didn't generate a focus key (eg. viewOnly), fall back to the
-  // explicit prop so descendants still receive a value.
-  const providerValue = providedFocusKey ?? focusKey;
+    // If the hook didn't generate a focus key (eg. viewOnly), fall back to the
+    // explicit prop so descendants still receive a value.
+    const providerValue = providedFocusKey ?? focusKey;
 
-  // merge forwarded ref and internal ref
-  React.useImperativeHandle(ref, () => innerRef.current, [innerRef]);
+    // merge forwarded ref and internal ref
+    React.useImperativeHandle(ref, () => innerRef.current, [innerRef]);
 
-  // Provide the focus key to descendants
-  return (
-    <FocusContext.Provider value={providerValue}>
-      <section
-        ref={innerRef as React.RefObject<HTMLElement>}
-        className={`tv-section focus-visible:ui-outline-none ${className} ${focused ? 'focused' : ''}`}
-        tabIndex={0}
-        style={style}
-      >
-        {children}
-      </section>
-    </FocusContext.Provider>
-  );
-});
+    // Provide the focus key to descendants
+    return (
+      <FocusContext.Provider value={providerValue}>
+        <section
+          ref={innerRef as React.RefObject<HTMLElement>}
+          className={`tv-section focus-visible:ui-outline-none ${className} ${focused ? "focused" : ""}`}
+          tabIndex={0}
+          style={style}
+        >
+          {children}
+        </section>
+      </FocusContext.Provider>
+    );
+  }
+);
 
-Section.displayName = 'Section';
+Section.displayName = "Section";

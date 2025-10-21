@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { FocusContext } from '../hooks/useFocusContext';
-import { useFocusable } from '../hooks/useFocusable';
+import { useCallback, useEffect, useRef, useState } from "react";
+import { FocusContext } from "../hooks/useFocusContext";
+import { useFocusable } from "../hooks/useFocusable";
 
 type RenderProps = {
   focused: boolean;
@@ -29,11 +29,16 @@ export const Sidebar = ({
   expandedWidth = 280,
   collapseDelay = 300,
   overlay = false,
-  className = '',
-  focusKey: componentFocusKey = 'SIDEBAR',
+  className = "",
+  focusKey: componentFocusKey = "SIDEBAR",
 }: SidebarProps) => {
   // Use the project's navigation hooks so sidebar reacts to TV focus engine
-  const { ref: containerRef, focused, hasFocusedChild, focusKey } = useFocusable({
+  const {
+    ref: containerRef,
+    focused,
+    hasFocusedChild,
+    focusKey,
+  } = useFocusable({
     focusKey: componentFocusKey,
     focusable: true,
     trackChildren: true,
@@ -77,18 +82,18 @@ export const Sidebar = ({
     const el = containerRef.current as HTMLElement | null;
     if (!el) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === "Enter" || e.key === " ") {
         setExpanded((s) => !s);
       }
     };
-    el.addEventListener('keydown', onKeyDown);
-    return () => el.removeEventListener('keydown', onKeyDown);
+    el.addEventListener("keydown", onKeyDown);
+    return () => el.removeEventListener("keydown", onKeyDown);
   }, [containerRef]);
 
   // inline styles for width transition
   const baseStyle: React.CSSProperties = {
     width: expanded ? expandedWidth : collapsedWidth,
-    transition: 'width 200ms ease',
+    transition: "width 200ms ease",
   };
 
   // publish width to a CSS variable so siblings (like Screen) can read it
@@ -100,17 +105,17 @@ export const Sidebar = ({
     // set on document.documentElement so layouts outside this component can consume
     const root = document.documentElement as HTMLElement | null;
     if (root) {
-      root.style.setProperty('--ui-sidebar-width', width);
-      root.style.setProperty('--ui-expanded-width', extendedWidth);
-      root.style.setProperty('--ui-collapsed-width', collapseWidth);
+      root.style.setProperty("--ui-sidebar-width", width);
+      root.style.setProperty("--ui-expanded-width", extendedWidth);
+      root.style.setProperty("--ui-collapsed-width", collapseWidth);
     }
 
     return () => {
       // when unmounting or overlay toggled, remove the variable if it matches
       if (root) {
-        root.style.removeProperty('--ui-sidebar-width');
-        root.style.removeProperty('--ui-expanded-width');
-        root.style.removeProperty('--ui-collapsed-width');
+        root.style.removeProperty("--ui-sidebar-width");
+        root.style.removeProperty("--ui-expanded-width");
+        root.style.removeProperty("--ui-collapsed-width");
       }
     };
   }, [expanded, expandedWidth, collapsedWidth, overlay]);
@@ -118,14 +123,14 @@ export const Sidebar = ({
   // overlay mode styles
   const overlayStyle: React.CSSProperties = overlay
     ? {
-      position: 'absolute',
-      left: 0,
-      top: 0,
-      bottom: 0,
-      zIndex: 50,
-      boxShadow: expanded ? '0 6px 18px rgba(0,0,0,0.4)' : 'none',
-    }
-    : { position: 'relative' };
+        position: "absolute",
+        left: 0,
+        top: 0,
+        bottom: 0,
+        zIndex: 50,
+        boxShadow: expanded ? "0 6px 18px rgba(0,0,0,0.4)" : "none",
+      }
+    : { position: "relative" };
 
   return (
     <FocusContext.Provider value={focusKey}>
@@ -139,10 +144,14 @@ export const Sidebar = ({
         {/* visual thin divider when collapsed */}
         <div
           className="ui-h-full ui-overflow-hidden"
-          style={{ width: '100%', display: 'flex', flexDirection: 'column' }}
+          style={{ width: "100%", display: "flex", flexDirection: "column" }}
         >
           {typeof children === "function"
-            ? children({ focused: focused || hasFocusedChild, ref: containerRef, focusKey })
+            ? children({
+                focused: focused || hasFocusedChild,
+                ref: containerRef,
+                focusKey,
+              })
             : children}
         </div>
       </aside>

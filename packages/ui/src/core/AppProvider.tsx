@@ -1,67 +1,78 @@
-import { createContext, createElement, ReactNode, useContext, useMemo, useState } from "react";
 import {
-    getCurrentFocusKey,
-    InitOptions,
-    destroy as navigationDestroy,
-    init as navigationInit,
-    navigateByDirection as navigationNavigateByDirection,
-    setFocus as navigationSetFocus,
-    updateRtl as navigationUpdateRtl
+  createContext,
+  createElement,
+  ReactNode,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+import {
+  getCurrentFocusKey,
+  InitOptions,
+  destroy as navigationDestroy,
+  init as navigationInit,
+  navigateByDirection as navigationNavigateByDirection,
+  setFocus as navigationSetFocus,
+  updateRtl as navigationUpdateRtl,
 } from "./Navigation";
 
 // Minimal shape of the app context
 export interface AppProviderValue {
-    label: string;
-    setLabel: (label: string) => void;
-    init: typeof navigationInit | undefined;
-    destroy: () => void;
-    setFocus: (focusKey: string) => void;
-    navigate: (direction: "up" | "down" | "left" | "right") => void;
-    getFocusedKey: () => string;
-    setRtl: (rtl: boolean) => void;
+  label: string;
+  setLabel: (label: string) => void;
+  init: typeof navigationInit | undefined;
+  destroy: () => void;
+  setFocus: (focusKey: string) => void;
+  navigate: (direction: "up" | "down" | "left" | "right") => void;
+  getFocusedKey: () => string;
+  setRtl: (rtl: boolean) => void;
 }
 
-export const AppContext = createContext<AppProviderValue | undefined>(undefined);
+export const AppContext = createContext<AppProviderValue | undefined>(
+  undefined
+);
 
 export function AppProvider({
-    children,
-    initialLabel = "",
-    init = {
-        debug: false,
-    },
+  children,
+  initialLabel = "",
+  init = {
+    debug: false,
+  },
 }: {
-    children: ReactNode;
-    initialLabel?: string;
-    init?: InitOptions
+  children: ReactNode;
+  initialLabel?: string;
+  init?: InitOptions;
 }) {
-    const [label, setLabel] = useState(initialLabel);
+  const [label, setLabel] = useState(initialLabel);
 
-    if (init !== undefined) {
-        navigationInit(init);
-    }
+  if (init !== undefined) {
+    navigationInit(init);
+  }
 
-    const value = useMemo<AppProviderValue>(() => ({
-        label,
-        setLabel,
-        init: (opts = {}) => navigationInit(opts),
-        destroy: () => navigationDestroy(),
-        setFocus: (focusKey: string) => navigationSetFocus(focusKey),
-        navigate: (direction: "up" | "down" | "left" | "right") =>
-            navigationNavigateByDirection(direction as any, {} as any),
-        getFocusedKey: () => getCurrentFocusKey(),
-        setRtl: (rtl: boolean) => navigationUpdateRtl(rtl),
-    }), [label]);
+  const value = useMemo<AppProviderValue>(
+    () => ({
+      label,
+      setLabel,
+      init: (opts = {}) => navigationInit(opts),
+      destroy: () => navigationDestroy(),
+      setFocus: (focusKey: string) => navigationSetFocus(focusKey),
+      navigate: (direction: "up" | "down" | "left" | "right") =>
+        navigationNavigateByDirection(direction as any, {} as any),
+      getFocusedKey: () => getCurrentFocusKey(),
+      setRtl: (rtl: boolean) => navigationUpdateRtl(rtl),
+    }),
+    [label]
+  );
 
-    return createElement(AppContext.Provider, { value }, children);
+  return createElement(AppContext.Provider, { value }, children);
 }
 
 export function useAppProvider() {
-    const ctx = useContext(AppContext);
+  const ctx = useContext(AppContext);
 
-    if (!ctx) {
-        throw new Error("useAppProvider must be used within an AppProvider");
-    }
+  if (!ctx) {
+    throw new Error("useAppProvider must be used within an AppProvider");
+  }
 
-    return ctx;
+  return ctx;
 }
-

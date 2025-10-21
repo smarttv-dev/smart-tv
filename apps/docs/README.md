@@ -14,16 +14,19 @@ This is the documentation application for the Smart TV monorepo.
 ### Run Locally
 
 1. From the repository root, install dependencies:
+
    ```bash
    pnpm install
    ```
 
 2. Start the development server:
+
    ```bash
    pnpm -w -C apps/docs dev
    ```
-   
+
    Or from the root:
+
    ```bash
    pnpm dev
    ```
@@ -58,6 +61,7 @@ The documentation is configured for easy deployment to Vercel:
 2. **Manual Setup** - See [VERCEL_DEPLOYMENT.md](../../VERCEL_DEPLOYMENT.md) for detailed instructions
 
 The project includes:
+
 - `vercel.json` - Monorepo configuration
 - `.vercelignore` - Build optimization
 
@@ -85,7 +89,7 @@ apps/docs/
 
 ## Contributing
 
-This app is part of an open-source project (MIT License). Contributions are welcome!
+This app is part of an open-source project (BSD 3-Clause License). Contributions are welcome!
 
 ## Learn More
 

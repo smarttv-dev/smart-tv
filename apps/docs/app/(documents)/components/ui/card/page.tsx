@@ -1,36 +1,43 @@
 import React from "react";
-import CodePreview from "../../../../../components/CodePreview";
+import CodePreview from "@/components/CodePreview";
 
 export default function CardDoc(): React.ReactElement {
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">Card</h1>
+        <h1 className="mb-2 text-4xl font-bold text-gray-900 dark:text-gray-100">
+          Card
+        </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300">
-          A versatile container component with built-in focus management, perfect for displaying media content, product cards, and grid items.
+          A versatile container component with built-in focus management,
+          perfect for displaying media content, product cards, and grid items.
         </p>
       </div>
 
       {/* Import */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Import</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Import
+        </h2>
         <CodePreview
           language="tsx"
-          code={`import { 
-  Card, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription, 
-  CardContent, 
-  CardFooter 
+          code={`import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter
 } from '@smart-tv/ui';`}
         />
       </div>
 
       {/* Basic Usage */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Basic Usage</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Basic Usage
+        </h2>
         <CodePreview
           language="tsx"
           code={`<Card focusKey="movie-card" className="w-64">
@@ -42,8 +49,10 @@ export default function CardDoc(): React.ReactElement {
 
       {/* With Subcomponents */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">With Card Subcomponents</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          With Card Subcomponents
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Use the provided subcomponents for structured card layouts.
         </p>
         <CodePreview
@@ -53,14 +62,14 @@ export default function CardDoc(): React.ReactElement {
     <CardTitle>The Great Adventure</CardTitle>
     <CardDescription>2023 • Action • 2h 15m</CardDescription>
   </CardHeader>
-  
+
   <CardContent>
     <img src="/poster.jpg" alt="Poster" className="w-full h-64 object-cover rounded" />
     <p className="mt-4 text-sm text-gray-600">
       An epic journey through uncharted territories...
     </p>
   </CardContent>
-  
+
   <CardFooter className="flex gap-2">
     <Button focusKey="play-btn">Play</Button>
     <Button focusKey="info-btn">More Info</Button>
@@ -71,10 +80,12 @@ export default function CardDoc(): React.ReactElement {
 
       {/* Focusable Card */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Focusable Card with Actions</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Focusable Card with Actions
+        </h2>
         <CodePreview
           language="tsx"
-          code={`<Card 
+          code={`<Card
   focusKey="action-card"
   focusable={true}
   className="w-64 transition-transform"
@@ -92,21 +103,23 @@ export default function CardDoc(): React.ReactElement {
 
       {/* Render Props */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Render Props Pattern</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Render Props Pattern
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Dynamically render card content based on focus state.
         </p>
         <CodePreview
           language="tsx"
-          code={`<Card 
+          code={`<Card
   focusKey="dynamic-card"
   className="w-64"
 >
   {({ focused, focusSelf }) => (
     <div className={focused ? 'bg-blue-500 text-white' : 'bg-gray-100'}>
-      <img 
-        src="/image.jpg" 
-        alt="Image" 
+      <img
+        src="/image.jpg"
+        alt="Image"
         className="w-full h-80 object-cover"
       />
       <div className="p-4">
@@ -122,14 +135,16 @@ export default function CardDoc(): React.ReactElement {
 
       {/* Card Grid */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Card Grid Layout</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Card Grid Layout
+        </h2>
         <CodePreview
           language="tsx"
           code={`import { Grid, Card } from '@smart-tv/ui';
 
-<Grid 
-  focusKey="movie-grid" 
-  columns={4} 
+<Grid
+  focusKey="movie-grid"
+  columns={4}
   gap={16}
   className="p-8"
 >
@@ -154,16 +169,18 @@ export default function CardDoc(): React.ReactElement {
 
       {/* Card Row */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Horizontal Card Row</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Horizontal Card Row
+        </h2>
         <CodePreview
           language="tsx"
           code={`import { Row, Card } from '@smart-tv/ui';
 
 <Section focusKey="featured-section">
   <h2 className="text-2xl font-bold mb-4">Featured Content</h2>
-  
-  <Row 
-    focusKey="featured-row" 
+
+  <Row
+    focusKey="featured-row"
     gap={16}
     scrollProps={{ behavior: 'smooth' }}
   >
@@ -185,24 +202,30 @@ export default function CardDoc(): React.ReactElement {
 
       {/* With Nested Focusable Elements */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Card with Nested Buttons</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Cards can contain nested focusable elements. Use <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">trackChildren</code> to manage focus.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Card with Nested Buttons
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Cards can contain nested focusable elements. Use{" "}
+          <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-700">
+            trackChildren
+          </code>{" "}
+          to manage focus.
         </p>
         <CodePreview
           language="tsx"
-          code={`<Card 
+          code={`<Card
   focusKey="complex-card"
   trackChildren={true}
   saveLastFocusedChild={true}
   className="w-96"
 >
   <img src="/movie.jpg" alt="Movie" className="w-full h-80 object-cover" />
-  
+
   <CardContent className="p-4">
     <h3 className="text-xl font-bold mb-2">Movie Title</h3>
     <p className="text-gray-600 mb-4">Description goes here...</p>
-    
+
     <div className="flex gap-2">
       <Button focusKey="play-btn" className="flex-1">
         Play
@@ -221,10 +244,12 @@ export default function CardDoc(): React.ReactElement {
 
       {/* Focus Boundary */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Card with Focus Boundary</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Card with Focus Boundary
+        </h2>
         <CodePreview
           language="tsx"
-          code={`<Card 
+          code={`<Card
   focusKey="modal-card"
   isFocusBoundary={true}
   focusBoundaryDirections={['up', 'down', 'left', 'right']}
@@ -233,11 +258,11 @@ export default function CardDoc(): React.ReactElement {
   <CardHeader>
     <CardTitle>Confirmation</CardTitle>
   </CardHeader>
-  
+
   <CardContent>
     <p>Are you sure you want to delete this item?</p>
   </CardContent>
-  
+
   <CardFooter className="flex gap-2">
     <Button focusKey="cancel-btn">Cancel</Button>
     <Button focusKey="confirm-btn">Confirm</Button>
@@ -249,71 +274,153 @@ export default function CardDoc(): React.ReactElement {
 
       {/* Props Reference */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Card Props</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Card Props
+        </h2>
         <div className="overflow-x-auto">
           <table className="min-w-full border border-gray-200 dark:border-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-800">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Prop</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Type</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Default</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Description</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Prop
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Type
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Default
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Description
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">focusKey</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">required</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Unique identifier</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  focusKey
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  required
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Unique identifier
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">focusable</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">boolean</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">false</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Make card itself focusable</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  focusable
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  boolean
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  false
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Make card itself focusable
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">trackChildren</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">boolean</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">false</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Track child focus</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  trackChildren
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  boolean
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  false
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Track child focus
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">saveLastFocusedChild</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">boolean</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">false</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Restore child focus</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  saveLastFocusedChild
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  boolean
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  false
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Restore child focus
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">className</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">CSS classes</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  className
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  CSS classes
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">active</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">CSS classes when focused</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  active
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  CSS classes when focused
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">onEnterPress</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">function</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Enter press handler</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  onEnterPress
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  function
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Enter press handler
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">onFocus</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">function</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Focus handler</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  onFocus
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  function
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Focus handler
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">children</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">ReactNode | RenderFunction</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Card content</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  children
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  ReactNode | RenderFunction
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Card content
+                </td>
               </tr>
             </tbody>
           </table>
@@ -322,39 +429,77 @@ export default function CardDoc(): React.ReactElement {
 
       {/* Subcomponents */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Subcomponents</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Subcomponents
+        </h2>
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">CardHeader</h3>
-            <p className="text-gray-600 dark:text-gray-300">Container for card header content (title, description)</p>
+            <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              CardHeader
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Container for card header content (title, description)
+            </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">CardTitle</h3>
-            <p className="text-gray-600 dark:text-gray-300">Main title of the card</p>
+            <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              CardTitle
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Main title of the card
+            </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">CardDescription</h3>
-            <p className="text-gray-600 dark:text-gray-300">Subtitle or description text</p>
+            <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              CardDescription
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Subtitle or description text
+            </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">CardContent</h3>
-            <p className="text-gray-600 dark:text-gray-300">Main content area of the card</p>
+            <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              CardContent
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Main content area of the card
+            </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">CardFooter</h3>
-            <p className="text-gray-600 dark:text-gray-300">Footer area for actions and buttons</p>
+            <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              CardFooter
+            </h3>
+            <p className="text-gray-600 dark:text-gray-300">
+              Footer area for actions and buttons
+            </p>
           </div>
         </div>
       </div>
 
       {/* Best Practices */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Best Practices</h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Best Practices
+        </h2>
+        <ul className="list-inside list-disc space-y-2 text-gray-600 dark:text-gray-300">
           <li>Use consistent card dimensions within a grid or row</li>
-          <li>Provide clear visual feedback with the <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">active</code> prop</li>
-          <li>Use CardHeader, CardContent, and CardFooter for structured layouts</li>
-          <li>Enable <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">trackChildren</code> when cards contain buttons</li>
+          <li>
+            Provide clear visual feedback with the{" "}
+            <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-700">
+              active
+            </code>{" "}
+            prop
+          </li>
+          <li>
+            Use CardHeader, CardContent, and CardFooter for structured layouts
+          </li>
+          <li>
+            Enable{" "}
+            <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-700">
+              trackChildren
+            </code>{" "}
+            when cards contain buttons
+          </li>
           <li>Optimize images for TV resolution (use appropriate sizes)</li>
           <li>Keep card content readable at 10-foot viewing distance</li>
         </ul>

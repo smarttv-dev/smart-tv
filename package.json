@@ -4,7 +4,7 @@
   "private": true,
   "description": "A comprehensive toolkit for building Smart TV applications with React and TypeScript",
   "author": "ForidPathan",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "https://github.com/smarttv-dev/smart-tv.git"
@@ -25,7 +25,8 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "check-types": "turbo run check-types",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md,html,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md,html,yml,yaml}\"",
     "clean": "turbo run clean && rm -rf node_modules",
     "test": "turbo run test",
     "verify": "bash scripts/verify-publish.sh",

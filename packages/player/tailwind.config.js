@@ -1,42 +1,40 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  prefix: 'player-',
-  content: [
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  prefix: "player-",
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#3b82f6', // Use hex instead of CSS variables
-          foreground: '#ffffff',
+          DEFAULT: "#3b82f6", // Use hex instead of CSS variables
+          foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: '#6b7280',
-          foreground: '#ffffff',
+          DEFAULT: "#6b7280",
+          foreground: "#ffffff",
         },
-        background: '#ffffff',
-        foreground: '#111827',
+        background: "#ffffff",
+        foreground: "#111827",
         muted: {
-          DEFAULT: '#f3f4f6',
-          foreground: '#6b7280',
+          DEFAULT: "#f3f4f6",
+          foreground: "#6b7280",
         },
         accent: {
-          DEFAULT: '#f1f5f9',
-          foreground: '#0f172a',
+          DEFAULT: "#f1f5f9",
+          foreground: "#0f172a",
         },
         destructive: {
-          DEFAULT: '#ef4444',
-          foreground: '#ffffff',
+          DEFAULT: "#ef4444",
+          foreground: "#ffffff",
         },
-        border: '#e5e7eb',
-        input: '#e5e7eb',
-        ring: '#3b82f6',
+        border: "#e5e7eb",
+        input: "#e5e7eb",
+        ring: "#3b82f6",
       },
       borderRadius: {
-        lg: '0.5rem', // Use fixed values instead of CSS variables
-        md: '0.375rem',
-        sm: '0.25rem',
+        lg: "0.5rem", // Use fixed values instead of CSS variables
+        md: "0.375rem",
+        sm: "0.25rem",
       },
     },
   },

@@ -78,12 +78,14 @@ my-smart-tv-app/
 ## Features
 
 ### 📺 Smart TV Optimized
+
 - Pre-configured for Smart TV environments
 - Legacy browser support (Chrome 38+, IE 11+)
 - Remote control navigation support
 - TV-specific CSS and styling
 
 ### ⚡ Modern Development Experience
+
 - **Vite** for fast development and building
 - **TypeScript** support out of the box
 - **Tailwind CSS** for utility-first styling
@@ -91,6 +93,7 @@ my-smart-tv-app/
 - Hot module replacement during development
 
 ### 📦 Smart TV Packages Included
+
 - **@smart-tv/ui**: UI components optimized for TV interfaces
 - **@smart-tv/player**: Media player components for video/audio
 - **@smart-tv/query**: Data fetching and state management
@@ -102,4 +105,4 @@ my-smart-tv-app/
 
 ## License
 
-MIT
+BSD-3-Clause

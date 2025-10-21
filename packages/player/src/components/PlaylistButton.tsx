@@ -1,6 +1,6 @@
-import { useFocusable } from '@smart-tv/ui';
-import React, { memo } from 'react';
-import { cn } from '../utils';
+import { useFocusable } from "@smart-tv/ui";
+import React, { memo } from "react";
+import { cn } from "../utils";
 
 interface PlaylistButtonProps {
   className?: string;
@@ -16,7 +16,7 @@ interface PlaylistButtonProps {
 const PlaylistButtonComponent: React.FC<PlaylistButtonProps> = ({
   className,
   style,
-  focusKey = 'playlist-button',
+  focusKey = "playlist-button",
   isActive = false,
   itemCount = 0,
   onClick,
@@ -36,20 +36,20 @@ const PlaylistButtonComponent: React.FC<PlaylistButtonProps> = ({
     <button
       ref={ref}
       className={cn(
-        'playlist-button',
-        'player-relative player-flex player-items-center player-justify-center',
-        'player-w-10 player-h-10',
-        'player-transition-all player-duration-200',
-        'player-text-white hover:player-text-white',
-        'hover:player-bg-white/20 focus:player-bg-white/20',
-        focused && 'player-ring-2 player-ring-white player-ring-opacity-50',
-        isActive && 'player-bg-white/30',
+        "playlist-button",
+        "player-relative player-flex player-items-center player-justify-center",
+        "player-w-10 player-h-10",
+        "player-transition-all player-duration-200",
+        "player-text-white hover:player-text-white",
+        "hover:player-bg-white/20 focus:player-bg-white/20",
+        focused && "player-ring-2 player-ring-white player-ring-opacity-50",
+        isActive && "player-bg-white/30",
         className
       )}
       style={style}
       onClick={onClick}
-      title={`${isActive ? 'Hide' : 'Show'} Playlist${itemCount > 0 ? ` (${itemCount} items)` : ''}`}
-      aria-label={`${isActive ? 'Hide' : 'Show'} Playlist`}
+      title={`${isActive ? "Hide" : "Show"} Playlist${itemCount > 0 ? ` (${itemCount} items)` : ""}`}
+      aria-label={`${isActive ? "Hide" : "Show"} Playlist`}
       aria-pressed={isActive}
     >
       {/* Playlist Icon */}
@@ -69,7 +69,7 @@ const PlaylistButtonComponent: React.FC<PlaylistButtonProps> = ({
       {/* Item Count Badge */}
       {itemCount > 0 && (
         <div className="player-absolute player--top-1 player--right-1 player-min-w-[18px] player-h-[18px] player-bg-red-500 player-text-white player-text-xs player-font-bold player-rounded-full player-flex player-items-center player-justify-center player-px-1">
-          {itemCount > 99 ? '99+' : itemCount}
+          {itemCount > 99 ? "99+" : itemCount}
         </div>
       )}
 

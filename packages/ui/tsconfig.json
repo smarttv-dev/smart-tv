@@ -16,7 +16,7 @@
     "jsx": "react-jsx",
     "types": ["node"],
     "downlevelIteration": true,
-    "outDir": "dist"    
+    "outDir": "dist"
   },
   "include": ["src"],
   "exclude": ["dist", "build", "node_modules"]

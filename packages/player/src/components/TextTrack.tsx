@@ -1,8 +1,8 @@
-import { useFocusable } from '@smart-tv/ui';
-import React, { memo, useCallback } from 'react';
-import { usePlayerInstance, useTextTracks } from '../hooks/useOptimizedHooks';
-import { TextTrack as TextTrackType } from '../types';
-import { cn, compareTrackProps, getDisplayLanguage } from '../utils';
+import { useFocusable } from "@smart-tv/ui";
+import React, { memo, useCallback } from "react";
+import { usePlayerInstance, useTextTracks } from "../hooks/useOptimizedHooks";
+import { TextTrack as TextTrackType } from "../types";
+import { cn, compareTrackProps, getDisplayLanguage } from "../utils";
 
 interface TextTrackProps {
   className?: string;
@@ -21,30 +21,33 @@ const TextTrackComponent: React.FC<TextTrackProps> = ({
   itemClass,
   focusClass,
   selectedClass,
-  title
+  title,
 }) => {
   const player = usePlayerInstance();
   const textTracks = useTextTracks();
 
   const { ref } = useFocusable({
-    focusKey: 'text-track-selector',
+    focusKey: "text-track-selector",
     trackChildren: true,
   });
 
-  const handleTrackSelect = useCallback((track: TextTrackType) => {
-    if (player) {
-      player.selectTextTrack(track.id);
-      onTrackSelect?.(track);
-      onClose?.();
-    }
-  }, [player, onTrackSelect, onClose]);
+  const handleTrackSelect = useCallback(
+    (track: TextTrackType) => {
+      if (player) {
+        player.selectTextTrack(track.id);
+        onTrackSelect?.(track);
+        onClose?.();
+      }
+    },
+    [player, onTrackSelect, onClose]
+  );
 
   const handleDisableSubtitles = useCallback(() => {
     // Disable all text tracks
     textTracks.forEach((track: TextTrackType) => {
       if (player) {
         // Disable the track
-        track.mode = 'disabled';
+        track.mode = "disabled";
       }
     });
     onTrackSelect?.(null);
@@ -55,13 +58,15 @@ const TextTrackComponent: React.FC<TextTrackProps> = ({
     <div
       ref={ref}
       className={cn(
-        'player-bg-black player-bg-opacity-80 player-text-white player-p-6 player-rounded-lg player-min-w-80',
+        "player-bg-black player-bg-opacity-80 player-text-white player-p-6 player-rounded-lg player-min-w-80",
         className
       )}
     >
-      {title && <div className="player-mb-4">
-        <h3 className="player-text-xl player-font-semibold">{title}</h3>
-      </div>}
+      {title && (
+        <div className="player-mb-4">
+          <h3 className="player-text-xl player-font-semibold">{title}</h3>
+        </div>
+      )}
 
       <div className="player-space-y-2">
         {/* Off option */}
@@ -77,7 +82,10 @@ const TextTrackComponent: React.FC<TextTrackProps> = ({
         />
 
         {textTracks
-          .filter((track: TextTrackType) => track.kind === 'subtitles' || track.kind === 'captions')
+          .filter(
+            (track: TextTrackType) =>
+              track.kind === "subtitles" || track.kind === "captions"
+          )
           .map((track: TextTrackType, index: number) => (
             <TextTrackItem
               key={track.id}
@@ -125,7 +133,7 @@ const TextTrackItem: React.FC<TextTrackItemProps> = ({
 
   const getTrackLabel = () => {
     if (label) return label;
-    if (!track) return 'Off';
+    if (!track) return "Off";
 
     return track.label || getDisplayLanguage(track.language);
   };
@@ -134,19 +142,21 @@ const TextTrackItem: React.FC<TextTrackItemProps> = ({
     <div
       ref={ref}
       className={cn(
-        'player-flex player-items-center player-justify-between player-p-3 player-rounded player-cursor-pointer player-transition-colors',
-        'hover:player-bg-white hover:player-bg-opacity-10',
+        "player-flex player-items-center player-justify-between player-p-3 player-rounded player-cursor-pointer player-transition-colors",
+        "hover:player-bg-white hover:player-bg-opacity-10",
         className,
-        focused && (focusClass || 'player-bg-blue-600'),
-        isSelected && (selectedClass || 'player-bg-green-600')
+        focused && (focusClass || "player-bg-blue-600"),
+        isSelected && (selectedClass || "player-bg-green-600")
       )}
       onClick={onSelect}
     >
-      <span className="player-text-lg">
-        {getTrackLabel()}
-      </span>
+      <span className="player-text-lg">{getTrackLabel()}</span>
       {isSelected && (
-        <svg className="player-w-6 player-h-6" fill="currentColor" viewBox="0 0 20 20">
+        <svg
+          className="player-w-6 player-h-6"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
           <path
             fillRule="evenodd"
             d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"

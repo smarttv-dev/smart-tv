@@ -107,7 +107,7 @@
       ]
     }
   },
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "pnpm run build:bundle && pnpm run build:styles",

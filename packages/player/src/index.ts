@@ -27,105 +27,104 @@ export { PlaylistRail } from "./components/PlaylistRail";
 
 // Hooks and context
 export {
-    MediaProvider,
-    useMediaContext,
-    usePlayer,
-    usePlayerActions,
-    usePlayerDisplay,
-    usePlayerPlayback,
-    usePlayerState,
-    usePlayerTime,
-    usePlayerVolume,
-    useTracks
+  MediaProvider,
+  useMediaContext,
+  usePlayer,
+  usePlayerActions,
+  usePlayerDisplay,
+  usePlayerPlayback,
+  usePlayerState,
+  usePlayerTime,
+  usePlayerVolume,
+  useTracks,
 } from "./hooks/MediaContext";
 
 // Playlist hooks and context
 export {
-    PlaylistProvider,
-    usePlaylist,
-    usePlaylistActions,
-    usePlaylistHelpers,
-    usePlaylistState
+  PlaylistProvider,
+  usePlaylist,
+  usePlaylistActions,
+  usePlaylistHelpers,
+  usePlaylistState,
 } from "./hooks/PlaylistContext";
 
 // Optimized hooks to prevent unnecessary re-renders
 export {
-    useAudioTracks,
-    useBuffered,
-    useCurrentTime,
-    useDuration,
-    useFullscreen,
-    useLoading,
-    useMuted,
-    usePaused,
-    usePictureInPicture,
-    usePlaybackState,
-    usePlayerActionsOnly,
-    usePlayerControls,
-    usePlayerInstance,
-    useTextTracks,
-    useTimeProgress,
-    useVideoTracks,
-    useVolume,
-    useVolumeState
+  useAudioTracks,
+  useBuffered,
+  useCurrentTime,
+  useDuration,
+  useFullscreen,
+  useLoading,
+  useMuted,
+  usePaused,
+  usePictureInPicture,
+  usePlaybackState,
+  usePlayerActionsOnly,
+  usePlayerControls,
+  usePlayerInstance,
+  useTextTracks,
+  useTimeProgress,
+  useVideoTracks,
+  useVolume,
+  useVolumeState,
 } from "./hooks/useOptimizedHooks";
 
 // Types
 export type {
-    AudioTrack as AudioTrackType,
-    DrmConfig,
-    MediaPlayerInstance,
-    MediaPlayerProps,
-    PlayButtonProps,
-    PlayerControlsProps,
-    PlayerEvent,
-    PlayerEventType,
-    PlayerSource,
-    PlayerState,
-    PlaylistCallbacks,
-    PlaylistConfig,
-    PlaylistItem as PlaylistItemType,
-    PlaylistRail as PlaylistRailType,
-    PlaylistState,
-    SeekBarProps,
-    TextTrack as TextTrackType,
-    TrackSelectorProps,
-    VideoTrack as VideoTrackType,
-    VolumeControlProps
+  AudioTrack as AudioTrackType,
+  DrmConfig,
+  MediaPlayerInstance,
+  MediaPlayerProps,
+  PlayButtonProps,
+  PlayerControlsProps,
+  PlayerEvent,
+  PlayerEventType,
+  PlayerSource,
+  PlayerState,
+  PlaylistCallbacks,
+  PlaylistConfig,
+  PlaylistItem as PlaylistItemType,
+  PlaylistRail as PlaylistRailType,
+  PlaylistState,
+  SeekBarProps,
+  TextTrack as TextTrackType,
+  TrackSelectorProps,
+  VideoTrack as VideoTrackType,
+  VolumeControlProps,
 } from "./types";
 
 // Player Controller types
 export {
-    buttonSizeMap,
-    defaultButtonConfigs
+  buttonSizeMap,
+  defaultButtonConfigs,
 } from "./types/PlayerControllerTypes";
 export type {
-    PlayerButtonAction,
-    PlayerButtonConfig,
-    PlayerControllerLayout,
-    PlayerControllerProps,
-    PlayerLayoutStyle
+  PlayerButtonAction,
+  PlayerButtonConfig,
+  PlayerControllerLayout,
+  PlayerControllerProps,
+  PlayerLayoutStyle,
 } from "./types/PlayerControllerTypes";
 
 // Predefined layouts
 export {
-    getLayoutByStyle,
-    mergeLayoutWithCustomButtons,
-    minimalLayout,
-    mobileLayout,
-    netflixLayout,
-    predefinedLayouts,
-    tvRemoteLayout,
-    youtubeLayout
+  getLayoutByStyle,
+  mergeLayoutWithCustomButtons,
+  minimalLayout,
+  mobileLayout,
+  netflixLayout,
+  predefinedLayouts,
+  tvRemoteLayout,
+  youtubeLayout,
 } from "./types/PlayerLayouts";
 
 // Utilities
 export {
-    clamp,
-    cn,
-    debounce,
-    formatTime,
-    getDisplayLanguage,
-    throttle
+  clamp,
+  cn,
+  debounce,
+  formatTime,
+  getDisplayLanguage,
+  throttle,
 } from "./utils";
-

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Initial project setup with monorepo structure
 - Player package with Shaka Player integration
 - Query package for data fetching
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2025-10-17
 
 ### Added
+
 - Initial release of Smart TV packages
 - `@smart-tv/player` - Video player component with spatial navigation
 - `@smart-tv/query` - Data fetching and caching utilities
@@ -33,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Features
 
 #### @smart-tv/player
+
 - Shaka Player integration for adaptive streaming
 - Spatial navigation support for TV remote controls
 - Customizable player UI
@@ -42,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Accessibility features
 
 #### @smart-tv/query
+
 - React hooks for data fetching
 - Built-in caching mechanism
 - Request deduplication
@@ -50,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Retry logic
 
 #### create-smart-tv-app
+
 - Interactive CLI for project scaffolding
 - Pre-configured Vite setup
 - TypeScript template

@@ -3,7 +3,7 @@
   "version": "1.3.0",
   "description": "Create Smart TV applications with React and Smart TV packages - official CLI scaffolding tool",
   "author": "ForidPathan",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "bin": {
     "create-smart-tv-app": "bin/cli.js"
   },

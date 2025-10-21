@@ -1,6 +1,6 @@
 enum WritingDirection {
   LTR,
-  RTL
+  RTL,
 }
 
 export default WritingDirection;

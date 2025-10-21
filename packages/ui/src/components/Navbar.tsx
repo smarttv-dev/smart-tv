@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
-import { FocusContext, useFocusable, UseFocusableConfig } from '../hooks';
+import React, { forwardRef } from "react";
+import { FocusContext, useFocusable, UseFocusableConfig } from "../hooks";
 
 type NavbarProps = {
   children?: React.ReactNode;
@@ -10,10 +10,21 @@ type NavbarProps = {
 } & Partial<UseFocusableConfig>;
 
 export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar(
-  { children, className = '', focusKey, trackChildren = true, saveLastFocusedChild = true, ...rest },
+  {
+    children,
+    className = "",
+    focusKey,
+    trackChildren = true,
+    saveLastFocusedChild = true,
+    ...rest
+  },
   ref
 ) {
-  const { ref: innerRef, focusKey: providedFocusKey, focused } = useFocusable({
+  const {
+    ref: innerRef,
+    focusKey: providedFocusKey,
+    focused,
+  } = useFocusable({
     focusKey,
     focusable: true,
     trackChildren,
@@ -25,11 +36,14 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar(
 
   return (
     <FocusContext.Provider value={providedFocusKey}>
-      <nav ref={innerRef as any} className={`tv-navbar ${className} ${focused ? 'focused' : ''}`}>
+      <nav
+        ref={innerRef as any}
+        className={`tv-navbar ${className} ${focused ? "focused" : ""}`}
+      >
         {children}
       </nav>
     </FocusContext.Provider>
   );
 });
 
-Navbar.displayName = 'Navbar';
+Navbar.displayName = "Navbar";

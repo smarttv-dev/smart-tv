@@ -1,26 +1,42 @@
-import React, { createContext, ReactNode, useCallback, useContext, useMemo, useReducer, useRef, useState } from 'react';
-import { AudioTrack, MediaPlayerInstance, PlayerEvent, PlayerState, TextTrack, VideoTrack } from '../types';
+import React, {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
+import {
+  AudioTrack,
+  MediaPlayerInstance,
+  PlayerEvent,
+  PlayerState,
+  TextTrack,
+  VideoTrack,
+} from "../types";
 
 // Define action types
 type PlayerAction =
-  | { type: 'SET_CURRENT_TIME'; payload: number }
-  | { type: 'SET_DURATION'; payload: number }
-  | { type: 'SET_VOLUME'; payload: number }
-  | { type: 'SET_MUTED'; payload: boolean }
-  | { type: 'SET_PAUSED'; payload: boolean }
-  | { type: 'SET_ENDED'; payload: boolean }
-  | { type: 'SET_BUFFERED'; payload: TimeRanges | null }
-  | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: Error | null }
-  | { type: 'SET_FULLSCREEN'; payload: boolean }
-  | { type: 'SET_PICTURE_IN_PICTURE'; payload: boolean }
-  | { type: 'SET_PLAYBACK_RATE'; payload: number }
-  | { type: 'SET_SEEKING'; payload: boolean }
-  | { type: 'SET_WAITING'; payload: boolean }
-  | { type: 'SET_AUDIO_TRACKS'; payload: AudioTrack[] }
-  | { type: 'SET_VIDEO_TRACKS'; payload: VideoTrack[] }
-  | { type: 'SET_TEXT_TRACKS'; payload: TextTrack[] }
-  | { type: 'RESET_STATE' };
+  | { type: "SET_CURRENT_TIME"; payload: number }
+  | { type: "SET_DURATION"; payload: number }
+  | { type: "SET_VOLUME"; payload: number }
+  | { type: "SET_MUTED"; payload: boolean }
+  | { type: "SET_PAUSED"; payload: boolean }
+  | { type: "SET_ENDED"; payload: boolean }
+  | { type: "SET_BUFFERED"; payload: TimeRanges | null }
+  | { type: "SET_LOADING"; payload: boolean }
+  | { type: "SET_ERROR"; payload: Error | null }
+  | { type: "SET_FULLSCREEN"; payload: boolean }
+  | { type: "SET_PICTURE_IN_PICTURE"; payload: boolean }
+  | { type: "SET_PLAYBACK_RATE"; payload: number }
+  | { type: "SET_SEEKING"; payload: boolean }
+  | { type: "SET_WAITING"; payload: boolean }
+  | { type: "SET_AUDIO_TRACKS"; payload: AudioTrack[] }
+  | { type: "SET_VIDEO_TRACKS"; payload: VideoTrack[] }
+  | { type: "SET_TEXT_TRACKS"; payload: TextTrack[] }
+  | { type: "RESET_STATE" };
 
 // Initial state
 const initialState: PlayerState = {
@@ -44,43 +60,46 @@ const initialState: PlayerState = {
 };
 
 // Reducer function
-const playerReducer = (state: PlayerState, action: PlayerAction): PlayerState => {
+const playerReducer = (
+  state: PlayerState,
+  action: PlayerAction
+): PlayerState => {
   switch (action.type) {
-    case 'SET_CURRENT_TIME':
+    case "SET_CURRENT_TIME":
       return { ...state, currentTime: action.payload };
-    case 'SET_DURATION':
+    case "SET_DURATION":
       return { ...state, duration: action.payload };
-    case 'SET_VOLUME':
+    case "SET_VOLUME":
       return { ...state, volume: action.payload };
-    case 'SET_MUTED':
+    case "SET_MUTED":
       return { ...state, muted: action.payload };
-    case 'SET_PAUSED':
+    case "SET_PAUSED":
       return { ...state, paused: action.payload };
-    case 'SET_ENDED':
+    case "SET_ENDED":
       return { ...state, ended: action.payload };
-    case 'SET_BUFFERED':
+    case "SET_BUFFERED":
       return { ...state, buffered: action.payload };
-    case 'SET_LOADING':
+    case "SET_LOADING":
       return { ...state, loading: action.payload };
-    case 'SET_ERROR':
+    case "SET_ERROR":
       return { ...state, error: action.payload };
-    case 'SET_FULLSCREEN':
+    case "SET_FULLSCREEN":
       return { ...state, fullscreen: action.payload };
-    case 'SET_PICTURE_IN_PICTURE':
+    case "SET_PICTURE_IN_PICTURE":
       return { ...state, pictureInPicture: action.payload };
-    case 'SET_PLAYBACK_RATE':
+    case "SET_PLAYBACK_RATE":
       return { ...state, playbackRate: action.payload };
-    case 'SET_SEEKING':
+    case "SET_SEEKING":
       return { ...state, seeking: action.payload };
-    case 'SET_WAITING':
+    case "SET_WAITING":
       return { ...state, waiting: action.payload };
-    case 'SET_AUDIO_TRACKS':
+    case "SET_AUDIO_TRACKS":
       return { ...state, audioTracks: action.payload };
-    case 'SET_VIDEO_TRACKS':
+    case "SET_VIDEO_TRACKS":
       return { ...state, videoTracks: action.payload };
-    case 'SET_TEXT_TRACKS':
+    case "SET_TEXT_TRACKS":
       return { ...state, textTracks: action.payload };
-    case 'RESET_STATE':
+    case "RESET_STATE":
       return { ...initialState };
     default:
       return state;
@@ -183,98 +202,147 @@ export const MediaProvider: React.FC<MediaProviderProps> = ({ children }) => {
   const subscribersRef = useRef<((event: PlayerEvent) => void)[]>([]);
 
   // Actions - memoized to prevent recreation on every render
-  const actions = useMemo(() => ({
-    setCurrentTime: (time: number) => dispatch({ type: 'SET_CURRENT_TIME', payload: time }),
-    setDuration: (duration: number) => dispatch({ type: 'SET_DURATION', payload: duration }),
-    setVolume: (volume: number) => dispatch({ type: 'SET_VOLUME', payload: volume }),
-    setMuted: (muted: boolean) => dispatch({ type: 'SET_MUTED', payload: muted }),
-    setPaused: (paused: boolean) => dispatch({ type: 'SET_PAUSED', payload: paused }),
-    setEnded: (ended: boolean) => dispatch({ type: 'SET_ENDED', payload: ended }),
-    setBuffered: (buffered: TimeRanges | null) => dispatch({ type: 'SET_BUFFERED', payload: buffered }),
-    setLoading: (loading: boolean) => dispatch({ type: 'SET_LOADING', payload: loading }),
-    setError: (error: Error | null) => dispatch({ type: 'SET_ERROR', payload: error }),
-    setFullscreen: (fullscreen: boolean) => dispatch({ type: 'SET_FULLSCREEN', payload: fullscreen }),
-    setPictureInPicture: (pip: boolean) => dispatch({ type: 'SET_PICTURE_IN_PICTURE', payload: pip }),
-    setPlaybackRate: (rate: number) => dispatch({ type: 'SET_PLAYBACK_RATE', payload: rate }),
-    setSeeking: (seeking: boolean) => dispatch({ type: 'SET_SEEKING', payload: seeking }),
-    setWaiting: (waiting: boolean) => dispatch({ type: 'SET_WAITING', payload: waiting }),
-    resetState: () => dispatch({ type: 'RESET_STATE' }),
-  }), []);
+  const actions = useMemo(
+    () => ({
+      setCurrentTime: (time: number) =>
+        dispatch({ type: "SET_CURRENT_TIME", payload: time }),
+      setDuration: (duration: number) =>
+        dispatch({ type: "SET_DURATION", payload: duration }),
+      setVolume: (volume: number) =>
+        dispatch({ type: "SET_VOLUME", payload: volume }),
+      setMuted: (muted: boolean) =>
+        dispatch({ type: "SET_MUTED", payload: muted }),
+      setPaused: (paused: boolean) =>
+        dispatch({ type: "SET_PAUSED", payload: paused }),
+      setEnded: (ended: boolean) =>
+        dispatch({ type: "SET_ENDED", payload: ended }),
+      setBuffered: (buffered: TimeRanges | null) =>
+        dispatch({ type: "SET_BUFFERED", payload: buffered }),
+      setLoading: (loading: boolean) =>
+        dispatch({ type: "SET_LOADING", payload: loading }),
+      setError: (error: Error | null) =>
+        dispatch({ type: "SET_ERROR", payload: error }),
+      setFullscreen: (fullscreen: boolean) =>
+        dispatch({ type: "SET_FULLSCREEN", payload: fullscreen }),
+      setPictureInPicture: (pip: boolean) =>
+        dispatch({ type: "SET_PICTURE_IN_PICTURE", payload: pip }),
+      setPlaybackRate: (rate: number) =>
+        dispatch({ type: "SET_PLAYBACK_RATE", payload: rate }),
+      setSeeking: (seeking: boolean) =>
+        dispatch({ type: "SET_SEEKING", payload: seeking }),
+      setWaiting: (waiting: boolean) =>
+        dispatch({ type: "SET_WAITING", payload: waiting }),
+      resetState: () => dispatch({ type: "RESET_STATE" }),
+    }),
+    []
+  );
 
   // Subscribe function - memoized to prevent recreation
   const subscribe = useCallback((callback: (event: PlayerEvent) => void) => {
     subscribersRef.current.push(callback);
     return () => {
-      subscribersRef.current = subscribersRef.current.filter(cb => cb !== callback);
+      subscribersRef.current = subscribersRef.current.filter(
+        (cb) => cb !== callback
+      );
     };
   }, []);
 
   // Emit events to subscribers - memoized to prevent recreation
   const emit = useCallback((event: PlayerEvent) => {
-    subscribersRef.current.forEach(callback => callback(event));
+    subscribersRef.current.forEach((callback) => callback(event));
   }, []);
 
-  // Set player instance - now using state setter instead of dispatch  
-  const setPlayer = useCallback((playerInstance: MediaPlayerInstance | null) => {
-    setPlayerState(playerInstance);
-  }, []);
+  // Set player instance - now using state setter instead of dispatch
+  const setPlayer = useCallback(
+    (playerInstance: MediaPlayerInstance | null) => {
+      setPlayerState(playerInstance);
+    },
+    []
+  );
 
   // Set tracks - now using dispatch to update state instead of refs
   const setAudioTracks = useCallback((tracks: AudioTrack[]) => {
-    dispatch({ type: 'SET_AUDIO_TRACKS', payload: tracks });
+    dispatch({ type: "SET_AUDIO_TRACKS", payload: tracks });
   }, []);
 
   const setVideoTracks = useCallback((tracks: VideoTrack[]) => {
-    dispatch({ type: 'SET_VIDEO_TRACKS', payload: tracks });
+    dispatch({ type: "SET_VIDEO_TRACKS", payload: tracks });
   }, []);
 
   const setTextTracks = useCallback((tracks: TextTrack[]) => {
-    dispatch({ type: 'SET_TEXT_TRACKS', payload: tracks });
+    dispatch({ type: "SET_TEXT_TRACKS", payload: tracks });
   }, []);
 
   // Memoize different parts of the state separately to prevent unnecessary re-renders
-  const tracks = useMemo(() => ({
-    audioTracks: state.audioTracks,
-    videoTracks: state.videoTracks,
-    textTracks: state.textTracks,
-  }), [state.audioTracks, state.videoTracks, state.textTracks]);
+  const tracks = useMemo(
+    () => ({
+      audioTracks: state.audioTracks,
+      videoTracks: state.videoTracks,
+      textTracks: state.textTracks,
+    }),
+    [state.audioTracks, state.videoTracks, state.textTracks]
+  );
 
-  const playerData = useMemo(() => ({
-    player,
-    actions,
-    subscribe,
-    setPlayer,
-    setAudioTracks,
-    setVideoTracks,
-    setTextTracks,
-    emit,
-  }), [player, actions, subscribe, setPlayer, setAudioTracks, setVideoTracks, setTextTracks, emit]);
+  const playerData = useMemo(
+    () => ({
+      player,
+      actions,
+      subscribe,
+      setPlayer,
+      setAudioTracks,
+      setVideoTracks,
+      setTextTracks,
+      emit,
+    }),
+    [
+      player,
+      actions,
+      subscribe,
+      setPlayer,
+      setAudioTracks,
+      setVideoTracks,
+      setTextTracks,
+      emit,
+    ]
+  );
 
-  const timeData = useMemo(() => ({
-    currentTime: state.currentTime,
-    duration: state.duration,
-    buffered: state.buffered,
-  }), [state.currentTime, state.duration, state.buffered]);
+  const timeData = useMemo(
+    () => ({
+      currentTime: state.currentTime,
+      duration: state.duration,
+      buffered: state.buffered,
+    }),
+    [state.currentTime, state.duration, state.buffered]
+  );
 
-  const playbackData = useMemo(() => ({
-    paused: state.paused,
-    loading: state.loading,
-    ended: state.ended,
-    seeking: state.seeking,
-    waiting: state.waiting,
-  }), [state.paused, state.loading, state.ended, state.seeking, state.waiting]);
+  const playbackData = useMemo(
+    () => ({
+      paused: state.paused,
+      loading: state.loading,
+      ended: state.ended,
+      seeking: state.seeking,
+      waiting: state.waiting,
+    }),
+    [state.paused, state.loading, state.ended, state.seeking, state.waiting]
+  );
 
-  const volumeData = useMemo(() => ({
-    volume: state.volume,
-    muted: state.muted,
-  }), [state.volume, state.muted]);
+  const volumeData = useMemo(
+    () => ({
+      volume: state.volume,
+      muted: state.muted,
+    }),
+    [state.volume, state.muted]
+  );
 
-  const displayData = useMemo(() => ({
-    fullscreen: state.fullscreen,
-    pictureInPicture: state.pictureInPicture,
-    playbackRate: state.playbackRate,
-    error: state.error,
-  }), [state.fullscreen, state.pictureInPicture, state.playbackRate, state.error]);
+  const displayData = useMemo(
+    () => ({
+      fullscreen: state.fullscreen,
+      pictureInPicture: state.pictureInPicture,
+      playbackRate: state.playbackRate,
+      error: state.error,
+    }),
+    [state.fullscreen, state.pictureInPicture, state.playbackRate, state.error]
+  );
 
   // Legacy context value for backward compatibility
   const legacyValue = useMemo((): MediaContextValue => {
@@ -296,7 +364,18 @@ export const MediaProvider: React.FC<MediaProviderProps> = ({ children }) => {
     (contextValue as any).emit = emit;
 
     return contextValue;
-  }, [state, player, tracks, actions, subscribe, setPlayer, setAudioTracks, setVideoTracks, setTextTracks, emit]);
+  }, [
+    state,
+    player,
+    tracks,
+    actions,
+    subscribe,
+    setPlayer,
+    setAudioTracks,
+    setVideoTracks,
+    setTextTracks,
+    emit,
+  ]);
 
   return (
     <TracksContext.Provider value={tracks}>
@@ -321,7 +400,7 @@ export const MediaProvider: React.FC<MediaProviderProps> = ({ children }) => {
 export const useMediaContext = (): MediaContextValue => {
   const context = useContext(MediaContext);
   if (!context) {
-    throw new Error('useMediaContext must be used within a MediaProvider');
+    throw new Error("useMediaContext must be used within a MediaProvider");
   }
   return context;
 };
@@ -332,7 +411,7 @@ export const useMediaContext = (): MediaContextValue => {
 export const useTracks = () => {
   const context = useContext(TracksContext);
   if (!context) {
-    throw new Error('useTracks must be used within a MediaProvider');
+    throw new Error("useTracks must be used within a MediaProvider");
   }
   return context;
 };
@@ -341,7 +420,7 @@ export const useTracks = () => {
 export const usePlayer = () => {
   const context = useContext(PlayerContext);
   if (!context) {
-    throw new Error('usePlayer must be used within a MediaProvider');
+    throw new Error("usePlayer must be used within a MediaProvider");
   }
   return context.player;
 };
@@ -350,7 +429,7 @@ export const usePlayer = () => {
 export const usePlayerActions = () => {
   const context = useContext(PlayerContext);
   if (!context) {
-    throw new Error('usePlayerActions must be used within a MediaProvider');
+    throw new Error("usePlayerActions must be used within a MediaProvider");
   }
   return context.actions;
 };
@@ -359,7 +438,7 @@ export const usePlayerActions = () => {
 export const usePlayerTime = () => {
   const context = useContext(PlayerTimeContext);
   if (!context) {
-    throw new Error('usePlayerTime must be used within a MediaProvider');
+    throw new Error("usePlayerTime must be used within a MediaProvider");
   }
   return context;
 };
@@ -368,7 +447,7 @@ export const usePlayerTime = () => {
 export const usePlayerPlayback = () => {
   const context = useContext(PlayerPlaybackContext);
   if (!context) {
-    throw new Error('usePlayerPlayback must be used within a MediaProvider');
+    throw new Error("usePlayerPlayback must be used within a MediaProvider");
   }
   return context;
 };
@@ -377,7 +456,7 @@ export const usePlayerPlayback = () => {
 export const usePlayerVolume = () => {
   const context = useContext(PlayerVolumeContext);
   if (!context) {
-    throw new Error('usePlayerVolume must be used within a MediaProvider');
+    throw new Error("usePlayerVolume must be used within a MediaProvider");
   }
   return context;
 };
@@ -386,7 +465,7 @@ export const usePlayerVolume = () => {
 export const usePlayerDisplay = () => {
   const context = useContext(PlayerDisplayContext);
   if (!context) {
-    throw new Error('usePlayerDisplay must be used within a MediaProvider');
+    throw new Error("usePlayerDisplay must be used within a MediaProvider");
   }
   return context;
 };

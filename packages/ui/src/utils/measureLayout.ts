@@ -17,7 +17,7 @@ const getRect = (node: HTMLElement) => {
     height,
     left,
     top,
-    width
+    width,
   };
 };
 
@@ -42,7 +42,7 @@ const measureLayout = (node: HTMLElement) => {
       },
       get bottom() {
         return this.top + this.height;
-      }
+      },
     };
   }
 
@@ -54,7 +54,7 @@ const measureLayout = (node: HTMLElement) => {
     left: 0,
     top: 0,
     right: 0,
-    bottom: 0
+    bottom: 0,
   };
 };
 
@@ -76,7 +76,7 @@ export const getBoundingClientRect = (node: HTMLElement) => {
       },
       get bottom() {
         return this.top + this.height;
-      }
+      },
     };
   }
 
@@ -88,6 +88,6 @@ export const getBoundingClientRect = (node: HTMLElement) => {
     left: 0,
     top: 0,
     right: 0,
-    bottom: 0
+    bottom: 0,
   };
 };

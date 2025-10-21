@@ -1,11 +1,23 @@
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
-import shaka from 'shaka-player';
-import { useMediaContext } from '../hooks/MediaContext';
-import { AudioTrack, MediaPlayerInstance, MediaPlayerProps, TextTrack, VideoTrack } from '../types';
-import { cn } from '../utils';
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from "react";
+import shaka from "shaka-player";
+import { useMediaContext } from "../hooks/MediaContext";
+import {
+  AudioTrack,
+  MediaPlayerInstance,
+  MediaPlayerProps,
+  TextTrack,
+  VideoTrack,
+} from "../types";
+import { cn } from "../utils";
 
 // Ensure Shaka Player polyfills are installed
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   shaka.polyfill.installAll();
 }
 
@@ -23,7 +35,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
       volume = 1,
       playbackRate = 1,
       crossOrigin,
-      preload = 'metadata',
+      preload = "metadata",
       onReady,
       onPlay,
       onPause,
@@ -51,10 +63,10 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
     const playerRef = useRef<shaka.Player | null>(null);
     const lastTimeUpdateRef = useRef<number>(0);
     const throttleTimeoutRef = useRef<number | null>(null);
-    
+
     // Throttle time updates to prevent excessive re-renders (update at most every 100ms)
     const TIME_UPDATE_THROTTLE = 100;
-    
+
     // Get media context if available
     let mediaContext: any = null;
     try {
@@ -70,112 +82,115 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
           await videoRef.current.play();
         }
       },
-      
+
       pause() {
         if (videoRef.current) {
           videoRef.current.pause();
         }
       },
-      
+
       seek(time: number) {
         if (videoRef.current) {
           videoRef.current.currentTime = time;
         }
       },
-      
+
       setVolume(volume: number) {
         if (videoRef.current) {
           videoRef.current.volume = Math.max(0, Math.min(1, volume));
         }
       },
-      
+
       setMuted(muted: boolean) {
         if (videoRef.current) {
           videoRef.current.muted = muted;
         }
       },
-      
+
       setPlaybackRate(rate: number) {
         if (videoRef.current) {
           videoRef.current.playbackRate = rate;
         }
       },
-      
+
       async enterFullscreen() {
         if (videoRef.current && videoRef.current.requestFullscreen) {
           await videoRef.current.requestFullscreen();
         }
       },
-      
+
       async exitFullscreen() {
         if (document.exitFullscreen) {
           await document.exitFullscreen();
         }
       },
-      
+
       async enterPictureInPicture() {
-        if (videoRef.current && (videoRef.current as any).requestPictureInPicture) {
+        if (
+          videoRef.current &&
+          (videoRef.current as any).requestPictureInPicture
+        ) {
           await (videoRef.current as any).requestPictureInPicture();
         }
       },
-      
+
       async exitPictureInPicture() {
         if ((document as any).exitPictureInPicture) {
           await (document as any).exitPictureInPicture();
         }
       },
-      
+
       getCurrentTime(): number {
         return videoRef.current?.currentTime ?? 0;
       },
-      
+
       getDuration(): number {
         return videoRef.current?.duration ?? 0;
       },
-      
+
       getVolume(): number {
         return videoRef.current?.volume ?? 0;
       },
-      
+
       isMuted(): boolean {
         return videoRef.current?.muted ?? false;
       },
-      
+
       isPaused(): boolean {
         return videoRef.current?.paused ?? true;
       },
-      
+
       isEnded(): boolean {
         return videoRef.current?.ended ?? false;
       },
-      
+
       isFullscreen(): boolean {
         return !!document.fullscreenElement;
       },
-      
+
       isPictureInPicture(): boolean {
         return !!(document as any).pictureInPictureElement;
       },
-      
+
       getPlaybackRate(): number {
         return videoRef.current?.playbackRate ?? 1;
       },
-      
+
       getAudioTracks(): AudioTrack[] {
         if (!playerRef.current) return [];
-        
+
         const variants = playerRef.current.getVariantTracks();
         const audioTracks: AudioTrack[] = [];
         const seenLanguages = new Set<string>();
-        
+
         variants.forEach((variant: any) => {
           if (variant.audioCodec && !seenLanguages.has(variant.language)) {
             seenLanguages.add(variant.language);
             audioTracks.push({
-              id: variant.audioId?.toString() || '',
+              id: variant.audioId?.toString() || "",
               language: variant.language,
               label: variant.label || variant.language,
-              kind: 'main',
+              kind: "main",
               roles: variant.roles,
               active: variant.active,
               bandwidth: variant.audioBandwidth,
@@ -183,33 +198,33 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
             });
           }
         });
-        
+
         return audioTracks;
       },
-      
+
       getVideoTracks(): VideoTrack[] {
         if (!playerRef.current) return [];
-        
+
         const variants = playerRef.current.getVariantTracks();
         return variants
           .filter((variant: any) => variant.videoCodec)
           .map((variant: any) => ({
-            id: variant.videoId?.toString() || '',
+            id: variant.videoId?.toString() || "",
             language: variant.language,
             label: variant.label || `${variant.height}p`,
-            kind: 'main',
+            kind: "main",
             bandwidth: variant.bandwidth,
             width: variant.width || 0,
             height: variant.height || 0,
             frameRate: variant.frameRate || 0,
-            codecs: variant.videoCodec || '',
+            codecs: variant.videoCodec || "",
             active: variant.active,
           }));
       },
-      
+
       getTextTracks(): TextTrack[] {
         if (!playerRef.current) return [];
-        
+
         const textTracks = playerRef.current.getTextTracks();
         return textTracks.map((track: any) => ({
           id: track.id,
@@ -217,16 +232,21 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
           label: track.label || track.language,
           kind: track.kind as any,
           active: track.active,
-          mode: track.active ? 'showing' : 'disabled',
+          mode: track.active ? "showing" : "disabled",
         }));
       },
-      
+
       selectAudioTrack(trackId: string) {
         if (playerRef.current) {
           const variants = playerRef.current.getVariantTracks();
-          const track = variants.find((v: any) => v.audioId?.toString() === trackId);
+          const track = variants.find(
+            (v: any) => v.audioId?.toString() === trackId
+          );
           if (track) {
-            playerRef.current.selectAudioLanguage(track.language, track.roles?.[0]);
+            playerRef.current.selectAudioLanguage(
+              track.language,
+              track.roles?.[0]
+            );
             // Refresh tracks after selection to update active state
             // Use setTimeout to ensure Shaka Player has updated its internal state
             setTimeout(() => {
@@ -236,11 +256,13 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
           }
         }
       },
-      
+
       selectVideoTrack(trackId: string) {
         if (playerRef.current) {
           const variants = playerRef.current.getVariantTracks();
-          const track = variants.find((v: any) => v.videoId?.toString() === trackId);
+          const track = variants.find(
+            (v: any) => v.videoId?.toString() === trackId
+          );
           if (track) {
             playerRef.current.selectVariantTrack(track, true);
             // Refresh tracks after selection to update active state
@@ -252,7 +274,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
           }
         }
       },
-      
+
       selectTextTrack(trackId: string) {
         if (playerRef.current) {
           const textTracks = playerRef.current.getTextTracks();
@@ -268,7 +290,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
           }
         }
       },
-      
+
       destroy() {
         if (playerRef.current) {
           playerRef.current.destroy();
@@ -289,16 +311,16 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
       playerRef.current = player;
 
       // Set up error handling
-      player.addEventListener('error', (event: any) => {
-        const error = new Error(event.detail?.message || 'Shaka Player error');
+      player.addEventListener("error", (event: any) => {
+        const error = new Error(event.detail?.message || "Shaka Player error");
         onError?.(error);
         mediaContext?.actions.setError(error);
       });
 
       // Set up track change events
-      player.addEventListener('trackschanged', () => {
+      player.addEventListener("trackschanged", () => {
         onTracksChange?.();
-        
+
         // Update context with new tracks
         if (mediaContext) {
           mediaContext.setAudioTracks(playerInstance.getAudioTracks());
@@ -324,12 +346,12 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
         try {
           // Ensure player is ready before loading
           if (!playerRef.current) {
-            throw new Error('Player not initialized');
+            throw new Error("Player not initialized");
           }
 
           mediaContext?.actions.setLoading(true);
-          
-          if (typeof src === 'string') {
+
+          if (typeof src === "string") {
             await playerRef.current.load(src);
           } else if (Array.isArray(src) && src.length > 0) {
             const source = src[0];
@@ -339,17 +361,18 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
                   servers: source.drm.servers,
                   advanced: source.drm.advanced,
                   clearKeys: source.drm.clearKeys,
-                }
+                },
               });
             }
             await playerRef.current.load(source.src);
           }
-          
+
           onLoadedData?.();
           mediaContext?.actions.setLoading(false);
           mediaContext?.actions.setError(null);
         } catch (error) {
-          const err = error instanceof Error ? error : new Error('Failed to load source');
+          const err =
+            error instanceof Error ? error : new Error("Failed to load source");
           onError?.(err);
           mediaContext?.actions.setError(err);
           mediaContext?.actions.setLoading(false);
@@ -380,17 +403,17 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
     const handleTimeUpdate = useCallback(() => {
       const video = videoRef.current;
       if (!video) return;
-      
+
       const currentTime = video.currentTime;
       const now = Date.now();
-      
+
       // More aggressive throttling - use both time-based and animation frame based throttling
       if (now - lastTimeUpdateRef.current >= TIME_UPDATE_THROTTLE) {
         // Cancel any pending timeout
         if (throttleTimeoutRef.current) {
           clearTimeout(throttleTimeoutRef.current);
         }
-        
+
         // Schedule the update for the next animation frame to avoid layout thrashing
         throttleTimeoutRef.current = window.setTimeout(() => {
           onTimeUpdate?.(currentTime);
@@ -404,7 +427,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
     const handleDurationChange = useCallback(() => {
       const video = videoRef.current;
       if (!video) return;
-      
+
       const duration = video.duration;
       onDurationChange?.(duration);
       mediaContext?.actions.setDuration(duration);
@@ -413,7 +436,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
     const handleVolumeChange = useCallback(() => {
       const video = videoRef.current;
       if (!video) return;
-      
+
       const volume = video.volume;
       const muted = video.muted;
       onVolumeChange?.(volume);
@@ -424,7 +447,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
     const handleProgress = useCallback(() => {
       const video = videoRef.current;
       if (!video) return;
-      
+
       onProgress?.(video.buffered);
       mediaContext?.actions.setBuffered(video.buffered);
     }, [onProgress, mediaContext?.actions]);
@@ -452,7 +475,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
     const handleRateChange = useCallback(() => {
       const video = videoRef.current;
       if (!video) return;
-      
+
       const rate = video.playbackRate;
       onPlaybackRateChange?.(rate);
       mediaContext?.actions.setPlaybackRate(rate);
@@ -476,56 +499,77 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
       if (!video) return;
 
       // Add event listeners
-      video.addEventListener('play', handlePlay);
-      video.addEventListener('pause', handlePause);
-      video.addEventListener('ended', handleEnded);
-      video.addEventListener('timeupdate', handleTimeUpdate);
-      video.addEventListener('durationchange', handleDurationChange);
-      video.addEventListener('volumechange', handleVolumeChange);
-      video.addEventListener('progress', handleProgress);
-      video.addEventListener('seeking', handleSeeking);
-      video.addEventListener('seeked', handleSeeked);
-      video.addEventListener('waiting', handleWaiting);
-      video.addEventListener('canplay', handleCanPlay);
-      video.addEventListener('canplaythrough', onCanPlayThrough || (() => {}));
-      video.addEventListener('loadstart', onLoadStart || (() => {}));
-      video.addEventListener('loadeddata', onLoadedData || (() => {}));
-      video.addEventListener('loadedmetadata', onLoadedMetadata || (() => {}));
-      video.addEventListener('ratechange', handleRateChange);
-      
-      document.addEventListener('fullscreenchange', handleFullscreenChange);
-      document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-      document.addEventListener('mozfullscreenchange', handleFullscreenChange);
-      document.addEventListener('msfullscreenchange', handleFullscreenChange);
-      
-      document.addEventListener('enterpictureinpicture', handlePipChange);
-      document.addEventListener('leavepictureinpicture', handlePipChange);
+      video.addEventListener("play", handlePlay);
+      video.addEventListener("pause", handlePause);
+      video.addEventListener("ended", handleEnded);
+      video.addEventListener("timeupdate", handleTimeUpdate);
+      video.addEventListener("durationchange", handleDurationChange);
+      video.addEventListener("volumechange", handleVolumeChange);
+      video.addEventListener("progress", handleProgress);
+      video.addEventListener("seeking", handleSeeking);
+      video.addEventListener("seeked", handleSeeked);
+      video.addEventListener("waiting", handleWaiting);
+      video.addEventListener("canplay", handleCanPlay);
+      video.addEventListener("canplaythrough", onCanPlayThrough || (() => {}));
+      video.addEventListener("loadstart", onLoadStart || (() => {}));
+      video.addEventListener("loadeddata", onLoadedData || (() => {}));
+      video.addEventListener("loadedmetadata", onLoadedMetadata || (() => {}));
+      video.addEventListener("ratechange", handleRateChange);
+
+      document.addEventListener("fullscreenchange", handleFullscreenChange);
+      document.addEventListener(
+        "webkitfullscreenchange",
+        handleFullscreenChange
+      );
+      document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+      document.addEventListener("msfullscreenchange", handleFullscreenChange);
+
+      document.addEventListener("enterpictureinpicture", handlePipChange);
+      document.addEventListener("leavepictureinpicture", handlePipChange);
 
       return () => {
-        video.removeEventListener('play', handlePlay);
-        video.removeEventListener('pause', handlePause);
-        video.removeEventListener('ended', handleEnded);
-        video.removeEventListener('timeupdate', handleTimeUpdate);
-        video.removeEventListener('durationchange', handleDurationChange);
-        video.removeEventListener('volumechange', handleVolumeChange);
-        video.removeEventListener('progress', handleProgress);
-        video.removeEventListener('seeking', handleSeeking);
-        video.removeEventListener('seeked', handleSeeked);
-        video.removeEventListener('waiting', handleWaiting);
-        video.removeEventListener('canplay', handleCanPlay);
-        video.removeEventListener('canplaythrough', onCanPlayThrough || (() => {}));
-        video.removeEventListener('loadstart', onLoadStart || (() => {}));
-        video.removeEventListener('loadeddata', onLoadedData || (() => {}));
-        video.removeEventListener('loadedmetadata', onLoadedMetadata || (() => {}));
-        video.removeEventListener('ratechange', handleRateChange);
-        
-        document.removeEventListener('fullscreenchange', handleFullscreenChange);
-        document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-        document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
-        document.removeEventListener('msfullscreenchange', handleFullscreenChange);
-        
-        document.removeEventListener('enterpictureinpicture', handlePipChange);
-        document.removeEventListener('leavepictureinpicture', handlePipChange);
+        video.removeEventListener("play", handlePlay);
+        video.removeEventListener("pause", handlePause);
+        video.removeEventListener("ended", handleEnded);
+        video.removeEventListener("timeupdate", handleTimeUpdate);
+        video.removeEventListener("durationchange", handleDurationChange);
+        video.removeEventListener("volumechange", handleVolumeChange);
+        video.removeEventListener("progress", handleProgress);
+        video.removeEventListener("seeking", handleSeeking);
+        video.removeEventListener("seeked", handleSeeked);
+        video.removeEventListener("waiting", handleWaiting);
+        video.removeEventListener("canplay", handleCanPlay);
+        video.removeEventListener(
+          "canplaythrough",
+          onCanPlayThrough || (() => {})
+        );
+        video.removeEventListener("loadstart", onLoadStart || (() => {}));
+        video.removeEventListener("loadeddata", onLoadedData || (() => {}));
+        video.removeEventListener(
+          "loadedmetadata",
+          onLoadedMetadata || (() => {})
+        );
+        video.removeEventListener("ratechange", handleRateChange);
+
+        document.removeEventListener(
+          "fullscreenchange",
+          handleFullscreenChange
+        );
+        document.removeEventListener(
+          "webkitfullscreenchange",
+          handleFullscreenChange
+        );
+        document.removeEventListener(
+          "mozfullscreenchange",
+          handleFullscreenChange
+        );
+        document.removeEventListener(
+          "msfullscreenchange",
+          handleFullscreenChange
+        );
+
+        document.removeEventListener("enterpictureinpicture", handlePipChange);
+        document.removeEventListener("leavepictureinpicture", handlePipChange);
       };
     }, [
       handlePlay,
@@ -545,7 +589,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
       onCanPlayThrough,
       onLoadStart,
       onLoadedData,
-      onLoadedMetadata
+      onLoadedMetadata,
     ]);
 
     // Set initial properties
@@ -561,11 +605,21 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
       video.playbackRate = playbackRate;
       video.crossOrigin = crossOrigin || null;
       video.preload = preload;
-      
+
       if (poster) {
         video.poster = poster;
       }
-    }, [autoPlay, loop, muted, controls, volume, playbackRate, crossOrigin, preload, poster]);
+    }, [
+      autoPlay,
+      loop,
+      muted,
+      controls,
+      volume,
+      playbackRate,
+      crossOrigin,
+      preload,
+      poster,
+    ]);
 
     // Cleanup throttle timeout on unmount
     useEffect(() => {
@@ -579,7 +633,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
     return (
       <video
         ref={videoRef}
-        className={cn('player-w-full player-h-full', className)}
+        className={cn("player-w-full player-h-full", className)}
         style={style}
         playsInline
       />
@@ -587,4 +641,4 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
   }
 );
 
-VideoPlayer.displayName = 'VideoPlayer';
+VideoPlayer.displayName = "VideoPlayer";

@@ -1,70 +1,118 @@
 /* eslint-disable react/no-unescaped-entities */
-import { CodePreview } from '../../../../../components';
+import { CodePreview } from "@/components";
 
 export default function PlayerComponents() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Components</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-          Complete reference for all Smart TV Player components, their props, and usage examples.
+        <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Components
+        </h1>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-300">
+          Complete reference for all Smart TV Player components, their props,
+          and usage examples.
         </p>
       </div>
 
       {/* Core Components */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Core Components</h2>
-        
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Core Components
+        </h2>
+
         {/* MediaProvider */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">MediaProvider</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Context provider that manages player state and provides it to all child components. 
-            This component must wrap all other player components.
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            MediaProvider
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
+            Context provider that manages player state and provides it to all
+            child components. This component must wrap all other player
+            components.
           </p>
-          
+
           <div className="mb-4">
-            <h4 className="font-semibold mb-2">Props</h4>
+            <h4 className="mb-2 font-semibold">Props</h4>
             <div className="overflow-x-auto">
-              <table className="min-w-full text-sm border border-gray-200 dark:border-gray-700 rounded-lg">
+              <table className="min-w-full rounded-lg border border-gray-200 text-sm dark:border-gray-700">
                 <thead className="bg-gray-50 dark:bg-gray-800">
                   <tr>
-                    <th className="px-3 py-2 text-left text-gray-900 dark:text-gray-100">Prop</th>
-                    <th className="px-3 py-2 text-left text-gray-900 dark:text-gray-100">Type</th>
-                    <th className="px-3 py-2 text-left text-gray-900 dark:text-gray-100">Default</th>
-                    <th className="px-3 py-2 text-left text-gray-900 dark:text-gray-100">Description</th>
+                    <th className="px-3 py-2 text-left text-gray-900 dark:text-gray-100">
+                      Prop
+                    </th>
+                    <th className="px-3 py-2 text-left text-gray-900 dark:text-gray-100">
+                      Type
+                    </th>
+                    <th className="px-3 py-2 text-left text-gray-900 dark:text-gray-100">
+                      Default
+                    </th>
+                    <th className="px-3 py-2 text-left text-gray-900 dark:text-gray-100">
+                      Description
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">children</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-600 dark:text-gray-300">ReactNode</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">-</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Child components that will have access to player context</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      children
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-600 dark:text-gray-300">
+                      ReactNode
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      -
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Child components that will have access to player context
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">defaultSettings</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">object</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">{}</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Default player settings (volume, muted, autoPlay, etc.)</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      defaultSettings
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      object
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      {}
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Default player settings (volume, muted, autoPlay, etc.)
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">onPlayerReady</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">function</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">-</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Callback when player is ready</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      onPlayerReady
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      function
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      -
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Callback when player is ready
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">onError</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">function</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">-</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Global error handler</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      onError
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      function
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      -
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Global error handler
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          
+
           <CodePreview
             code={`import { MediaProvider } from '@smart-tv/player';
 
@@ -84,14 +132,17 @@ export default function PlayerComponents() {
         </div>
 
         {/* VideoPlayer */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">VideoPlayer</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Main video component that renders the video element and handles playback using Shaka Player.
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            VideoPlayer
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
+            Main video component that renders the video element and handles
+            playback using Shaka Player.
           </p>
-          
+
           <div className="mb-4">
-            <h4 className="font-semibold mb-2">Key Props</h4>
+            <h4 className="mb-2 font-semibold">Key Props</h4>
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead className="bg-gray-50 dark:bg-gray-800">
@@ -104,40 +155,80 @@ export default function PlayerComponents() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">src</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">string | PlayerSource[]</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Yes</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Video source URL or array of sources</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      src
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      string | PlayerSource[]
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Yes
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Video source URL or array of sources
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">poster</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">string</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">No</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Poster image URL</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      poster
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      string
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      No
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Poster image URL
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">autoPlay</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">boolean</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">No</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Auto-start playback</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      autoPlay
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      boolean
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      No
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Auto-start playback
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">controls</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">boolean</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">No</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Show native browser controls</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      controls
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      boolean
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      No
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Show native browser controls
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">drm</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">DrmConfig</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">No</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">DRM configuration for protected content</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      drm
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      DrmConfig
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      No
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      DRM configuration for protected content
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          
+
           <CodePreview
             code={`import { VideoPlayer } from '@smart-tv/player';
 
@@ -160,14 +251,17 @@ export default function PlayerComponents() {
         </div>
 
         {/* PlayerController */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">PlayerController</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Customizable player controls overlay with multiple layout styles and custom button support.
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            PlayerController
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
+            Customizable player controls overlay with multiple layout styles and
+            custom button support.
           </p>
-          
+
           <div className="mb-4">
-            <h4 className="font-semibold mb-2">Key Props</h4>
+            <h4 className="mb-2 font-semibold">Key Props</h4>
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead className="bg-gray-50 dark:bg-gray-800">
@@ -179,35 +273,65 @@ export default function PlayerComponents() {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">layoutStyle</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">"youtube" | "netflix" | "minimal" | "tv-remote" | "mobile"</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Predefined layout style</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      layoutStyle
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      "youtube" | "netflix" | "minimal" | "tv-remote" | "mobile"
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Predefined layout style
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">layout</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">PlayerControllerLayout</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Custom layout configuration</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      layout
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      PlayerControllerLayout
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Custom layout configuration
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">title</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">string</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Video title to display</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      title
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      string
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Video title to display
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">subtitle</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">string</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Video subtitle/description</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      subtitle
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      string
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Video subtitle/description
+                    </td>
                   </tr>
                   <tr>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">customButtons</td>
-                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">PlayerButtonConfig[]</td>
-                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Additional custom buttons</td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      customButtons
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-gray-900 dark:text-gray-100">
+                      PlayerButtonConfig[]
+                    </td>
+                    <td className="px-3 py-2 text-gray-600 dark:text-gray-300">
+                      Additional custom buttons
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          
+
           <CodePreview
             code={`import { PlayerController } from '@smart-tv/player';
 
@@ -236,15 +360,19 @@ export default function PlayerComponents() {
 
       {/* Control Components */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Control Components</h2>
-        
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Control Components
+        </h2>
+
         {/* PlayButton */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">PlayButton</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            PlayButton
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Standalone play/pause toggle button component.
           </p>
-          
+
           <CodePreview
             code={`import { PlayButton } from '@smart-tv/player';
 
@@ -260,12 +388,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* SeekBar */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">SeekBar</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            SeekBar
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Progress bar component for seeking through video content.
           </p>
-          
+
           <CodePreview
             code={`import { SeekBar } from '@smart-tv/player';
 
@@ -284,12 +414,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* VolumeControl */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">VolumeControl</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            VolumeControl
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Volume slider and mute button component.
           </p>
-          
+
           <CodePreview
             code={`import { VolumeControl } from '@smart-tv/player';
 
@@ -306,12 +438,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* Fullscreen */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Fullscreen</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            Fullscreen
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Fullscreen toggle button component.
           </p>
-          
+
           <CodePreview
             code={`import { Fullscreen } from '@smart-tv/player';
 
@@ -325,12 +459,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* PictureInPicture */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">PictureInPicture</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            PictureInPicture
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Picture-in-picture toggle button component.
           </p>
-          
+
           <CodePreview
             code={`import { PictureInPicture } from '@smart-tv/player';
 
@@ -346,15 +482,19 @@ export default function PlayerComponents() {
 
       {/* Track Components */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Track Components</h2>
-        
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Track Components
+        </h2>
+
         {/* TrackSelector */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">TrackSelector</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            TrackSelector
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Generic track selection component for audio, video, and text tracks.
           </p>
-          
+
           <CodePreview
             code={`import { TrackSelector } from '@smart-tv/player';
 
@@ -370,12 +510,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* AudioTrack */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">AudioTrack</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            AudioTrack
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Audio track selection button and menu.
           </p>
-          
+
           <CodePreview
             code={`import { AudioTrack } from '@smart-tv/player';
 
@@ -389,12 +531,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* TextTrack */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">TextTrack</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            TextTrack
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Subtitle/caption track selection component.
           </p>
-          
+
           <CodePreview
             code={`import { TextTrack } from '@smart-tv/player';
 
@@ -409,12 +553,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* VideoTrack */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">VideoTrack</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            VideoTrack
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Video quality/resolution selection component.
           </p>
-          
+
           <CodePreview
             code={`import { VideoTrack } from '@smart-tv/player';
 
@@ -429,12 +575,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* SpeedSelector */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">SpeedSelector</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            SpeedSelector
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Playback speed selection component.
           </p>
-          
+
           <CodePreview
             code={`import { SpeedSelector } from '@smart-tv/player';
 
@@ -451,15 +599,20 @@ export default function PlayerComponents() {
 
       {/* Playlist Components */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Playlist Components</h2>
-        
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Playlist Components
+        </h2>
+
         {/* PlaylistProvider */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">PlaylistProvider</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Context provider for playlist functionality. Must wrap playlist-related components.
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            PlaylistProvider
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
+            Context provider for playlist functionality. Must wrap
+            playlist-related components.
           </p>
-          
+
           <CodePreview
             code={`import { PlaylistProvider } from '@smart-tv/player';
 
@@ -480,12 +633,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* PlaylistManager */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">PlaylistManager</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            PlaylistManager
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Complete playlist interface with item list and controls.
           </p>
-          
+
           <CodePreview
             code={`import { PlaylistManager } from '@smart-tv/player';
 
@@ -503,12 +658,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* Playlist */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Playlist</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            Playlist
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Simple playlist display component.
           </p>
-          
+
           <CodePreview
             code={`import { Playlist } from '@smart-tv/player';
 
@@ -524,12 +681,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* PlaylistButton */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">PlaylistButton</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            PlaylistButton
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Button to toggle playlist visibility.
           </p>
-          
+
           <CodePreview
             code={`import { PlaylistButton } from '@smart-tv/player';
 
@@ -545,15 +704,20 @@ export default function PlayerComponents() {
 
       {/* Settings Components */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Settings Components</h2>
-        
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Settings Components
+        </h2>
+
         {/* SettingsPanel */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">SettingsPanel</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            Comprehensive settings panel with quality, audio, subtitle, and speed controls.
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            SettingsPanel
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
+            Comprehensive settings panel with quality, audio, subtitle, and
+            speed controls.
           </p>
-          
+
           <CodePreview
             code={`import { SettingsPanel } from '@smart-tv/player';
 
@@ -571,12 +735,14 @@ export default function PlayerComponents() {
         </div>
 
         {/* AutoPlayCountdown */}
-        <div className="mb-8 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">AutoPlayCountdown</h3>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <div className="mb-8 rounded-lg border border-gray-200 p-6 dark:border-gray-700">
+          <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-gray-100">
+            AutoPlayCountdown
+          </h3>
+          <p className="mb-4 text-gray-600 dark:text-gray-300">
             Countdown component for auto-playing next episode/video.
           </p>
-          
+
           <CodePreview
             code={`import { AutoPlayCountdown } from '@smart-tv/player';
 
@@ -597,13 +763,15 @@ export default function PlayerComponents() {
 
       {/* Common Props */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Common Props</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Common Props
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Props that are available across multiple components:
         </p>
-        
+
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm border border-gray-200 dark:border-gray-700 rounded-lg">
+          <table className="min-w-full rounded-lg border border-gray-200 text-sm dark:border-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-800">
               <tr>
                 <th className="px-4 py-3 text-left">Prop</th>
@@ -615,7 +783,9 @@ export default function PlayerComponents() {
               <tr>
                 <td className="px-4 py-3 font-mono text-xs">className</td>
                 <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3">Additional CSS classes (with player- prefix)</td>
+                <td className="px-4 py-3">
+                  Additional CSS classes (with player- prefix)
+                </td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-mono text-xs">style</td>
@@ -625,7 +795,9 @@ export default function PlayerComponents() {
               <tr>
                 <td className="px-4 py-3 font-mono text-xs">focusKey</td>
                 <td className="px-4 py-3 font-mono text-xs">string</td>
-                <td className="px-4 py-3">Unique identifier for focus management</td>
+                <td className="px-4 py-3">
+                  Unique identifier for focus management
+                </td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-mono text-xs">onFocus</td>
@@ -644,28 +816,42 @@ export default function PlayerComponents() {
 
       {/* Next Steps */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Next Steps</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a 
-            href="/components/player/hooks" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Next Steps
+        </h2>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <a
+            href="/components/player/hooks"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Hooks</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">Learn about state management hooks</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Hooks
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Learn about state management hooks
+            </p>
           </a>
-          <a 
-            href="/components/player/types" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+          <a
+            href="/components/player/types"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Types</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">TypeScript type definitions</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Types
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              TypeScript type definitions
+            </p>
           </a>
-          <a 
-            href="/components/player/examples" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+          <a
+            href="/components/player/examples"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Examples</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">Complete implementation examples</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Examples
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Complete implementation examples
+            </p>
           </a>
         </div>
       </div>

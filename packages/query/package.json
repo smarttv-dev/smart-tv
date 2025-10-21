@@ -36,7 +36,7 @@
     "typescript"
   ],
   "author": "ForidPathan",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
     "url": "https://github.com/smarttv-dev/smart-tv.git",

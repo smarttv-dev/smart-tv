@@ -7,14 +7,16 @@ Complete this checklist before publishing your Smart TV packages to npm.
 ## 📋 Phase 1: Documentation Review
 
 ### Core Files
+
 - [ ] Read through `README.md` - ensure accuracy
 - [ ] Review `CONTRIBUTING.md` - customize if needed
 - [ ] Check `CODE_OF_CONDUCT.md` - appropriate for your project
 - [ ] Update `SECURITY.md` - **ADD YOUR CONTACT EMAIL** ⚠️
 - [ ] Review `CHANGELOG.md` - correct version and date
-- [ ] Verify `LICENSE` - MIT license is appropriate
+- [ ] Verify `LICENSE` - BSD 3-Clause license is appropriate
 
 ### Package Documentation
+
 - [ ] `packages/player/README.md` - exists and accurate
 - [ ] `packages/query/README.md` - exists and accurate
 - [ ] `packages/create-smart-tv/README.md` - exists and accurate
@@ -24,8 +26,9 @@ Complete this checklist before publishing your Smart TV packages to npm.
 ## 🔧 Phase 2: Package Configuration
 
 ### @smart-tv/player
+
 - [ ] `package.json` has correct version (0.1.0)
-- [ ] `package.json` has "license": "MIT"
+- [ ] `package.json` has "license": "BSD-3-Clause"
 - [ ] `package.json` has repository URL
 - [ ] `package.json` has keywords
 - [ ] `package.json` has "publishConfig": { "access": "public" }
@@ -34,9 +37,10 @@ Complete this checklist before publishing your Smart TV packages to npm.
 - [ ] Contains: index.js, index.mjs, index.d.ts, styles.css
 
 ### @smart-tv/query
+
 - [ ] `package.json` **DOES NOT** have "private": true ⚠️
 - [ ] `package.json` has correct version (0.1.0)
-- [ ] `package.json` has "license": "MIT"
+- [ ] `package.json` has "license": "BSD-3-Clause"
 - [ ] `package.json` has repository URL
 - [ ] `package.json` has keywords
 - [ ] `package.json` has "publishConfig": { "access": "public" }
@@ -45,8 +49,9 @@ Complete this checklist before publishing your Smart TV packages to npm.
 - [ ] Contains: index.js, index.mjs, index.d.ts
 
 ### create-smart-tv-app
+
 - [ ] `package.json` has correct version (1.0.0)
-- [ ] `package.json` has "license": "MIT"
+- [ ] `package.json` has "license": "BSD-3-Clause"
 - [ ] `package.json` has repository URL
 - [ ] `package.json` has keywords
 - [ ] `package.json` has proper bin configuration
@@ -60,6 +65,7 @@ Complete this checklist before publishing your Smart TV packages to npm.
 ## 💻 Phase 3: Code Quality
 
 ### Build & Test
+
 - [ ] Run `pnpm install` - no errors
 - [ ] Run `pnpm lint` - passes
 - [ ] Run `pnpm check-types` - passes
@@ -68,6 +74,7 @@ Complete this checklist before publishing your Smart TV packages to npm.
 - [ ] All build artifacts in `dist/` folders
 
 ### Verification
+
 - [ ] Run `pnpm verify` - all checks pass
 - [ ] No uncommitted changes (`git status` clean)
 - [ ] On main/master branch
@@ -78,17 +85,20 @@ Complete this checklist before publishing your Smart TV packages to npm.
 ## 🌐 Phase 4: npm Setup
 
 ### Account & Authentication
+
 - [ ] npm account created (https://www.npmjs.com/signup)
 - [ ] Email verified
 - [ ] Run `npm login` - successful
 - [ ] Run `npm whoami` - shows your username
 
 ### Organization (if using @smart-tv scope)
+
 - [ ] Organization `smart-tv` exists on npm, OR
 - [ ] Changed package names to `@yourname/package`, OR
 - [ ] Changed to non-scoped names
 
 ### Dry Run
+
 - [ ] `cd packages/player && npm pack --dry-run` - review output
 - [ ] `cd packages/query && npm pack --dry-run` - review output
 - [ ] `cd packages/create-smart-tv && npm pack --dry-run` - review output
@@ -98,6 +108,7 @@ Complete this checklist before publishing your Smart TV packages to npm.
 ## 📦 Phase 5: Publishing Preparation
 
 ### Pre-Publish
+
 - [ ] All dependencies installed
 - [ ] All packages built
 - [ ] All tests passing
@@ -105,6 +116,7 @@ Complete this checklist before publishing your Smart TV packages to npm.
 - [ ] No ESLint errors
 
 ### Version Check
+
 - [ ] Player version: 0.1.0
 - [ ] Query version: 0.1.0
 - [ ] CLI version: 1.0.0
@@ -116,27 +128,33 @@ Complete this checklist before publishing your Smart TV packages to npm.
 ## 🚀 Phase 6: Publishing
 
 ### Execute Publishing
+
 Choose one method:
 
 #### Option A: Use Scripts (Recommended)
+
 - [ ] Run `pnpm publish:packages` - publish all at once
 
 #### Option B: Individual Publishing
+
 - [ ] Run `pnpm publish:player`
 - [ ] Run `pnpm publish:query`
 - [ ] Run `pnpm publish:cli`
 
 #### Option C: Manual
+
 - [ ] `cd packages/player && npm publish --access public`
 - [ ] `cd packages/query && npm publish --access public`
 - [ ] `cd packages/create-smart-tv && npm publish --access public`
 
 ### Verification
+
 - [ ] Run `npm view @smart-tv/player` - shows package info
 - [ ] Run `npm view @smart-tv/query` - shows package info
 - [ ] Run `npm view create-smart-tv-app` - shows package info
 
 ### Test Installation
+
 - [ ] Create test directory
 - [ ] Run `npm install @smart-tv/player` - installs successfully
 - [ ] Run `npm install @smart-tv/query` - installs successfully
@@ -147,6 +165,7 @@ Choose one method:
 ## 🏷️ Phase 7: Git Tagging
 
 ### Create Tag
+
 - [ ] Run `git tag -a v0.1.0 -m "Release v0.1.0"`
 - [ ] Run `git push origin v0.1.0`
 - [ ] Verify tag appears on GitHub
@@ -156,6 +175,7 @@ Choose one method:
 ## 📝 Phase 8: GitHub Release
 
 ### Create Release
+
 - [ ] Go to https://github.com/smarttv-dev/smart-tv/releases/new
 - [ ] Select tag: v0.1.0
 - [ ] Title: "v0.1.0 - Initial Release"
@@ -164,6 +184,7 @@ Choose one method:
 - [ ] Click "Publish release"
 
 ### Verify Release
+
 - [ ] Release appears on GitHub
 - [ ] Release notes are accurate
 - [ ] Links work correctly
@@ -173,11 +194,13 @@ Choose one method:
 ## 📢 Phase 9: Post-Publishing
 
 ### Documentation Updates
+
 - [ ] Add npm badges to README.md
 - [ ] Update installation instructions if needed
 - [ ] Update any version references
 
 ### Announcements
+
 - [ ] Post on Twitter/X
 - [ ] Share on Reddit (r/react, r/javascript, r/opensource)
 - [ ] Post on Dev.to
@@ -185,6 +208,7 @@ Choose one method:
 - [ ] Notify in relevant Discord/Slack communities
 
 ### Monitoring Setup
+
 - [ ] Enable GitHub notifications
 - [ ] Watch npm download stats
 - [ ] Monitor GitHub issues
@@ -195,6 +219,7 @@ Choose one method:
 ## 🔄 Phase 10: GitHub Actions (Optional)
 
 ### Setup Automation
+
 - [ ] Generate npm token (Automation type)
 - [ ] Add NPM_TOKEN to GitHub secrets
 - [ ] Test publish workflow
@@ -205,6 +230,7 @@ Choose one method:
 ## ⚠️ Critical Reminders
 
 ### MUST DO Before Publishing
+
 1. **Update SECURITY.md** with your contact email
 2. **Remove "private": true** from @smart-tv/query package.json
 3. **Login to npm** with `npm login`
@@ -212,6 +238,7 @@ Choose one method:
 5. **Run `pnpm verify`** to check everything
 
 ### MUST NOT DO
+
 1. ❌ Don't publish without testing locally
 2. ❌ Don't publish with uncommitted changes
 3. ❌ Don't republish the same version number
@@ -258,7 +285,7 @@ Before publishing, confirm:
 - [ ] I am ready to publish to npm
 - [ ] I understand I cannot unpublish easily
 
-**Signed**: _________________ **Date**: _________________
+**Signed**: **\*\*\*\***\_**\*\*\*\*** **Date**: **\*\*\*\***\_**\*\*\*\***
 
 ---
 
@@ -277,6 +304,7 @@ If any step is unclear or fails:
 ## 🎉 After Completing This Checklist
 
 You will have:
+
 - ✅ Published 3 packages to npm
 - ✅ Created git tags
 - ✅ Published GitHub release
@@ -287,4 +315,4 @@ You will have:
 
 ---
 
-*Save this checklist and use it for every release!*
+_Save this checklist and use it for every release!_

@@ -20,6 +20,7 @@ We take the security of Smart TV seriously. If you believe you have found a secu
 ### Please DO:
 
 **Report security vulnerabilities via email to:**
+
 - Email: [INSERT SECURITY EMAIL HERE]
 
 **Include the following information:**
@@ -45,6 +46,7 @@ We take the security of Smart TV seriously. If you believe you have found a secu
 - **Public disclosure**: After the patch is released, we will publicly disclose the vulnerability
 
 We aim to:
+
 - Confirm the vulnerability within 3 business days
 - Release a patch within 30 days for critical vulnerabilities
 - Release a patch within 90 days for non-critical vulnerabilities
@@ -70,7 +72,7 @@ When using the player package, ensure content sources are trusted:
 ```typescript
 // ✅ Good - validate source
 const isValidSource = (url: string) => {
-  const allowedDomains = ['your-cdn.com', 'trusted-source.com'];
+  const allowedDomains = ["your-cdn.com", "trusted-source.com"];
   const urlObj = new URL(url);
   return allowedDomains.includes(urlObj.hostname);
 };
@@ -88,10 +90,12 @@ player.load(userProvidedUrl);
 Implement proper CSP headers when using Smart TV packages:
 
 ```html
-<meta http-equiv="Content-Security-Policy" 
-      content="default-src 'self'; 
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; 
                media-src 'self' https://trusted-cdn.com; 
-               script-src 'self' 'unsafe-eval';">
+               script-src 'self' 'unsafe-eval';"
+/>
 ```
 
 ### 4. Sanitize User Input
@@ -99,7 +103,7 @@ Implement proper CSP headers when using Smart TV packages:
 Always sanitize user input before using it in queries or player metadata:
 
 ```typescript
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 
 const sanitizedTitle = DOMPurify.sanitize(userInput);
 ```
@@ -110,11 +114,11 @@ Never expose API keys in client-side code:
 
 ```typescript
 // ❌ Bad
-const API_KEY = 'sk_live_12345...';
+const API_KEY = "sk_live_12345...";
 
 // ✅ Good - use environment variables and proxy through backend
-const response = await fetch('/api/content', {
-  headers: { 'Authorization': 'Bearer <token from backend>' }
+const response = await fetch("/api/content", {
+  headers: { Authorization: "Bearer <token from backend>" },
 });
 ```
 
@@ -129,6 +133,7 @@ pnpm audit
 ## Security Updates
 
 Security updates will be:
+
 - Published in the CHANGELOG.md
 - Announced in GitHub Security Advisories
 - Tagged with version number following semantic versioning
@@ -136,6 +141,7 @@ Security updates will be:
 ## Scope
 
 This security policy applies to:
+
 - `@smart-tv/player`
 - `@smart-tv/query`
 - `create-smart-tv-app`
@@ -144,6 +150,7 @@ This security policy applies to:
 ## Safe Harbor
 
 We support safe harbor for security researchers who:
+
 - Make a good faith effort to avoid privacy violations, destruction of data, and interruption or degradation of our services
 - Only interact with accounts they own or with explicit permission from the account holder
 - Do not exploit a security issue beyond the minimal amount necessary to prove it exists

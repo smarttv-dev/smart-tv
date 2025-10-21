@@ -5,6 +5,7 @@ Use this checklist when preparing to release new versions of Smart TV packages.
 ## Pre-Release Phase
 
 ### 1. Code Quality
+
 - [ ] All tests pass (`pnpm test`)
 - [ ] No linting errors (`pnpm lint`)
 - [ ] No TypeScript errors (`pnpm check-types`)
@@ -12,6 +13,7 @@ Use this checklist when preparing to release new versions of Smart TV packages.
 - [ ] All packages build successfully (`pnpm build`)
 
 ### 2. Documentation
+
 - [ ] README.md files updated
 - [ ] CHANGELOG.md updated with release notes
 - [ ] API documentation reviewed
@@ -19,12 +21,14 @@ Use this checklist when preparing to release new versions of Smart TV packages.
 - [ ] Migration guide (if breaking changes)
 
 ### 3. Version Management
+
 - [ ] Version numbers updated in package.json files
 - [ ] Version follows semantic versioning
 - [ ] CHANGELOG.md reflects new version
 - [ ] Breaking changes documented
 
 ### 4. Testing
+
 - [ ] Tested locally with `npm link`
 - [ ] Tested in demo app
 - [ ] Tested on target TV platforms
@@ -32,6 +36,7 @@ Use this checklist when preparing to release new versions of Smart TV packages.
 - [ ] Performance acceptable
 
 ### 5. Package Contents
+
 - [ ] Run `npm pack --dry-run` for each package
 - [ ] Verify dist/ folder contents
 - [ ] Check that all necessary files are included
@@ -40,12 +45,14 @@ Use this checklist when preparing to release new versions of Smart TV packages.
 ## Release Phase
 
 ### 1. Final Checks
+
 - [ ] Clean workspace: `git status` shows no uncommitted changes
 - [ ] On correct branch (usually `main`)
 - [ ] All commits pushed to remote
 - [ ] CI/CD pipeline passing
 
 ### 2. Build
+
 ```bash
 pnpm clean
 pnpm install
@@ -55,6 +62,7 @@ pnpm build
 ### 3. Publish Packages
 
 #### Option A: Manual Publishing
+
 ```bash
 # Player
 cd packages/player
@@ -70,18 +78,21 @@ npm publish --access public
 ```
 
 #### Option B: Using Scripts
+
 ```bash
 # From root
 pnpm publish:packages
 ```
 
 #### Option C: GitHub Actions
+
 - Go to Actions tab
 - Run "Publish Packages" workflow
 - Select version bump type
 - Select packages to publish
 
 ### 4. Verify Publication
+
 ```bash
 # Check on npm
 npm view @smart-tv/player
@@ -95,6 +106,7 @@ npm install @smart-tv/player@latest
 ## Post-Release Phase
 
 ### 1. Git Tags
+
 ```bash
 # Create and push tag
 git tag -a v0.1.0 -m "Release v0.1.0"
@@ -102,6 +114,7 @@ git push origin v0.1.0
 ```
 
 ### 2. GitHub Release
+
 - [ ] Go to Releases on GitHub
 - [ ] Create new release
 - [ ] Select the tag
@@ -110,17 +123,20 @@ git push origin v0.1.0
 - [ ] Publish release
 
 ### 3. Update Documentation
+
 - [ ] Update main README.md if needed
 - [ ] Update documentation site
 - [ ] Update examples with new version
 
 ### 4. Communication
+
 - [ ] Announce on social media
 - [ ] Update project website
 - [ ] Notify contributors
 - [ ] Post in relevant communities
 
 ### 5. Monitoring
+
 - [ ] Monitor npm downloads
 - [ ] Watch for issues on GitHub
 - [ ] Check error tracking services
@@ -131,11 +147,13 @@ git push origin v0.1.0
 If critical issues are found:
 
 ### 1. Deprecate Bad Version
+
 ```bash
 npm deprecate @smart-tv/player@0.1.0 "Critical bug, use 0.1.1 instead"
 ```
 
 ### 2. Publish Hotfix
+
 - Create hotfix branch
 - Fix the issue
 - Bump patch version
@@ -143,6 +161,7 @@ npm deprecate @smart-tv/player@0.1.0 "Critical bug, use 0.1.1 instead"
 - Update deprecation message
 
 ### 3. Communication
+
 - Notify users via GitHub
 - Update documentation
 - Post announcement
@@ -150,18 +169,21 @@ npm deprecate @smart-tv/player@0.1.0 "Critical bug, use 0.1.1 instead"
 ## Version Bump Guide
 
 ### Patch (0.0.x)
+
 - Bug fixes
 - Performance improvements
 - Documentation updates
 - No API changes
 
 ### Minor (0.x.0)
+
 - New features
 - Backward compatible changes
 - Deprecations (with warnings)
 - Non-breaking API additions
 
 ### Major (x.0.0)
+
 - Breaking changes
 - Removed deprecated features
 - Major refactoring

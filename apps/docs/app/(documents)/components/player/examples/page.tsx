@@ -1,23 +1,29 @@
 /* eslint-disable react/no-unescaped-entities */
-import { CodePreview } from '../../../../../components';
+import { CodePreview } from "@/components";
 
 export default function PlayerExamples() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Examples</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-          Real-world examples and complete implementations of the Smart TV Player for different use cases.
+        <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Examples
+        </h1>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-300">
+          Real-world examples and complete implementations of the Smart TV
+          Player for different use cases.
         </p>
       </div>
 
       {/* Basic Video Player */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Basic Video Player</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          A simple video player with minimal controls for basic playback functionality.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Basic Video Player
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          A simple video player with minimal controls for basic playback
+          functionality.
         </p>
-        
+
         <CodePreview
           code={`import React from 'react';
 import { MediaProvider, VideoPlayer, PlayerController } from '@smart-tv/player';
@@ -53,18 +59,20 @@ export default BasicVideoPlayer;`}
 
       {/* YouTube-Style Player */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">YouTube-Style Player</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          YouTube-Style Player
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           A comprehensive player with YouTube-style controls and custom buttons.
         </p>
-        
+
         <CodePreview
           code={`import React, { useState } from 'react';
-import { 
-  MediaProvider, 
-  VideoPlayer, 
+import {
+  MediaProvider,
+  VideoPlayer,
   PlayerController,
-  PlayerButtonConfig 
+  PlayerButtonConfig
 } from '@smart-tv/player';
 
 // Custom icons
@@ -144,7 +152,7 @@ function YouTubeStylePlayer() {
               }
             }}
           />
-          
+
           <PlayerController
             layoutStyle="youtube"
             title="Amazing Video Content"
@@ -176,16 +184,19 @@ export default YouTubeStylePlayer;`}
 
       {/* Netflix-Style Series Player */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Netflix-Style Series Player</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          A series player with Netflix-style interface, episode management, and auto-play functionality.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Netflix-Style Series Player
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          A series player with Netflix-style interface, episode management, and
+          auto-play functionality.
         </p>
-        
+
         <CodePreview
           code={`import React, { useState } from 'react';
-import { 
-  MediaProvider, 
-  VideoPlayer, 
+import {
+  MediaProvider,
+  VideoPlayer,
   PlayerController,
   PlaylistProvider,
   PlaylistManager,
@@ -315,7 +326,7 @@ function NetflixStylePlayer() {
                     setShowAutoPlay(true);
                   }}
                 />
-                
+
                 <PlayerController
                   layoutStyle="netflix"
                   title={currentEpisode.title}
@@ -388,16 +399,19 @@ export default NetflixStylePlayer;`}
 
       {/* Smart TV Remote Player */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Smart TV Remote Player</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          A TV-optimized player with spatial navigation and remote control support for Smart TV applications.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Smart TV Remote Player
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          A TV-optimized player with spatial navigation and remote control
+          support for Smart TV applications.
         </p>
-        
+
         <CodePreview
           code={`import React, { useEffect, useState } from 'react';
-import { 
-  MediaProvider, 
-  VideoPlayer, 
+import {
+  MediaProvider,
+  VideoPlayer,
   PlayerController,
   init // Initialize spatial navigation
 } from '@smart-tv/player';
@@ -412,11 +426,11 @@ function SmartTVPlayer() {
   useEffect(() => {
     // Detect TV environment
     const userAgent = navigator.userAgent.toLowerCase();
-    const isTVPlatform = userAgent.includes('smart-tv') || 
-                        userAgent.includes('tizen') || 
+    const isTVPlatform = userAgent.includes('smart-tv') ||
+                        userAgent.includes('tizen') ||
                         userAgent.includes('webos') ||
                         window.innerWidth >= 1920; // Assume large screens are TVs
-    
+
     setIsTV(isTVPlatform);
 
     // Handle remote control key events
@@ -501,7 +515,7 @@ function SmartTVPlayer() {
             onReady={() => console.log('TV Player ready')}
             onPlay={() => console.log('Channel playing:', currentChannelData.name)}
           />
-          
+
           <PlayerController
             layoutStyle="tv-remote"
             title={currentChannelData.name}
@@ -596,17 +610,19 @@ export default SmartTVPlayer;`}
 
       {/* Mobile-Optimized Player */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Mobile-Optimized Player</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Mobile-Optimized Player
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           A mobile-friendly player with touch gestures and responsive design.
         </p>
-        
+
         <CodePreview
           code={`import React, { useState, useEffect } from 'react';
-import { 
-  MediaProvider, 
-  VideoPlayer, 
-  PlayerController 
+import {
+  MediaProvider,
+  VideoPlayer,
+  PlayerController
 } from '@smart-tv/player';
 
 function MobilePlayer() {
@@ -618,7 +634,7 @@ function MobilePlayer() {
     const checkDevice = () => {
       const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       const isPortraitMode = window.innerHeight > window.innerWidth;
-      
+
       setIsMobile(isMobileDevice);
       setIsPortrait(isPortraitMode);
     };
@@ -626,7 +642,7 @@ function MobilePlayer() {
     checkDevice();
     window.addEventListener('resize', checkDevice);
     window.addEventListener('orientationchange', checkDevice);
-    
+
     return () => {
       window.removeEventListener('resize', checkDevice);
       window.removeEventListener('orientationchange', checkDevice);
@@ -659,7 +675,7 @@ function MobilePlayer() {
           muted: false,
         }}
       >
-        <div 
+        <div
           className="relative bg-black rounded-lg overflow-hidden h-full"
           onClick={handleTap}
           onTouchStart={handleTap}
@@ -673,7 +689,7 @@ function MobilePlayer() {
             onPlay={() => setShowControls(false)}
             onPause={() => setShowControls(true)}
           />
-          
+
           {(showControls || !isMobile) && (
             <PlayerController
               layoutStyle="mobile"
@@ -772,18 +788,21 @@ export default MobilePlayer;`}
 
       {/* DRM Protected Content */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">DRM Protected Content Player</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Example of playing DRM-protected content with Widevine and PlayReady support.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          DRM Protected Content Player
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Example of playing DRM-protected content with Widevine and PlayReady
+          support.
         </p>
-        
+
         <CodePreview
           code={`import React, { useState } from 'react';
-import { 
-  MediaProvider, 
-  VideoPlayer, 
+import {
+  MediaProvider,
+  VideoPlayer,
   PlayerController,
-  DrmConfig 
+  DrmConfig
 } from '@smart-tv/player';
 
 function DRMProtectedPlayer() {
@@ -839,7 +858,7 @@ function DRMProtectedPlayer() {
               <div className="text-center text-white p-6">
                 <h3 className="text-lg font-semibold mb-2">DRM Error</h3>
                 <p className="text-sm mb-4">{drmError}</p>
-                <button 
+                <button
                   className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
                   onClick={() => {
                     setDrmError(null);
@@ -877,7 +896,7 @@ function DRMProtectedPlayer() {
               setIsLoading(false);
             }}
           />
-          
+
           <PlayerController
             layoutStyle="youtube"
             title="Protected Content"
@@ -945,41 +964,51 @@ export default DRMProtectedPlayer;`}
 
       {/* Integration Tips */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Integration Tips</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
-            <h3 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">Performance Optimization</h3>
-            <ul className="text-blue-800 dark:text-blue-300 text-sm space-y-1">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Integration Tips
+        </h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-700 dark:bg-blue-900/20">
+            <h3 className="mb-2 font-semibold text-blue-900 dark:text-blue-200">
+              Performance Optimization
+            </h3>
+            <ul className="space-y-1 text-sm text-blue-800 dark:text-blue-300">
               <li>• Use preload="none" for better page load times</li>
               <li>• Implement lazy loading for video lists</li>
               <li>• Optimize poster images for faster display</li>
               <li>• Use appropriate video formats for target devices</li>
             </ul>
           </div>
-          
-          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4">
-            <h3 className="font-semibold text-green-900 dark:text-green-200 mb-2">Accessibility</h3>
-            <ul className="text-green-800 dark:text-green-300 text-sm space-y-1">
+
+          <div className="rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-700 dark:bg-green-900/20">
+            <h3 className="mb-2 font-semibold text-green-900 dark:text-green-200">
+              Accessibility
+            </h3>
+            <ul className="space-y-1 text-sm text-green-800 dark:text-green-300">
               <li>• Ensure keyboard navigation works properly</li>
               <li>• Provide meaningful alt text for poster images</li>
               <li>• Include subtitle/caption support</li>
               <li>• Test with screen readers</li>
             </ul>
           </div>
-          
-          <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-lg p-4">
-            <h3 className="font-semibold text-purple-900 dark:text-purple-200 mb-2">Error Handling</h3>
-            <ul className="text-purple-800 dark:text-purple-300 text-sm space-y-1">
+
+          <div className="rounded-lg border border-purple-200 bg-purple-50 p-4 dark:border-purple-700 dark:bg-purple-900/20">
+            <h3 className="mb-2 font-semibold text-purple-900 dark:text-purple-200">
+              Error Handling
+            </h3>
+            <ul className="space-y-1 text-sm text-purple-800 dark:text-purple-300">
               <li>• Implement comprehensive error boundaries</li>
               <li>• Provide fallback content for unsupported formats</li>
               <li>• Handle network connectivity issues gracefully</li>
               <li>• Log errors for debugging and analytics</li>
             </ul>
           </div>
-          
-          <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-700 rounded-lg p-4">
-            <h3 className="font-semibold text-orange-900 dark:text-orange-200 mb-2">Analytics Integration</h3>
-            <ul className="text-orange-800 dark:text-orange-300 text-sm space-y-1">
+
+          <div className="rounded-lg border border-orange-200 bg-orange-50 p-4 dark:border-orange-700 dark:bg-orange-900/20">
+            <h3 className="mb-2 font-semibold text-orange-900 dark:text-orange-200">
+              Analytics Integration
+            </h3>
+            <ul className="space-y-1 text-sm text-orange-800 dark:text-orange-300">
               <li>• Track play/pause events</li>
               <li>• Monitor playback quality and buffering</li>
               <li>• Measure user engagement and completion rates</li>
@@ -991,28 +1020,42 @@ export default DRMProtectedPlayer;`}
 
       {/* Next Steps */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Next Steps</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <a 
-            href="/components/player/hooks" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Next Steps
+        </h2>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <a
+            href="/components/player/hooks"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Hooks</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">Learn about state management hooks for custom components</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Hooks
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Learn about state management hooks for custom components
+            </p>
           </a>
-          <a 
-            href="/components/player/types" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+          <a
+            href="/components/player/types"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Types</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">TypeScript definitions and interfaces</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Types
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              TypeScript definitions and interfaces
+            </p>
           </a>
-          <a 
-            href="/components/player/usage" 
-            className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
+          <a
+            href="/components/player/usage"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
           >
-            <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">→ Configuration</h3>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">Advanced configuration options and customization</p>
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              → Configuration
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Advanced configuration options and customization
+            </p>
           </a>
         </div>
       </div>

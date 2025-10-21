@@ -1,13 +1,18 @@
-import { useFocusable } from '@smart-tv/ui';
-import React, { memo, useEffect, useRef, useState } from 'react';
-import { useBuffered, usePaused, usePlayerInstance, useTimeProgress } from '../hooks/useOptimizedHooks';
-import { SeekBarProps } from '../types';
-import { clamp, cn, formatTime } from '../utils';
+import { useFocusable } from "@smart-tv/ui";
+import React, { memo, useEffect, useRef, useState } from "react";
+import {
+  useBuffered,
+  usePaused,
+  usePlayerInstance,
+  useTimeProgress,
+} from "../hooks/useOptimizedHooks";
+import { SeekBarProps } from "../types";
+import { clamp, cn, formatTime } from "../utils";
 
 const SeekBarComponent: React.FC<SeekBarProps> = ({
   className,
   style,
-  focusKey = 'seek-bar',
+  focusKey = "seek-bar",
   showPreview = true,
   stepTime = 10,
   onSeek,
@@ -26,8 +31,8 @@ const SeekBarComponent: React.FC<SeekBarProps> = ({
   const { ref, focused, focusSelf } = useFocusable({
     focusKey,
     onArrowPress: (direction) => {
-      if (direction === 'left' || direction === 'right') {
-        handleKeySeek(direction === 'right' ? stepTime : -stepTime);
+      if (direction === "left" || direction === "right") {
+        handleKeySeek(direction === "right" ? stepTime : -stepTime);
         return false; // Prevent default navigation
       }
       return true;
@@ -138,18 +143,22 @@ const SeekBarComponent: React.FC<SeekBarProps> = ({
     };
 
     if (isDragging) {
-      document.addEventListener('mouseup', handleGlobalMouseUp);
-      document.addEventListener('mousemove', handleGlobalMouseMove);
+      document.addEventListener("mouseup", handleGlobalMouseUp);
+      document.addEventListener("mousemove", handleGlobalMouseMove);
     }
 
     return () => {
-      document.removeEventListener('mouseup', handleGlobalMouseUp);
-      document.removeEventListener('mousemove', handleGlobalMouseMove);
+      document.removeEventListener("mouseup", handleGlobalMouseUp);
+      document.removeEventListener("mousemove", handleGlobalMouseMove);
     };
   }, [isDragging, duration, player, onSeek]);
 
   return (
-    <div ref={ref} className={cn('player-relative player-group', className)} style={style}>
+    <div
+      ref={ref}
+      className={cn("player-relative player-group", className)}
+      style={style}
+    >
       {/* Time display */}
       <div className="player-flex player-items-center player-justify-between player-text-sm player-text-white player-mb-2">
         <span>{formatTime(currentTime)}</span>
@@ -160,10 +169,11 @@ const SeekBarComponent: React.FC<SeekBarProps> = ({
       <div
         ref={seekBarRef}
         className={cn(
-          'player-relative player-h-2 player-bg-white player-bg-opacity-25 player-rounded-full player-cursor-pointer',
-          'player-transition-all player-duration-200',
-          focused && 'player-h-3 player-ring-2 player-ring-white player-ring-opacity-50',
-          'hover:player-h-3'
+          "player-relative player-h-2 player-bg-white player-bg-opacity-25 player-rounded-full player-cursor-pointer",
+          "player-transition-all player-duration-200",
+          focused &&
+            "player-h-3 player-ring-2 player-ring-white player-ring-opacity-50",
+          "hover:player-h-3"
         )}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -185,10 +195,10 @@ const SeekBarComponent: React.FC<SeekBarProps> = ({
         {/* Progress handle */}
         <div
           className={cn(
-            'player-absolute player-top-1/2 player-transform player--translate-y-1/2 player-w-4 player-h-4 player-bg-white player-rounded-full',
-            'player-transition-all player-duration-200 player-opacity-0 group-hover:player-opacity-100',
-            focused && 'player-opacity-100 player-scale-125',
-            isDragging && 'player-scale-150'
+            "player-absolute player-top-1/2 player-transform player--translate-y-1/2 player-w-4 player-h-4 player-bg-white player-rounded-full",
+            "player-transition-all player-duration-200 player-opacity-0 group-hover:player-opacity-100",
+            focused && "player-opacity-100 player-scale-125",
+            isDragging && "player-scale-150"
           )}
           style={{ left: `calc(${progress}% - 8px)` }}
         />

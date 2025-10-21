@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 // Generic context selector hook to prevent unnecessary re-renders
 export function useContextSelector<T, U>(
@@ -7,12 +7,16 @@ export function useContextSelector<T, U>(
   equalityFn?: (a: U, b: U) => boolean
 ): U {
   const contextValue = useContext(context);
-  
+
   if (contextValue === null || contextValue === undefined) {
-    throw new Error('useContextSelector must be used within the appropriate Provider');
+    throw new Error(
+      "useContextSelector must be used within the appropriate Provider"
+    );
   }
 
-  const [selectedValue, setSelectedValue] = useState(() => selector(contextValue));
+  const [selectedValue, setSelectedValue] = useState(() =>
+    selector(contextValue)
+  );
   const selectorRef = useRef(selector);
   const equalityRef = useRef(equalityFn || Object.is);
   const selectedValueRef = useRef(selectedValue);
@@ -23,7 +27,7 @@ export function useContextSelector<T, U>(
 
   useEffect(() => {
     const newValue = selectorRef.current(contextValue);
-    
+
     if (!equalityRef.current(selectedValueRef.current, newValue)) {
       selectedValueRef.current = newValue;
       setSelectedValue(newValue);

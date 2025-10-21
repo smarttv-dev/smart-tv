@@ -10,25 +10,25 @@ jobs:
   lint-and-test:
     name: Lint and Test
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9.2.0
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'pnpm'
-      
+          node-version: "22"
+          cache: "pnpm"
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      
+
       - name: Run linting
         run: pnpm lint
 
@@ -37,6 +37,6 @@ jobs:
 
       - name: Run type checking
         run: pnpm check-types
-      
+
       # - name: Run tests
       #   run: pnpm test

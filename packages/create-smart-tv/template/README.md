@@ -5,6 +5,7 @@ A Smart TV application built with React and Smart TV packages.
 ## Getting Started
 
 1. Install dependencies:
+
    ```bash
    npm install
    # or
@@ -14,6 +15,7 @@ A Smart TV application built with React and Smart TV packages.
    ```
 
 2. Start the development server:
+
    ```bash
    npm run dev
    # or
@@ -61,6 +63,7 @@ The development server runs on `http://localhost:3000` and is configured to be a
 ## Browser Support
 
 This project is configured to support older Smart TV browsers including:
+
 - Chrome 38+
 - Internet Explorer 11+
 

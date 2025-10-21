@@ -36,22 +36,26 @@ This project and everyone participating in it is governed by our [Code of Conduc
 1. **Fork the repository** on GitHub
 
 2. **Clone your fork**:
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/smart-tv.git
    cd smart-tv
    ```
 
 3. **Add upstream remote**:
+
    ```bash
    git remote add upstream https://github.com/smarttv-dev/smart-tv.git
    ```
 
 4. **Install dependencies**:
+
    ```bash
    pnpm install
    ```
 
 5. **Build all packages**:
+
    ```bash
    pnpm build
    ```
@@ -132,6 +136,7 @@ git checkout -b fix/your-bug-fix
 ```
 
 Branch naming conventions:
+
 - `feature/` - New features
 - `fix/` - Bug fixes
 - `docs/` - Documentation changes
@@ -174,6 +179,7 @@ git commit -m "docs: update installation instructions"
 ```
 
 Commit types:
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -235,16 +241,16 @@ pnpm format
 5. Styles
 
 ```typescript
-import React from 'react';
-import { SomeExternalLib } from 'external-lib';
+import React from "react";
+import { SomeExternalLib } from "external-lib";
 
-import { useQuery } from '@smart-tv/query';
-import { Button } from '@smart-tv/ui';
+import { useQuery } from "@smart-tv/query";
+import { Button } from "@smart-tv/ui";
 
-import { localUtil } from './utils';
-import type { Props } from './types';
+import { localUtil } from "./utils";
+import type { Props } from "./types";
 
-import './styles.css';
+import "./styles.css";
 ```
 
 ## Testing
@@ -284,23 +290,28 @@ pnpm test
 
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Related Issues
+
 Closes #(issue number)
 
 ## Testing
+
 Describe how you tested your changes
 
 ## Screenshots (if applicable)
 
 ## Checklist
+
 - [ ] Code follows style guidelines
 - [ ] Self-review completed
 - [ ] Tests added
@@ -352,13 +363,14 @@ We follow [Semantic Versioning](https://semver.org/):
 ## Recognition
 
 Contributors will be recognized in:
+
 - CHANGELOG.md
 - Release notes
 - Contributors page (when available)
 
 ## License
 
-By contributing to Smart TV, you agree that your contributions will be licensed under the MIT License.
+By contributing to Smart TV, you agree that your contributions will be licensed under the BSD 3-Clause License.
 
 ---
 

@@ -1,9 +1,9 @@
-import '@smart-tv/player/styles.css';
-import '@smart-tv/ui/styles.css';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import "@smart-tv/player/styles.css";
+import "@smart-tv/ui/styles.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
 
 // Initialize for old Smart TV compatibility
 // Cast window to any for the assignment because the runtime polyfill
@@ -16,13 +16,13 @@ if (!(window as any).Promise) {
   // TypeScript global `Promise` type during typechecking.
   const SimplePromise: any = function (this: any, executor: any) {
     const self: any = this;
-    self.state = 'pending';
+    self.state = "pending";
     self.value = undefined;
     self.handlers = [] as any[];
 
     function resolve(result: any) {
-      if (self.state === 'pending') {
-        self.state = 'fulfilled';
+      if (self.state === "pending") {
+        self.state = "fulfilled";
         self.value = result;
         self.handlers.forEach(handle);
         self.handlers = null;
@@ -30,8 +30,8 @@ if (!(window as any).Promise) {
     }
 
     function reject(error: any) {
-      if (self.state === 'pending') {
-        self.state = 'rejected';
+      if (self.state === "pending") {
+        self.state = "rejected";
         self.value = error;
         self.handlers.forEach(handle);
         self.handlers = null;
@@ -39,13 +39,19 @@ if (!(window as any).Promise) {
     }
 
     function handle(handler: any) {
-      if (self.state === 'pending') {
+      if (self.state === "pending") {
         self.handlers.push(handler);
       } else {
-        if (self.state === 'fulfilled' && typeof handler.onFulfilled === 'function') {
+        if (
+          self.state === "fulfilled" &&
+          typeof handler.onFulfilled === "function"
+        ) {
           handler.onFulfilled(self.value);
         }
-        if (self.state === 'rejected' && typeof handler.onRejected === 'function') {
+        if (
+          self.state === "rejected" &&
+          typeof handler.onRejected === "function"
+        ) {
           handler.onRejected(self.value);
         }
       }
@@ -67,7 +73,7 @@ if (!(window as any).Promise) {
             } catch (ex) {
               reject(ex);
             }
-          }
+          },
         });
       });
     };
@@ -99,7 +105,7 @@ if (!(Array as any).from) {
 }
 
 // Ensure root element exists before rendering
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
@@ -108,5 +114,7 @@ if (rootElement) {
     </React.StrictMode>
   );
 } else {
-  console.error('Root element not found. Make sure there is a div with id="root" in your HTML.');
+  console.error(
+    'Root element not found. Make sure there is a div with id="root" in your HTML.'
+  );
 }

@@ -23,7 +23,11 @@ type RowProps = {
     inline?: ScrollLogicalPosition;
   };
   virtualize?: { enabled?: boolean; itemSize?: number; buffer?: number };
-  infinite?: { fetchNext?: () => Promise<any>; hasNext?: boolean; threshold?: number };
+  infinite?: {
+    fetchNext?: () => Promise<any>;
+    hasNext?: boolean;
+    threshold?: number;
+  };
 } & Partial<UseFocusableConfig>;
 
 export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
@@ -56,7 +60,9 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
 
   // keep both refs in sync (useFocusable returns a ref we must assign to innerRef)
   useEffect(() => {
-    innerRef.current = (fRef as React.MutableRefObject<HTMLDivElement | null>).current;
+    innerRef.current = (
+      fRef as React.MutableRefObject<HTMLDivElement | null>
+    ).current;
   }, [fRef]);
 
   React.useImperativeHandle(ref, () => innerRef.current, [innerRef]);
@@ -66,7 +72,10 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
   // helper: find the row child element (direct child of innerRef) for a given descendant node
   const findRowChild = useCallback((node: Node | null): HTMLElement | null => {
     if (!node || !innerRef.current) return null;
-    let el: HTMLElement | null = node instanceof HTMLElement ? node : (node.parentElement as HTMLElement | null);
+    let el: HTMLElement | null =
+      node instanceof HTMLElement
+        ? node
+        : (node.parentElement as HTMLElement | null);
     while (el && el !== innerRef.current) {
       if (el.parentElement === innerRef.current) return el;
       el = el.parentElement;
@@ -96,7 +105,9 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
     if (!inner) return;
     const observer = new MutationObserver(() => {
       // a simple approach: on attribute change, find the currently marked node
-      const marked = inner.querySelector<HTMLElement>('[data-focused="true"], .focused');
+      const marked = inner.querySelector<HTMLElement>(
+        '[data-focused="true"], .focused'
+      );
       if (marked) {
         const child = findRowChild(marked);
         if (child) scrollToChild(child);
@@ -120,7 +131,10 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
   }, [rest.forceFocus, focusSelf]);
 
   // virtualization + infinite
-  const childrenArr = useMemo(() => React.Children.toArray(children), [children]);
+  const childrenArr = useMemo(
+    () => React.Children.toArray(children),
+    [children]
+  );
   const totalItems = childrenArr.length;
   const itemSize = (rest as any).virtualize?.itemSize ?? 0;
   // if not provided, try to measure first child width
@@ -142,7 +156,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
       } else {
         navigateByDirection("right", event);
       }
-    }
+    };
 
     const onScroll = () => {
       const scrollLeft = el.scrollLeft;
@@ -154,19 +168,23 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
 
       const threshold = (rest as any).infinite?.threshold ?? 250;
       const distanceToRight = el.scrollWidth - (scrollLeft + clientWidth);
-      if ((rest as any).infinite?.fetchNext && (rest as any).infinite?.hasNext && distanceToRight < threshold) {
+      if (
+        (rest as any).infinite?.fetchNext &&
+        (rest as any).infinite?.hasNext &&
+        distanceToRight < threshold
+      ) {
         void (rest as any).infinite.fetchNext();
       }
     };
 
     onScroll();
-    el.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    window.addEventListener('wheel', onWheel);
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("wheel", onWheel);
     return () => {
-      el.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      window.removeEventListener('wheel', onWheel);
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("wheel", onWheel);
     };
   }, [virtualEnabled, itemSize, buffer, rest]);
 
@@ -191,15 +209,22 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
       // render placeholder by cloning element and replacing children with a small stub
       if (React.isValidElement(child)) {
         const placeholder = (
-          <div style={{ width: `${effectiveItemSize}px`, height: '100%' }} aria-hidden="true" />
+          <div
+            style={{ width: `${effectiveItemSize}px`, height: "100%" }}
+            aria-hidden="true"
+          />
         );
         try {
           return React.cloneElement(child, { children: placeholder } as any);
         } catch {
-          return <div style={{ width: `${effectiveItemSize}px`, height: '100%' }} />;
+          return (
+            <div style={{ width: `${effectiveItemSize}px`, height: "100%" }} />
+          );
         }
       }
-      return <div style={{ width: `${effectiveItemSize}px`, height: '100%' }} />;
+      return (
+        <div style={{ width: `${effectiveItemSize}px`, height: "100%" }} />
+      );
     });
 
     return (
@@ -207,9 +232,18 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
         <div
           ref={containerRef}
           className="ui-row overflow-x-auto"
-          style={{ WebkitOverflowScrolling: 'touch', width: 'calc(98vw - var(--ui-sidebar-width, 0px))' } as React.CSSProperties}
+          style={
+            {
+              WebkitOverflowScrolling: "touch",
+              width: "calc(98vw - var(--ui-sidebar-width, 0px))",
+            } as React.CSSProperties
+          }
         >
-          <div style={{ display: 'inline-block' }} ref={measuredRef} aria-hidden>
+          <div
+            style={{ display: "inline-block" }}
+            ref={measuredRef}
+            aria-hidden
+          >
             {/* measuring element for dynamic item size */}
           </div>
           <div
@@ -229,10 +263,12 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
       <div
         ref={containerRef}
         className="ui-row overflow-x-auto"
-        style={{
-          WebkitOverflowScrolling: "touch",
-          width: 'calc(98vw - var(--ui-sidebar-width, 0px))'
-        } as React.CSSProperties}
+        style={
+          {
+            WebkitOverflowScrolling: "touch",
+            width: "calc(98vw - var(--ui-sidebar-width, 0px))",
+          } as React.CSSProperties
+        }
       >
         <div
           ref={fRef}

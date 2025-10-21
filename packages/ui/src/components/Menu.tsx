@@ -21,9 +21,9 @@ type RenderProps = {
 type MenuProps = {
   children?: ReactNode | ((props: RenderProps) => ReactNode);
   onBlur?: BlurHandler<any>;
-  onEnterPress?: EnterPressHandler<any> ;
+  onEnterPress?: EnterPressHandler<any>;
   onFocus?: FocusHandler<any>;
-  onEnterRelease?: EnterReleaseHandler<any> ;
+  onEnterRelease?: EnterReleaseHandler<any>;
   onArrowPress?: ArrowPressHandler<any> | undefined;
   focusKey: string;
   className?: string;
@@ -70,27 +70,27 @@ export function Menu(props: MenuProps) {
     onBlur,
     onEnterPress: !disabled
       ? (details) => {
-        if (typeof onEnterPress === "function") {
-          onEnterPress?.({ ...payload, focusKey }, details);
-        }
-        if (href && !disabled) {
-          // prefer internal router when available
-          if (router && typeof router.push === "function") {
-            // respect target: replace behavior when target === '_self' or undefined
-            if (target && target !== "_self") {
-              window.open(href, target, rel || "noopener noreferrer");
+          if (typeof onEnterPress === "function") {
+            onEnterPress?.({ ...payload, focusKey }, details);
+          }
+          if (href && !disabled) {
+            // prefer internal router when available
+            if (router && typeof router.push === "function") {
+              // respect target: replace behavior when target === '_self' or undefined
+              if (target && target !== "_self") {
+                window.open(href, target, rel || "noopener noreferrer");
+              } else {
+                router.push(href);
+              }
             } else {
-              router.push(href);
-            }
-          } else {
-            if (target) {
-              window.open(href, target, rel || "noopener noreferrer");
-            } else {
-              window.location.href = href;
+              if (target) {
+                window.open(href, target, rel || "noopener noreferrer");
+              } else {
+                window.location.href = href;
+              }
             }
           }
         }
-      }
       : undefined,
     onFocus,
     onEnterRelease: !disabled ? onEnterRelease : undefined,
@@ -152,8 +152,20 @@ export function Menu(props: MenuProps) {
         handleClick();
       }}
       ref={ref}
-      onMouseUp={!hover ? () => { if (!disabled) onEnterRelease?.({ ...payload, focusKey }); } : undefined}
-      onMouseEnter={!hover ? () => { if (!disabled) focusSelf(); } : undefined}
+      onMouseUp={
+        !hover
+          ? () => {
+              if (!disabled) onEnterRelease?.({ ...payload, focusKey });
+            }
+          : undefined
+      }
+      onMouseEnter={
+        !hover
+          ? () => {
+              if (!disabled) focusSelf();
+            }
+          : undefined
+      }
       href={href}
       target={href ? target : undefined}
       rel={href ? rel : undefined}

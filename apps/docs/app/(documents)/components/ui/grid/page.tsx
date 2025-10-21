@@ -1,20 +1,25 @@
 import React from "react";
-import CodePreview from "../../../../../components/CodePreview";
+import CodePreview from "@/components/CodePreview";
 
 export default function GridDoc(): React.ReactElement {
   return (
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">Grid</h1>
+        <h1 className="mb-2 text-4xl font-bold text-gray-900 dark:text-gray-100">
+          Grid
+        </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300">
-          A responsive grid layout container for organizing content in rows and columns with spatial navigation support.
+          A responsive grid layout container for organizing content in rows and
+          columns with spatial navigation support.
         </p>
       </div>
 
       {/* Import */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Import</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Import
+        </h2>
         <CodePreview
           language="tsx"
           code={`import { Grid } from '@smart-tv/ui';`}
@@ -23,8 +28,10 @@ export default function GridDoc(): React.ReactElement {
 
       {/* Basic Usage */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Basic Usage</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Basic Usage
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Create a basic grid layout with cards or content items.
         </p>
         <CodePreview
@@ -44,13 +51,15 @@ export default function GridDoc(): React.ReactElement {
 
       {/* Responsive Columns */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Responsive Columns</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Responsive Columns
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Adapt grid columns based on screen size.
         </p>
         <CodePreview
           language="tsx"
-          code={`<Grid 
+          code={`<Grid
   focusKey="responsive-grid"
   columns={{ sm: 2, md: 3, lg: 4, xl: 6 }}
   gap={4}
@@ -66,13 +75,15 @@ export default function GridDoc(): React.ReactElement {
 
       {/* Custom Gap */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Custom Spacing</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Custom Spacing
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Control spacing between grid items.
         </p>
         <CodePreview
           language="tsx"
-          code={`<Grid 
+          code={`<Grid
   focusKey="spaced-grid"
   columns={3}
   gap={8}
@@ -87,13 +98,15 @@ export default function GridDoc(): React.ReactElement {
 
       {/* Auto Fit */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Auto-fit Layout</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Auto-fit Layout
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Automatically fit items based on minimum width.
         </p>
         <CodePreview
           language="tsx"
-          code={`<Grid 
+          code={`<Grid
   focusKey="autofit-grid"
   autoFit="minmax(200px, 1fr)"
   gap={4}
@@ -109,13 +122,15 @@ export default function GridDoc(): React.ReactElement {
 
       {/* With Focus Boundary */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Focus Boundary</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Focus Boundary
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Contain focus within the grid for better navigation control.
         </p>
         <CodePreview
           language="tsx"
-          code={`<Grid 
+          code={`<Grid
   focusKey="bounded-grid"
   columns={3}
   isFocusBoundary={true}
@@ -130,65 +145,139 @@ export default function GridDoc(): React.ReactElement {
 
       {/* Props Reference */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Props</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Props
+        </h2>
         <div className="overflow-x-auto">
           <table className="min-w-full border border-gray-200 dark:border-gray-700">
             <thead className="bg-gray-50 dark:bg-gray-800">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Prop</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Type</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Default</th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Description</th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Prop
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Type
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Default
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  Description
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">focusKey</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">required</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Unique identifier</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  focusKey
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  required
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Unique identifier
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">columns</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">number | object</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">3</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Number of columns or responsive config</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  columns
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  number | object
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  3
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Number of columns or responsive config
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">gap</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">number</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">4</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Gap between items (in spacing units)</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  gap
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  number
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  4
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Gap between items (in spacing units)
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">autoFit</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">CSS grid auto-fit value</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  autoFit
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  CSS grid auto-fit value
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">isFocusBoundary</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">boolean</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">false</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Contain focus within grid</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  isFocusBoundary
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  boolean
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  false
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Contain focus within grid
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">focusBoundaryDirections</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">array</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Directions to block focus escape</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  focusBoundaryDirections
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  array
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Directions to block focus escape
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">className</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">string</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Additional CSS classes</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  className
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  string
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Additional CSS classes
+                </td>
               </tr>
               <tr>
-                <td className="px-4 py-3 text-sm font-mono text-blue-600 dark:text-blue-400">children</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">ReactNode</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">-</td>
-                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">Grid items</td>
+                <td className="px-4 py-3 font-mono text-sm text-blue-600 dark:text-blue-400">
+                  children
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  ReactNode
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  -
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+                  Grid items
+                </td>
               </tr>
             </tbody>
           </table>
@@ -197,12 +286,22 @@ export default function GridDoc(): React.ReactElement {
 
       {/* Best Practices */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Best Practices</h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Best Practices
+        </h2>
+        <ul className="list-inside list-disc space-y-2 text-gray-600 dark:text-gray-300">
           <li>Use consistent card sizes for better visual alignment</li>
-          <li>Set appropriate <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">gap</code> values for comfortable navigation</li>
+          <li>
+            Set appropriate{" "}
+            <code className="rounded bg-gray-100 px-1 py-0.5 dark:bg-gray-700">
+              gap
+            </code>{" "}
+            values for comfortable navigation
+          </li>
           <li>Consider using responsive columns for different screen sizes</li>
-          <li>Enable focus boundary for better navigation control in sections</li>
+          <li>
+            Enable focus boundary for better navigation control in sections
+          </li>
           <li>Use auto-fit for dynamic content with varying item counts</li>
         </ul>
       </div>

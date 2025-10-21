@@ -1,15 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        primary: '#1a1a1a',
-        secondary: '#2a2a2a',
-        accent: '#0070f3',
+        primary: "#1a1a1a",
+        secondary: "#2a2a2a",
+        accent: "#0070f3",
       },
     },
   },
@@ -30,4 +27,4 @@ export default {
     // Ensure compatibility with older PostCSS versions
     hoverOnlyWhenSupported: false,
   },
-}
+};

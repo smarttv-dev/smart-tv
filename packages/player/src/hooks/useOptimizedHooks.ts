@@ -1,12 +1,16 @@
 import {
-    PlayerContext,
-    PlayerDisplayContext,
-    PlayerPlaybackContext,
-    PlayerTimeContext,
-    PlayerVolumeContext,
-    TracksContext
-} from './MediaContext';
-import { shallowEqualArray, timeBasedEquality, useContextSelector } from './useContextSelector';
+  PlayerContext,
+  PlayerDisplayContext,
+  PlayerPlaybackContext,
+  PlayerTimeContext,
+  PlayerVolumeContext,
+  TracksContext,
+} from "./MediaContext";
+import {
+  shallowEqualArray,
+  timeBasedEquality,
+  useContextSelector,
+} from "./useContextSelector";
 
 // Optimized hooks using context selectors
 
@@ -21,10 +25,7 @@ export const useCurrentTime = () => {
 
 // Hook for duration only
 export const useDuration = () => {
-  return useContextSelector(
-    PlayerTimeContext,
-    (value) => value?.duration ?? 0
-  );
+  return useContextSelector(PlayerTimeContext, (value) => value?.duration ?? 0);
 };
 
 // Hook for buffered state only
@@ -53,10 +54,7 @@ export const useLoading = () => {
 
 // Hook for volume state only
 export const useVolume = () => {
-  return useContextSelector(
-    PlayerVolumeContext,
-    (value) => value?.volume ?? 1
-  );
+  return useContextSelector(PlayerVolumeContext, (value) => value?.volume ?? 1);
 };
 
 // Hook for muted state only
@@ -112,49 +110,43 @@ export const useTextTracks = () => {
 
 // Hook for player instance only
 export const usePlayerInstance = () => {
-  return useContextSelector(
-    PlayerContext,
-    (value) => value?.player ?? null
-  );
+  return useContextSelector(PlayerContext, (value) => value?.player ?? null);
 };
 
 // Hook for player actions only
 export const usePlayerActionsOnly = () => {
-  return useContextSelector(
-    PlayerContext,
-    (value) => value?.actions ?? null
-  );
+  return useContextSelector(PlayerContext, (value) => value?.actions ?? null);
 };
 
 // Combined hooks for commonly used combinations
 export const useTimeProgress = () => {
   const currentTime = useCurrentTime();
   const duration = useDuration();
-  
+
   return {
     currentTime,
     duration,
-    progress: duration > 0 ? (currentTime / duration) * 100 : 0
+    progress: duration > 0 ? (currentTime / duration) * 100 : 0,
   };
 };
 
 export const usePlaybackState = () => {
   const paused = usePaused();
   const loading = useLoading();
-  
+
   return { paused, loading };
 };
 
 export const useVolumeState = () => {
   const volume = useVolume();
   const muted = useMuted();
-  
+
   return { volume, muted };
 };
 
 export const usePlayerControls = () => {
   const player = usePlayerInstance();
   const actions = usePlayerActionsOnly();
-  
+
   return { player, actions };
 };

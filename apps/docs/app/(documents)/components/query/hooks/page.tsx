@@ -1,26 +1,32 @@
-import { CodePreview } from '../../../../../components';
+import { CodePreview } from "@/components";
 
 export default function QueryHooks() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Hooks Reference</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-          Complete API reference for all Smart TV Query hooks including useQuery, useMutation, and useInfiniteQuery.
+        <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Hooks Reference
+        </h1>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-300">
+          Complete API reference for all Smart TV Query hooks including
+          useQuery, useMutation, and useInfiniteQuery.
         </p>
       </div>
 
       {/* useQuery Hook */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">useQuery</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          The primary hook for fetching and caching data. Returns loading states, data, and error information.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          useQuery
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          The primary hook for fetching and caching data. Returns loading
+          states, data, and error information.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Basic Usage</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Basic Usage</h3>
+            <CodePreview
               code={`import { useQuery } from '@smart-tv/query';
 
 function MovieList() {
@@ -64,8 +70,8 @@ function MovieList() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Type Definitions</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Type Definitions</h3>
+            <CodePreview
               code={`// Query function type
 type QueryFunction<T = unknown> = () => Promise<T>;
 
@@ -106,8 +112,8 @@ interface QueryResult<TData = unknown, TError = Error> {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Advanced Examples</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Advanced Examples</h3>
+            <CodePreview
               code={`// Parameterized query with TypeScript
 interface Movie {
   id: number;
@@ -130,7 +136,7 @@ function FilteredMovies({ filters }: { filters: MovieFilters }) {
       if (filters.genre) params.set('genre', filters.genre);
       if (filters.year) params.set('year', filters.year.toString());
       if (filters.sortBy) params.set('sortBy', filters.sortBy);
-      
+
       const response = await fetch(\`/api/movies?\${params}\`);
       if (!response.ok) throw new Error('Failed to fetch movies');
       return response.json();
@@ -176,20 +182,23 @@ function FilteredMovies({ filters }: { filters: MovieFilters }) {
 
       {/* useMutation Hook */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">useMutation</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Hook for creating, updating, or deleting data. Unlike useQuery, mutations are not automatically executed.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          useMutation
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Hook for creating, updating, or deleting data. Unlike useQuery,
+          mutations are not automatically executed.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Basic Usage</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Basic Usage</h3>
+            <CodePreview
               code={`import { useMutation, useQueryClient } from '@smart-tv/query';
 
 function AddMovieForm() {
   const queryClient = useQueryClient();
-  
+
   const {
     mutate,         // Function to trigger mutation
     mutateAsync,    // Async version of mutate
@@ -245,7 +254,7 @@ function AddMovieForm() {
           {isLoading ? 'Creating...' : 'Create Movie'}
         </button>
       </form>
-      
+
       {isError && <div>Error: {error?.message}</div>}
       {isSuccess && <div>Movie created successfully!</div>}
     </div>
@@ -256,8 +265,8 @@ function AddMovieForm() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Optimistic Updates</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Optimistic Updates</h3>
+            <CodePreview
               code={`interface Movie {
   id: number;
   title: string;
@@ -266,7 +275,7 @@ function AddMovieForm() {
 
 function MovieLikeButton({ movie }: { movie: Movie }) {
   const queryClient = useQueryClient();
-  
+
   const likeMutation = useMutation(
     async (movieId: number) => {
       const response = await fetch(\`/api/movies/\${movieId}/like\`, {
@@ -279,10 +288,10 @@ function MovieLikeButton({ movie }: { movie: Movie }) {
       onMutate: async (movieId) => {
         // Cancel outgoing refetches
         await queryClient.cancelQueries(['movie', movieId]);
-        
+
         // Snapshot previous value
         const previousMovie = queryClient.getQueryData<Movie>(['movie', movieId]);
-        
+
         // Optimistically update
         if (previousMovie) {
           queryClient.setQueryData<Movie>(['movie', movieId], {
@@ -290,18 +299,18 @@ function MovieLikeButton({ movie }: { movie: Movie }) {
             likes: previousMovie.likes + 1,
           });
         }
-        
+
         // Return context for rollback
         return { previousMovie };
       },
-      
+
       // Rollback on error
       onError: (error, movieId, context) => {
         if (context?.previousMovie) {
           queryClient.setQueryData(['movie', movieId], context.previousMovie);
         }
       },
-      
+
       // Always refetch after error or success
       onSettled: (data, error, movieId) => {
         queryClient.invalidateQueries(['movie', movieId]);
@@ -310,7 +319,7 @@ function MovieLikeButton({ movie }: { movie: Movie }) {
   );
 
   return (
-    <button 
+    <button
       onClick={() => likeMutation.mutate(movie.id)}
       disabled={likeMutation.isLoading}
     >
@@ -323,8 +332,10 @@ function MovieLikeButton({ movie }: { movie: Movie }) {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Mutation Type Definitions</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Mutation Type Definitions
+            </h3>
+            <CodePreview
               code={`// Mutation function type
 type MutationFunction<TData = unknown, TVariables = unknown> = (
   variables: TVariables
@@ -366,15 +377,18 @@ interface MutationResult<TData = unknown, TError = Error, TVariables = unknown> 
 
       {/* useInfiniteQuery Hook */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">useInfiniteQuery</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Hook for implementing infinite scrolling and pagination patterns. Perfect for long lists of content.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          useInfiniteQuery
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Hook for implementing infinite scrolling and pagination patterns.
+          Perfect for long lists of content.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Basic Usage</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Basic Usage</h3>
+            <CodePreview
               code={`import { useInfiniteQuery } from '@smart-tv/query';
 
 interface MoviesPage {
@@ -423,9 +437,9 @@ function InfiniteMovieList() {
           </div>
         ))}
       </div>
-      
+
       {hasNextPage && (
-        <button 
+        <button
           onClick={() => fetchNextPage()}
           disabled={isFetchingNextPage}
         >
@@ -440,8 +454,10 @@ function InfiniteMovieList() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Advanced Infinite Scrolling</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Advanced Infinite Scrolling
+            </h3>
+            <CodePreview
               code={`import { useInfiniteQuery } from '@smart-tv/query';
 import { useEffect, useRef, useCallback } from 'react';
 
@@ -485,15 +501,15 @@ function InfiniteSearchResults({ query }: { query: string }) {
   const lastElementCallbackRef = useCallback(
     (node: HTMLDivElement) => {
       if (isFetchingNextPage) return;
-      
+
       if (observerRef.current) observerRef.current.disconnect();
-      
+
       observerRef.current = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting && hasNextPage) {
           fetchNextPage();
         }
       });
-      
+
       if (node) observerRef.current.observe(node);
     },
     [isFetchingNextPage, hasNextPage, fetchNextPage]
@@ -517,11 +533,11 @@ function InfiniteSearchResults({ query }: { query: string }) {
   return (
     <div>
       <p>Found {totalResults} results</p>
-      
+
       <div className="results-list">
         {allItems.map((item, index) => {
           const isLast = index === allItems.length - 1;
-          
+
           return (
             <div
               key={item.id}
@@ -534,7 +550,7 @@ function InfiniteSearchResults({ query }: { query: string }) {
           );
         })}
       </div>
-      
+
       {isFetchingNextPage && (
         <div className="loading-more">Loading more results...</div>
       )}
@@ -546,8 +562,10 @@ function InfiniteSearchResults({ query }: { query: string }) {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Infinite Query Type Definitions</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Infinite Query Type Definitions
+            </h3>
+            <CodePreview
               code={`// Infinite query function type
 type InfiniteQueryFunction<TData = unknown, TPageParam = unknown> = (
   context: {
@@ -601,15 +619,18 @@ interface InfiniteData<TData> {
 
       {/* useQueryClient Hook */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">useQueryClient</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Access the QueryClient instance to manually manage cache, invalidate queries, and perform advanced operations.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          useQueryClient
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Access the QueryClient instance to manually manage cache, invalidate
+          queries, and perform advanced operations.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Basic Usage</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Basic Usage</h3>
+            <CodePreview
               code={`import { useQueryClient } from '@smart-tv/query';
 
 function CacheManager() {
@@ -670,8 +691,8 @@ function CacheManager() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">QueryClient Methods</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">QueryClient Methods</h3>
+            <CodePreview
               code={`// Cache management
 queryClient.getQueryData(queryKey);              // Get cached data
 queryClient.setQueryData(queryKey, data);        // Set cached data
@@ -701,15 +722,20 @@ queryClient.ensureQueryData(queryKey, queryFn);  // Fetch if not cached`}
 
       {/* Custom Hooks */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Custom Query Hooks</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Create reusable custom hooks that encapsulate your data fetching logic for better organization.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Custom Query Hooks
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Create reusable custom hooks that encapsulate your data fetching logic
+          for better organization.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Custom useMovies Hook</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Custom useMovies Hook
+            </h3>
+            <CodePreview
               code={`// hooks/useMovies.ts
 import { useQuery, UseQueryResult } from '@smart-tv/query';
 
@@ -738,7 +764,7 @@ export function useMovies(filters: MovieFilters = {}): UseQueryResult<Movie[]> {
           params.set(key, value.toString());
         }
       });
-      
+
       const response = await fetch(\`/api/movies?\${params}\`);
       if (!response.ok) throw new Error('Failed to fetch movies');
       return response.json();
@@ -786,8 +812,8 @@ export function useMovieRecommendations(movieId: number): UseQueryResult<Movie[]
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Using Custom Hooks</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Using Custom Hooks</h3>
+            <CodePreview
               code={`// components/MovieList.tsx
 import { useMovies } from '../hooks/useMovies';
 
@@ -825,7 +851,7 @@ function MovieDetail({ movieId }: { movieId: number }) {
       <p>Genre: {movie.genre}</p>
       <p>Year: {movie.year}</p>
       <p>Rating: {movie.rating}/10</p>
-      
+
       {recommendations && (
         <div>
           <h3>Recommended Movies</h3>
@@ -842,8 +868,10 @@ function MovieDetail({ movieId }: { movieId: number }) {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">XHR-Based Custom Hooks for Legacy TV</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              XHR-Based Custom Hooks for Legacy TV
+            </h3>
+            <CodePreview
               code={`// hooks/useTVMovies.ts - XHR-based hooks for Smart TV compatibility
 import { useQuery, UseQueryResult } from '@smart-tv/query';
 import { xhrFetcher, tvFetch } from '@smart-tv/query';
@@ -879,11 +907,11 @@ export function useTVMovies(filters: TVMovieFilters = {}): UseQueryResult<TVMovi
         timeout: 20000, // 20 second timeout for TV networks
         responseType: 'json'
       });
-      
+
       if (!response.ok) {
         throw new Error(\`TV API Error: \${response.status}\`);
       }
-      
+
       return response.json();
     },
     {
@@ -921,14 +949,14 @@ export function useTVMovie(id: number): UseQueryResult<TVMovie> {
       if (!response.ok) {
         throw new Error(\`Failed to load TV movie \${id}\`);
       }
-      
+
       const movie = await response.json();
-      
+
       // Optimize image URLs for TV display
       if (movie.poster_url) {
         movie.poster_url = movie.poster_url.replace('/w500/', '/w1280/');
       }
-      
+
       return movie;
     },
     {
@@ -973,7 +1001,7 @@ export function useTVStreamingContent(deviceInfo: {
       if (!response.ok) {
         throw new Error('Failed to load streaming content for TV');
       }
-      
+
       return response.json();
     },
     {
@@ -991,8 +1019,10 @@ export function useTVStreamingContent(deviceInfo: {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Using XHR-Based TV Hooks</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Using XHR-Based TV Hooks
+            </h3>
+            <CodePreview
               code={`// components/TVMovieApp.tsx
 import { useTVMovies, useTVMovie, useTVStreamingContent } from '../hooks/useTVMovies';
 
@@ -1009,7 +1039,7 @@ function TVMovieApp() {
     genre: 'action',
     platform: platform as any
   });
-  
+
   const { data: streamingContent } = useTVStreamingContent(deviceInfo);
 
   if (moviesLoading) {
@@ -1031,7 +1061,7 @@ function TVMovieApp() {
           ))}
         </div>
       </section>
-      
+
       <section className="tv-streaming-section">
         <h2>Streaming Content</h2>
         <div className="tv-content-grid">
@@ -1062,7 +1092,7 @@ function getNetworkQuality(): 'low' | 'medium' | 'high' {
   // @ts-ignore - navigator.connection is experimental
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   if (!connection) return 'medium';
-  
+
   const effectiveType = connection.effectiveType;
   if (effectiveType === '4g') return 'high';
   if (effectiveType === '3g') return 'medium';

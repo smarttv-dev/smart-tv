@@ -1,26 +1,32 @@
-import { CodePreview } from '../../../../../components';
+import { CodePreview } from "@/components";
 
 export default function QueryExamples() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Examples</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-          Real-world examples and common patterns for using Smart TV Query in your Smart TV applications.
+        <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Examples
+        </h1>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-300">
+          Real-world examples and common patterns for using Smart TV Query in
+          your Smart TV applications.
         </p>
       </div>
 
       {/* Movie Browsing App */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Movie Browsing App</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          A complete example showing movie browsing with search, filtering, and detail views.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Movie Browsing App
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          A complete example showing movie browsing with search, filtering, and
+          detail views.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Setup & Types</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Setup & Types</h3>
+            <CodePreview
               code={`// types/movie.ts
 export interface Movie {
   id: number;
@@ -96,8 +102,8 @@ export const movieApi = {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Custom Hooks</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Custom Hooks</h3>
+            <CodePreview
               code={`// hooks/useMovies.ts
 import { useQuery, useInfiniteQuery } from '@smart-tv/query';
 import { movieApi } from '../api/movieApi';
@@ -179,8 +185,8 @@ export function useGenres() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Movie List Component</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Movie List Component</h3>
+            <CodePreview
               code={`// components/MovieList.tsx
 import React, { useState } from 'react';
 import { useInfiniteMovies, useGenres } from '../hooks/useMovies';
@@ -198,7 +204,7 @@ export function MovieList({ filters }: MovieListProps) {
   const [sortBy, setSortBy] = useState(filters.sortBy || 'popularity.desc');
 
   const { data: genres } = useGenres();
-  
+
   const {
     data,
     hasNextPage,
@@ -225,7 +231,7 @@ export function MovieList({ filters }: MovieListProps) {
     return (
       <div className="text-center py-8">
         <p className="text-red-600">Error loading movies: {error.message}</p>
-        <button 
+        <button
           onClick={() => window.location.reload()}
           className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
         >
@@ -328,15 +334,20 @@ function MovieCard({ movie }: { movie: Movie }) {
 
       {/* Legacy Smart TV Example */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Legacy Smart TV Implementation</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Complete example using XHR fetcher for maximum compatibility with older Smart TV platforms (2015-2018).
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Legacy Smart TV Implementation
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Complete example using XHR fetcher for maximum compatibility with
+          older Smart TV platforms (2015-2018).
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">TV-Optimized API Layer</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              TV-Optimized API Layer
+            </h3>
+            <CodePreview
               code={`// api/tvMovieApi.ts
 import { xhrFetcher, tvFetch } from '@smart-tv/query';
 
@@ -378,7 +389,7 @@ export const tvMovieApi = {
     if (!response.ok) {
       throw new Error(\`TV API Error: \${response.status} - \${response.statusText}\`);
     }
-    
+
     return response.json();
   },
 
@@ -397,14 +408,14 @@ export const tvMovieApi = {
     if (!response.ok) {
       throw new Error(\`Failed to load movie \${id} for TV\`);
     }
-    
+
     const movie = await response.json();
-    
+
     // Optimize image URLs for TV display
     if (movie.poster_path) {
       movie.poster_path = movie.poster_path.replace('/w500/', '/w1280/');
     }
-    
+
     return movie;
   },
 
@@ -430,7 +441,7 @@ export const tvMovieApi = {
     if (!response.ok) {
       throw new Error('Search failed for TV platform');
     }
-    
+
     return response.json();
   }
 };
@@ -446,8 +457,8 @@ function getDeviceMemory(): string {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">TV-Optimized Hooks</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">TV-Optimized Hooks</h3>
+            <CodePreview
               code={`// hooks/useTVMovies.ts
 import { useQuery, useInfiniteQuery } from '@smart-tv/query';
 import { tvMovieApi } from '../api/tvMovieApi';
@@ -527,8 +538,10 @@ export function useTVSearch(query: string) {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">TV-Friendly Components</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              TV-Friendly Components
+            </h3>
+            <CodePreview
               code={`// components/TVMovieGrid.tsx
 import React, { useRef, useEffect } from 'react';
 import { useTVMovies } from '../hooks/useTVMovies';
@@ -546,7 +559,7 @@ export function TVMovieGrid({ filters, onMovieSelect }: TVMovieGridProps) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const focusedElement = document.activeElement as HTMLElement;
-      
+
       switch (event.key) {
         case 'ArrowRight':
         case 'ArrowLeft':
@@ -576,9 +589,9 @@ export function TVMovieGrid({ filters, onMovieSelect }: TVMovieGridProps) {
     const cards = Array.from(gridRef.current?.querySelectorAll('[data-movie-id]') || []);
     const currentIndex = cards.indexOf(currentElement);
     const columns = 6; // Grid columns
-    
+
     let nextIndex = currentIndex;
-    
+
     switch (direction) {
       case 'ArrowRight':
         nextIndex = Math.min(currentIndex + 1, cards.length - 1);
@@ -593,7 +606,7 @@ export function TVMovieGrid({ filters, onMovieSelect }: TVMovieGridProps) {
         nextIndex = Math.max(currentIndex - columns, 0);
         break;
     }
-    
+
     (cards[nextIndex] as HTMLElement)?.focus();
   };
 
@@ -613,7 +626,7 @@ export function TVMovieGrid({ filters, onMovieSelect }: TVMovieGridProps) {
         <div className="tv-error-icon">📺</div>
         <h2>Connection Error</h2>
         <p>Unable to load movies. Check your internet connection.</p>
-        <button 
+        <button
           className="tv-retry-button"
           onClick={() => refetch()}
           autoFocus
@@ -666,7 +679,7 @@ export function TVMovieGrid({ filters, onMovieSelect }: TVMovieGridProps) {
           </div>
         ))}
       </div>
-      
+
       {/* TV-friendly pagination info */}
       <div className="tv-pagination-info">
         <p>
@@ -687,15 +700,19 @@ export function TVMovieGrid({ filters, onMovieSelect }: TVMovieGridProps) {
 
       {/* Search with Debouncing */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Search with Debouncing</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Search with Debouncing
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Implement search functionality with debouncing to reduce API calls.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Search Hook with Debouncing</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Search Hook with Debouncing
+            </h3>
+            <CodePreview
               code={`// hooks/useDebounce.ts
 import { useState, useEffect } from 'react';
 
@@ -738,8 +755,8 @@ export function useSearchMovies(query: string) {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Search Component</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Search Component</h3>
+            <CodePreview
               code={`// components/MovieSearch.tsx
 import React, { useState } from 'react';
 import { useSearchMovies } from '../hooks/useSearchMovies';
@@ -814,15 +831,18 @@ export function MovieSearch() {
 
       {/* Optimistic Updates */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Optimistic Updates</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Implement optimistic updates for immediate UI feedback during mutations.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Optimistic Updates
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Implement optimistic updates for immediate UI feedback during
+          mutations.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Watchlist Management</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Watchlist Management</h3>
+            <CodePreview
               code={`// hooks/useWatchlist.ts
 import { useMutation, useQuery, useQueryClient } from '@smart-tv/query';
 
@@ -943,8 +963,10 @@ export function useRemoveFromWatchlist() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Watchlist Button Component</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Watchlist Button Component
+            </h3>
+            <CodePreview
               code={`// components/WatchlistButton.tsx
 import React from 'react';
 import { useWatchlist, useAddToWatchlist, useRemoveFromWatchlist } from '../hooks/useWatchlist';
@@ -976,8 +998,8 @@ export function WatchlistButton({ movie, className = '' }: WatchlistButtonProps)
       disabled={isLoading}
       className={{\`
         flex items-center space-x-2 px-4 py-2 rounded-lg transition-all
-        \${isInWatchlist 
-          ? 'bg-red-100 text-red-700 hover:bg-red-200' 
+        \${isInWatchlist
+          ? 'bg-red-100 text-red-700 hover:bg-red-200'
           : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
         }
         \${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-sm'}
@@ -990,10 +1012,10 @@ export function WatchlistButton({ movie, className = '' }: WatchlistButtonProps)
         <span>{isInWatchlist ? '❤️' : '🤍'}</span>
       )}
       <span>
-        {isLoading 
-          ? 'Updating...' 
-          : isInWatchlist 
-            ? 'Remove from Watchlist' 
+        {isLoading
+          ? 'Updating...'
+          : isInWatchlist
+            ? 'Remove from Watchlist'
             : 'Add to Watchlist'
         }
       </span>
@@ -1016,7 +1038,7 @@ function MovieDetail({ movieId }: { movieId: number }) {
           alt={movie.title}
           className="w-full md:w-80 aspect-[2/3] object-cover rounded-lg"
         />
-        
+
         <div className="flex-1 space-y-4">
           <div>
             <h1 className="text-3xl font-bold">{movie.title}</h1>
@@ -1024,9 +1046,9 @@ function MovieDetail({ movieId }: { movieId: number }) {
               {new Date(movie.release_date).getFullYear()}
             </p>
           </div>
-          
+
           <p className="text-gray-800">{movie.overview}</p>
-          
+
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <span className="text-yellow-400">★</span>
@@ -1034,7 +1056,7 @@ function MovieDetail({ movieId }: { movieId: number }) {
               <span className="text-gray-500">({movie.vote_count} votes)</span>
             </div>
           </div>
-          
+
           <WatchlistButton movie={movie} />
         </div>
       </div>
@@ -1049,15 +1071,17 @@ function MovieDetail({ movieId }: { movieId: number }) {
 
       {/* Background Syncing */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Background Syncing</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Background Syncing
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Keep data fresh with background syncing and automatic refetching.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Live Sports Scores</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Live Sports Scores</h3>
+            <CodePreview
               code={`// hooks/useLiveScores.ts
 import { useQuery } from '@smart-tv/query';
 
@@ -1104,7 +1128,7 @@ function LiveScoreboard() {
           Last updated: {new Date(dataUpdatedAt).toLocaleTimeString()}
         </p>
       </div>
-      
+
       <div className="grid gap-4">
         {scores?.map(score => (
           <div key={score.gameId} className="border rounded-lg p-4">
@@ -1117,8 +1141,8 @@ function LiveScoreboard() {
               </div>
               <div className={{\`
                 px-2 py-1 rounded text-sm font-medium
-                \${score.status === 'live' ? 'bg-red-100 text-red-800' : 
-                  score.status === 'finished' ? 'bg-gray-100 text-gray-800' : 
+                \${score.status === 'live' ? 'bg-red-100 text-red-800' :
+                  score.status === 'finished' ? 'bg-gray-100 text-gray-800' :
                   'bg-blue-100 text-blue-800 dark:text-blue-300'}
               \`}}>
                 {score.status.toUpperCase()}
@@ -1135,8 +1159,10 @@ function LiveScoreboard() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Sync Status Indicator</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Sync Status Indicator
+            </h3>
+            <CodePreview
               code={`// components/SyncStatus.tsx
 import React from 'react';
 import { useQueryClient } from '@smart-tv/query';
@@ -1189,13 +1215,13 @@ export function SyncStatus() {
     <div className="flex items-center space-x-2 text-sm">
       <div className={{\`
         w-2 h-2 rounded-full
-        \${!isOnline ? 'bg-red-500' : 
-          isSyncing ? 'bg-yellow-500 animate-pulse' : 
+        \${!isOnline ? 'bg-red-500' :
+          isSyncing ? 'bg-yellow-500 animate-pulse' :
           'bg-green-500'}
       \`}} />
       <span className="text-gray-600 dark:text-gray-300">
-        {!isOnline ? 'Offline' : 
-         isSyncing ? 'Syncing...' : 
+        {!isOnline ? 'Offline' :
+         isSyncing ? 'Syncing...' :
          'Online'}
       </span>
     </div>
@@ -1209,15 +1235,20 @@ export function SyncStatus() {
 
       {/* Error Recovery */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Error Recovery</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Implement robust error handling and recovery mechanisms for better user experience.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Error Recovery
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Implement robust error handling and recovery mechanisms for better
+          user experience.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Global Error Boundary</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Global Error Boundary
+            </h3>
+            <CodePreview
               code={`// components/ErrorBoundary.tsx
 import React from 'react';
 
@@ -1284,8 +1315,8 @@ function DefaultErrorFallback({ error, retry }: { error: Error; retry: () => voi
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Query Error Handler</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Query Error Handler</h3>
+            <CodePreview
               code={`// components/QueryErrorHandler.tsx
 import React from 'react';
 import { useQueryClient } from '@smart-tv/query';
@@ -1323,20 +1354,20 @@ export function QueryErrorHandler({ error, queryKey, onRetry }: QueryErrorProps)
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
           </svg>
         </div>
-        
+
         <div className="flex-1">
           <h3 className="text-sm font-medium text-red-800">
-            {isNetworkError ? 'Network Error' : 
-             isServerError ? 'Server Error' : 
+            {isNetworkError ? 'Network Error' :
+             isServerError ? 'Server Error' :
              'Error Loading Data'}
           </h3>
-          
+
           <p className="mt-1 text-sm text-red-700">
             {isNetworkError ? 'Please check your internet connection and try again.' :
              isServerError ? 'Our servers are experiencing issues. Please try again later.' :
              error.message}
           </p>
-          
+
           <div className="mt-3 flex space-x-2">
             <button
               onClick={handleRetry}
@@ -1344,7 +1375,7 @@ export function QueryErrorHandler({ error, queryKey, onRetry }: QueryErrorProps)
             >
               Retry
             </button>
-            
+
             <button
               onClick={handleClearCache}
               className="text-sm text-red-600 px-3 py-1 rounded border border-red-300 hover:bg-red-50"
@@ -1365,7 +1396,7 @@ function MovieListWithErrorHandling() {
   });
 
   if (isLoading) return <div>Loading...</div>;
-  
+
   if (error) {
     return (
       <QueryErrorHandler

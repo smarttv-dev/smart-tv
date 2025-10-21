@@ -1,26 +1,31 @@
-import { CodePreview } from '../../../../../components';
+import { CodePreview } from "@/components";
 
 export default function QueryTypes() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">TypeScript Types</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-          Complete TypeScript type definitions and interfaces for Smart TV Query package.
+        <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
+          TypeScript Types
+        </h1>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-300">
+          Complete TypeScript type definitions and interfaces for Smart TV Query
+          package.
         </p>
       </div>
 
       {/* Core Types */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Core Types</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Core Types
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Essential types that form the foundation of the Smart TV Query system.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Query Key Types</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Query Key Types</h3>
+            <CodePreview
               code={`// Query key can be a string or array of serializable values
 export type QueryKey = string | readonly unknown[];
 
@@ -55,8 +60,8 @@ type MovieQueryKeys = typeof queryKeys.movies;`}
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Query Function Types</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Query Function Types</h3>
+            <CodePreview
               code={`// Basic query function type
 export type QueryFunction<
   TQueryFnData = unknown,
@@ -91,8 +96,8 @@ export type MutationFunction<TData = unknown, TVariables = unknown> = (
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">XHR Fetcher Types</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">XHR Fetcher Types</h3>
+            <CodePreview
               code={`// XHR-based fetcher for legacy Smart TV compatibility
 export type Fetcher<T> = (...args: any[]) => Promise<T>;
 
@@ -104,11 +109,11 @@ export interface XhrOptions {
   responseType?: '' | 'arraybuffer' | 'blob' | 'document' | 'json' | 'text';
   timeout?: number; // milliseconds - important for TV networks
   withCredentials?: boolean;
-  
+
   // Progress callbacks for large content downloads
   onUploadProgress?: (sent: number, total?: number) => void;
   onDownloadProgress?: (loaded: number, total?: number) => void;
-  
+
   // AbortSignal for request cancellation
   signal?: AbortSignal | null;
 }
@@ -123,13 +128,13 @@ export interface XhrResponse {
     get: (key: string) => string | null;
     has: (key: string) => boolean;
   };
-  
+
   // Response body methods
   json: () => Promise<any>;
   text: () => Promise<string>;
   arrayBuffer: () => Promise<ArrayBuffer>;
   blob: () => Promise<Blob>;
-  
+
   // Raw XHR response for advanced usage
   raw: any;
 }
@@ -156,8 +161,8 @@ export interface TVFetchOptions extends XhrOptions {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">State Types</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">State Types</h3>
+            <CodePreview
               code={`// Query status enum
 export type QueryStatus = 'loading' | 'error' | 'success';
 
@@ -203,15 +208,17 @@ export interface MutationState<TData = unknown, TError = Error, TVariables = unk
 
       {/* Query Options */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Query Options</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Query Options
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Configuration options for customizing query behavior.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Base Query Options</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Base Query Options</h3>
+            <CodePreview
               code={`export interface QueryOptions<
   TQueryFnData = unknown,
   TError = Error,
@@ -221,40 +228,40 @@ export interface MutationState<TData = unknown, TError = Error, TVariables = unk
   // Cache configuration
   staleTime?: number;
   cacheTime?: number;
-  
+
   // Refetch behavior
   refetchOnMount?: boolean | 'always';
   refetchOnWindowFocus?: boolean | 'always';
   refetchOnReconnect?: boolean | 'always';
   refetchInterval?: number | false;
   refetchIntervalInBackground?: boolean;
-  
+
   // Retry configuration
   retry?: boolean | number | ((failureCount: number, error: TError) => boolean);
   retryOnMount?: boolean;
   retryDelay?: number | ((retryAttempt: number, error: TError) => number);
-  
+
   // Data transformation
   select?: (data: TQueryFnData) => TData;
   placeholderData?: TData | ((previousValue: TData | undefined, previousQuery: Query | undefined) => TData);
   initialData?: TData | (() => TData);
   initialDataUpdatedAt?: number | (() => number);
-  
+
   // Lifecycle callbacks
   onSuccess?: (data: TData) => void;
   onError?: (error: TError) => void;
   onSettled?: (data: TData | undefined, error: TError | null) => void;
-  
+
   // Advanced options
   enabled?: boolean;
   keepPreviousData?: boolean;
   suspense?: boolean;
   useErrorBoundary?: boolean | ((error: TError) => boolean);
   meta?: QueryMeta;
-  
+
   // Network mode
   networkMode?: 'online' | 'always' | 'offlineFirst';
-  
+
   // Structure sharing
   structuralSharing?: boolean | ((oldData: TData | undefined, newData: TData) => TData);
 }
@@ -269,8 +276,10 @@ export interface DefaultOptions<TError = Error> {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Infinite Query Options</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Infinite Query Options
+            </h3>
+            <CodePreview
               code={`export interface InfiniteQueryOptions<
   TQueryFnData = unknown,
   TError = Error,
@@ -282,15 +291,15 @@ export interface DefaultOptions<TError = Error> {
     lastPage: TQueryFnData,
     allPages: TQueryFnData[]
   ) => unknown | undefined;
-  
+
   getPreviousPageParam?: (
     firstPage: TQueryFnData,
     allPages: TQueryFnData[]
   ) => unknown | undefined;
-  
+
   // Data selection for infinite queries
   select?: (data: InfiniteData<TQueryFnData>) => TData;
-  
+
   // Initial page parameter
   initialPageParam?: unknown;
 }
@@ -314,8 +323,8 @@ export interface InfiniteQueryFunctionContext<
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Mutation Options</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Mutation Options</h3>
+            <CodePreview
               code={`export interface MutationOptions<
   TData = unknown,
   TError = Error,
@@ -340,17 +349,17 @@ export interface InfiniteQueryFunctionContext<
     variables: TVariables,
     context: TContext | undefined
   ) => Promise<unknown> | unknown;
-  
+
   // Retry configuration
   retry?: boolean | number | ((failureCount: number, error: TError) => boolean);
   retryDelay?: number | ((retryAttempt: number, error: TError) => number);
-  
+
   // Error handling
   useErrorBoundary?: boolean | ((error: TError, variables: TVariables, context: TContext | undefined) => boolean);
-  
+
   // Metadata
   meta?: MutationMeta;
-  
+
   // Network mode
   networkMode?: 'online' | 'always' | 'offlineFirst';
 }
@@ -367,21 +376,23 @@ export interface MutationMeta {
 
       {/* Hook Return Types */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Hook Return Types</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Hook Return Types
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Return types for all query hooks with complete type safety.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">useQuery Return Type</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">useQuery Return Type</h3>
+            <CodePreview
               code={`export interface UseQueryResult<TData = unknown, TError = Error>
   extends QueryState<TData, TError> {
   // Data and error
   data: TData | undefined;
   error: TError | null;
-  
+
   // Status booleans
   isLoading: boolean;
   isError: boolean;
@@ -390,19 +401,19 @@ export interface MutationMeta {
   isStale: boolean;
   isPlaceholderData: boolean;
   isPreviousData: boolean;
-  
+
   // Status enums
   status: QueryStatus;
   fetchStatus: FetchStatus;
-  
+
   // Timestamps
   dataUpdatedAt: number;
   errorUpdatedAt: number;
-  
+
   // Failure tracking
   fetchFailureCount: number;
   fetchFailureReason: TError | null;
-  
+
   // Actions
   refetch: (options?: RefetchOptions) => Promise<UseQueryResult<TData, TError>>;
   remove: () => void;
@@ -415,7 +426,7 @@ export interface RefetchOptions {
 }
 
 // Enabled/disabled query result
-export type UseQueryResult<TData, TError> = 
+export type UseQueryResult<TData, TError> =
   | UseQuerySuccessResult<TData, TError>
   | UseQueryLoadingResult<TData, TError>
   | UseQueryErrorResult<TData, TError>;
@@ -451,8 +462,10 @@ interface UseQueryErrorResult<TData, TError> extends QueryState<TData, TError> {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">useMutation Return Type</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              useMutation Return Type
+            </h3>
+            <CodePreview
               code={`export interface UseMutationResult<
   TData = unknown,
   TError = Error,
@@ -463,23 +476,23 @@ interface UseQueryErrorResult<TData, TError> extends QueryState<TData, TError> {
   data: TData | undefined;
   error: TError | null;
   variables: TVariables | undefined;
-  
+
   // Status booleans
   isIdle: boolean;
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
-  
+
   // Status enum
   status: 'idle' | 'loading' | 'error' | 'success';
-  
+
   // Failure tracking
   failureCount: number;
   failureReason: TError | null;
-  
+
   // Timestamps
   submittedAt: number;
-  
+
   // Actions
   mutate: (
     variables: TVariables,
@@ -513,19 +526,21 @@ export interface MutateOptions<
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">useInfiniteQuery Return Type</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              useInfiniteQuery Return Type
+            </h3>
+            <CodePreview
               code={`export interface UseInfiniteQueryResult<TData = unknown, TError = Error>
   extends Omit<UseQueryResult<InfiniteData<TData>, TError>, 'data'> {
   // Infinite-specific data
   data: InfiniteData<TData> | undefined;
-  
+
   // Page navigation
   hasNextPage: boolean;
   hasPreviousPage: boolean;
   isFetchingNextPage: boolean;
   isFetchingPreviousPage: boolean;
-  
+
   // Actions
   fetchNextPage: (options?: FetchNextPageOptions) => Promise<UseInfiniteQueryResult<TData, TError>>;
   fetchPreviousPage: (options?: FetchPreviousPageOptions) => Promise<UseInfiniteQueryResult<TData, TError>>;
@@ -555,20 +570,24 @@ export type InfiniteQueryPageParam<T> = T extends InfiniteData<any> ? unknown : 
 
       {/* QueryClient Types */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">QueryClient Types</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          QueryClient Types
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Types for the QueryClient class and its methods.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">QueryClient Interface</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              QueryClient Interface
+            </h3>
+            <CodePreview
               code={`export interface QueryClient {
   // Configuration
   getDefaultOptions(): DefaultOptions;
   setDefaultOptions(options: DefaultOptions): void;
-  
+
   // Cache management
   getQueryData<TData = unknown>(queryKey: QueryKey): TData | undefined;
   getQueriesData<TData = unknown>(
@@ -582,12 +601,12 @@ export type InfiniteQueryPageParam<T> = T extends InfiniteData<any> ? unknown : 
     queryKey: QueryKey,
     updater: Updater<TData | undefined, TData | undefined>
   ): Array<[QueryKey, TData | undefined]>;
-  
+
   // Query state management
   getQueryState<TData = unknown, TError = Error>(
     queryKey: QueryKey
   ): QueryState<TData, TError> | undefined;
-  
+
   // Query execution
   fetchQuery<TData = unknown, TError = Error, TQueryKey extends QueryKey = QueryKey>(
     options: FetchQueryOptions<TData, TError, TQueryKey>
@@ -598,7 +617,7 @@ export type InfiniteQueryPageParam<T> = T extends InfiniteData<any> ? unknown : 
   ensureQueryData<TData = unknown, TError = Error, TQueryKey extends QueryKey = QueryKey>(
     options: FetchQueryOptions<TData, TError, TQueryKey>
   ): Promise<TData>;
-  
+
   // Query invalidation
   invalidateQueries(
     filters?: QueryFilters,
@@ -612,15 +631,15 @@ export type InfiniteQueryPageParam<T> = T extends InfiniteData<any> ? unknown : 
     filters?: QueryFilters,
     options?: CancelOptions
   ): Promise<void>;
-  
+
   // Query removal
   removeQueries(filters?: QueryFilters): void;
   clear(): void;
-  
+
   // Utility methods
   isFetching(filters?: QueryFilters): number;
   isMutating(filters?: MutationFilters): number;
-  
+
   // Cache and mutation cache access
   getQueryCache(): QueryCache;
   getMutationCache(): MutationCache;
@@ -661,8 +680,8 @@ export type Updater<TInput, TOutput = TInput> = TOutput | ((input: TInput) => TO
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Fetch Query Options</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Fetch Query Options</h3>
+            <CodePreview
               code={`export interface FetchQueryOptions<
   TQueryFnData = unknown,
   TError = Error,
@@ -709,15 +728,17 @@ export interface MutationCacheConfig {
 
       {/* Utility Types */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Utility Types</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Utility Types
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Helper types for advanced TypeScript usage and type manipulation.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Query Key Helpers</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Query Key Helpers</h3>
+            <CodePreview
               code={`// Extract data type from query result
 export type QueryData<T> = T extends UseQueryResult<infer TData, any> ? TData : never;
 
@@ -730,15 +751,15 @@ export type TypedQueryKey<T extends string, P = never> = [P] extends [never]
   : [T, P];
 
 // Query key inference
-export type InferQueryKey<T> = T extends (queryKey: infer K, ...args: any[]) => any 
-  ? K 
+export type InferQueryKey<T> = T extends (queryKey: infer K, ...args: any[]) => any
+  ? K
   : never;
 
 // Query data inference
-export type InferQueryData<T> = T extends (...args: any[]) => Promise<infer D> 
-  ? D 
-  : T extends (...args: any[]) => infer D 
-  ? D 
+export type InferQueryData<T> = T extends (...args: any[]) => Promise<infer D>
+  ? D
+  : T extends (...args: any[]) => infer D
+  ? D
   : never;
 
 // Safe query key factory
@@ -763,21 +784,21 @@ const moviesKey = createQueryKey('movies'); // ['movies']`}
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Conditional Types</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Conditional Types</h3>
+            <CodePreview
               code={`// Enable/disable query based on parameters
-export type EnabledQuery<T> = T extends { enabled: false } 
+export type EnabledQuery<T> = T extends { enabled: false }
   ? UseQueryResult<undefined, Error>
   : UseQueryResult<unknown, Error>;
 
 // Optional query parameters
-export type OptionalQueryParams<T> = T extends undefined 
+export type OptionalQueryParams<T> = T extends undefined
   ? { enabled: false }
   : { enabled: true };
 
 // Mutation variables requirement
-export type MutationVariables<T> = T extends UseMutationResult<any, any, infer V, any> 
-  ? V 
+export type MutationVariables<T> = T extends UseMutationResult<any, any, infer V, any>
+  ? V
   : never;
 
 // Conditional hook return based on enabled state
@@ -810,8 +831,8 @@ export type MutationHook<
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Advanced Hook Types</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Advanced Hook Types</h3>
+            <CodePreview
               code={`// Strongly typed custom hook factory
 export interface CustomQueryHookFactory {
   <TData, TError = Error, TQueryKey extends QueryKey = QueryKey>(
@@ -857,10 +878,10 @@ function createTypedQueryHook<TParams, TData, TError = Error>(
       defaultOptions
     );
   };
-  
+
   hook.queryKey = keyFactory;
   hook.queryFn = queryFn;
-  
+
   return hook;
 }
 
@@ -878,34 +899,36 @@ const useMovie = createTypedQueryHook(
 
       {/* Module Declaration */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Module Declaration</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Module Declaration
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Complete module declaration for the Smart TV Query package.
         </p>
 
         <div>
-          <CodePreview 
+          <CodePreview
             code={`// @smart-tv/query module declaration
 declare module '@smart-tv/query' {
   // Re-export all types
   export * from './types';
-  
+
   // Core classes
   export class QueryClient {
     constructor(options?: QueryClientConfig);
     // ... methods
   }
-  
+
   export class QueryCache {
     constructor(config?: QueryCacheConfig);
     // ... methods
   }
-  
+
   export class MutationCache {
     constructor(config?: MutationCacheConfig);
     // ... methods
   }
-  
+
   // React hooks
   export function useQuery<
     TQueryFnData = unknown,
@@ -917,7 +940,7 @@ declare module '@smart-tv/query' {
     queryFn: QueryFunction<TQueryFnData, TQueryKey>,
     options?: QueryOptions<TQueryFnData, TError, TData, TQueryKey>
   ): UseQueryResult<TData, TError>;
-  
+
   export function useMutation<
     TData = unknown,
     TError = Error,
@@ -927,7 +950,7 @@ declare module '@smart-tv/query' {
     mutationFn: MutationFunction<TData, TVariables>,
     options?: MutationOptions<TData, TError, TVariables, TContext>
   ): UseMutationResult<TData, TError, TVariables, TContext>;
-  
+
   export function useInfiniteQuery<
     TQueryFnData = unknown,
     TError = Error,
@@ -938,29 +961,29 @@ declare module '@smart-tv/query' {
     queryFn: InfiniteQueryFunction<TQueryFnData, TQueryKey>,
     options?: InfiniteQueryOptions<TQueryFnData, TError, TData, TQueryKey>
   ): UseInfiniteQueryResult<TData, TError>;
-  
+
   export function useQueryClient(): QueryClient;
-  
+
   // Provider component
   export interface QueryClientProviderProps {
     client: QueryClient;
     children?: React.ReactNode;
   }
-  
+
   export const QueryClientProvider: React.FC<QueryClientProviderProps>;
-  
+
   // Error boundary
   export interface QueryErrorResetBoundaryProps {
     children: React.ReactNode;
   }
-  
+
   export const QueryErrorResetBoundary: React.FC<QueryErrorResetBoundaryProps>;
-  
+
   // Utility functions
   export function hashQueryKey(queryKey: QueryKey): string;
   export function isServer(): boolean;
   export function isCancelledError(error: unknown): error is CancelledError;
-  
+
   // Default export
   const SmartTVQuery: {
     QueryClient: typeof QueryClient;
@@ -972,7 +995,7 @@ declare module '@smart-tv/query' {
     useQueryClient: typeof useQueryClient;
     QueryClientProvider: typeof QueryClientProvider;
   };
-  
+
   export default SmartTVQuery;
 }`}
             language="ts"
@@ -982,15 +1005,19 @@ declare module '@smart-tv/query' {
 
       {/* Type Examples */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Type Usage Examples</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Type Usage Examples
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
           Practical examples of using TypeScript with Smart TV Query.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Strongly Typed API Layer</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Strongly Typed API Layer
+            </h3>
+            <CodePreview
               code={`// api/types.ts
 export interface Movie {
   id: number;
@@ -1013,7 +1040,7 @@ export type MoviesResponse = PaginatedResponse<Movie>;
 // api/movies.ts
 class MoviesAPI {
   private baseURL = 'https://api.example.com';
-  
+
   async getMovies(params: {
     page?: number;
     genre?: number;
@@ -1024,14 +1051,14 @@ class MoviesAPI {
         url.searchParams.set(key, value.toString());
       }
     });
-    
+
     const response = await fetch(url.toString());
     if (!response.ok) {
       throw new Error(\`HTTP \${response.status}: \${response.statusText}\`);
     }
     return response.json();
   }
-  
+
   async getMovie(id: number): Promise<Movie> {
     const response = await fetch(\`\${this.baseURL}/movies/\${id}\`);
     if (!response.ok) {
@@ -1066,14 +1093,16 @@ export function useMovie(id: number) {
     }
   );
 }`}
-            language="ts"
-          />
-        </div>
+              language="ts"
+            />
+          </div>
 
-        <div>
-          <h3 className="text-lg font-semibold mb-3">Type-Safe Query Key Factory</h3>
-          <CodePreview 
-            code={`// queryKeys.ts
+          <div>
+            <h3 className="mb-3 text-lg font-semibold">
+              Type-Safe Query Key Factory
+            </h3>
+            <CodePreview
+              code={`// queryKeys.ts
 interface MovieFilters {
   genre?: number;
   year?: number;
@@ -1095,7 +1124,7 @@ export const queryKeys = {
     detail: (id: number) => [...queryKeys.movies.details(), id] as const,
     search: (query: string) => [...queryKeys.movies.all, 'search', query] as const,
   },
-  
+
   // Users
   users: {
     all: ['users'] as const,
@@ -1104,7 +1133,7 @@ export const queryKeys = {
     details: () => [...queryKeys.users.all, 'detail'] as const,
     detail: (id: number) => [...queryKeys.users.details(), id] as const,
   },
-  
+
   // Watchlist
   watchlist: {
     all: ['watchlist'] as const,
@@ -1131,39 +1160,53 @@ export function useMovieDetail(id: number) {
     () => moviesAPI.getMovie(id)
   );
 }`}
-            language="ts"
-          />
+              language="ts"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <div>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Related Documentation
+        </h2>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <a
+            href="/components/query"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
+          >
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              Overview
+            </h3>
+            <p className="text-sm text-gray-600">
+              Smart TV Query features and quick start guide
+            </p>
+          </a>
+          <a
+            href="/components/query/hooks"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
+          >
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              Hooks Reference
+            </h3>
+            <p className="text-sm text-gray-600">
+              Complete API documentation for all hooks
+            </p>
+          </a>
+          <a
+            href="/components/query/examples"
+            className="block rounded-lg border border-gray-200 p-4 transition-all hover:border-blue-500 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-400"
+          >
+            <h3 className="mb-2 font-semibold text-gray-900 dark:text-gray-100">
+              Examples
+            </h3>
+            <p className="text-sm text-gray-600">
+              Real-world examples and implementation patterns
+            </p>
+          </a>
         </div>
       </div>
     </div>
-
-    {/* Navigation */}
-    <div>
-      <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Related Documentation</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <a 
-          href="/components/query" 
-          className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
-        >
-          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Overview</h3>
-          <p className="text-gray-600 text-sm">Smart TV Query features and quick start guide</p>
-        </a>
-        <a 
-          href="/components/query/hooks" 
-          className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
-        >
-          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Hooks Reference</h3>
-          <p className="text-gray-600 text-sm">Complete API documentation for all hooks</p>
-        </a>
-        <a 
-          href="/components/query/examples" 
-          className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-sm transition-all"
-        >
-          <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Examples</h3>
-          <p className="text-gray-600 text-sm">Real-world examples and implementation patterns</p>
-        </a>
-      </div>
-    </div>
-  </div>
   );
 }

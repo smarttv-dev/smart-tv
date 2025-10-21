@@ -1,7 +1,7 @@
-declare module 'shaka-player' {
+declare module "shaka-player" {
   export = shaka;
   export as namespace shaka;
-  
+
   namespace shaka {
     export class Player {
       constructor(video: HTMLVideoElement);
@@ -23,11 +23,11 @@ declare module 'shaka-player' {
       addEventListener(type: string, listener: EventListener): void;
       removeEventListener(type: string, listener: EventListener): void;
     }
-    
+
     export namespace polyfill {
       export function installAll(): void;
     }
-    
+
     export namespace util {
       export namespace Error {
         export const Code: {

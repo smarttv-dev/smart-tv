@@ -1,6 +1,12 @@
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
-import { DrmConfig, PlaylistCallbacks, PlaylistConfig, PlaylistItem, PlaylistState } from '../types';
-import { AutoPlayCountdown } from './AutoPlayCountdown';
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
+import {
+  DrmConfig,
+  PlaylistCallbacks,
+  PlaylistConfig,
+  PlaylistItem,
+  PlaylistState,
+} from "../types";
+import { AutoPlayCountdown } from "./AutoPlayCountdown";
 
 interface PlaylistManagerProps {
   state: PlaylistState;
@@ -38,26 +44,28 @@ const PlaylistManagerComponent: React.FC<PlaylistManagerProps> = ({
 
     // Default logic: find next item in the same rail
     for (const rail of state.rails) {
-      const currentIndex = rail.items.findIndex(item => item.id === currentItem.id);
+      const currentIndex = rail.items.findIndex(
+        (item) => item.id === currentItem.id
+      );
       if (currentIndex !== -1) {
         // Check if there's a next item in this rail
         if (currentIndex < rail.items.length - 1) {
           return rail.items[currentIndex + 1];
         }
-        
+
         // If loop is enabled, go back to the first item
         if (config?.loop && rail.items.length > 0) {
           return rail.items[0];
         }
-        
+
         // Look for next rail with items
-        const currentRailIndex = state.rails.findIndex(r => r.id === rail.id);
+        const currentRailIndex = state.rails.findIndex((r) => r.id === rail.id);
         for (let i = currentRailIndex + 1; i < state.rails.length; i++) {
           if (state.rails[i].items.length > 0) {
             return state.rails[i].items[0];
           }
         }
-        
+
         // If loop is enabled, start from the first rail
         if (config?.loop) {
           for (let i = 0; i < currentRailIndex; i++) {
@@ -66,7 +74,7 @@ const PlaylistManagerComponent: React.FC<PlaylistManagerProps> = ({
             }
           }
         }
-        
+
         break;
       }
     }
@@ -85,21 +93,23 @@ const PlaylistManagerComponent: React.FC<PlaylistManagerProps> = ({
 
     // Default logic: find previous item in the same rail
     for (const rail of state.rails) {
-      const currentIndex = rail.items.findIndex(item => item.id === currentItem.id);
+      const currentIndex = rail.items.findIndex(
+        (item) => item.id === currentItem.id
+      );
       if (currentIndex !== -1) {
         // Check if there's a previous item in this rail
         if (currentIndex > 0) {
           return rail.items[currentIndex - 1];
         }
-        
+
         // Look for previous rail with items
-        const currentRailIndex = state.rails.findIndex(r => r.id === rail.id);
+        const currentRailIndex = state.rails.findIndex((r) => r.id === rail.id);
         for (let i = currentRailIndex - 1; i >= 0; i--) {
           if (state.rails[i].items.length > 0) {
             return state.rails[i].items[state.rails[i].items.length - 1];
           }
         }
-        
+
         // If loop is enabled, go to the last item of the last rail
         if (config?.loop) {
           for (let i = state.rails.length - 1; i > currentRailIndex; i--) {
@@ -108,7 +118,7 @@ const PlaylistManagerComponent: React.FC<PlaylistManagerProps> = ({
             }
           }
         }
-        
+
         break;
       }
     }
@@ -130,14 +140,14 @@ const PlaylistManagerComponent: React.FC<PlaylistManagerProps> = ({
         setNextItem(next);
         const delay = config.autoPlayDelay || 5;
         setAutoPlayCountdown(delay);
-        
+
         if (config.autoPlayCountdown !== false) {
           setShowAutoPlayCountdown(true);
           callbacks?.onAutoPlayStart?.(next, delay);
-          
+
           // Start countdown
           countdownTimerRef.current = setInterval(() => {
-            setAutoPlayCountdown(prev => {
+            setAutoPlayCountdown((prev) => {
               if (prev <= 1) {
                 // Auto-play the next item
                 handleAutoPlayConfirm();
@@ -157,24 +167,27 @@ const PlaylistManagerComponent: React.FC<PlaylistManagerProps> = ({
   }, [currentItem, config, callbacks, getNextItem]);
 
   // Play a specific item
-  const playItem = useCallback((item: PlaylistItem) => {
-    // Handle DRM configuration
-    const drmConfig = item.drm || config?.globalDrm;
-    if (drmConfig) {
-      onDrmConfigChange?.(drmConfig);
-    } else {
-      onDrmConfigChange?.(undefined);
-    }
+  const playItem = useCallback(
+    (item: PlaylistItem) => {
+      // Handle DRM configuration
+      const drmConfig = item.drm || config?.globalDrm;
+      if (drmConfig) {
+        onDrmConfigChange?.(drmConfig);
+      } else {
+        onDrmConfigChange?.(undefined);
+      }
 
-    // Update the item and call callbacks
-    onItemChange(item);
-    callbacks?.onItemPlay?.(item);
-    
-    // Clear auto-play state
-    setShowAutoPlayCountdown(false);
-    setNextItem(undefined);
-    clearAutoPlayTimers();
-  }, [config?.globalDrm, onDrmConfigChange, onItemChange, callbacks]);
+      // Update the item and call callbacks
+      onItemChange(item);
+      callbacks?.onItemPlay?.(item);
+
+      // Clear auto-play state
+      setShowAutoPlayCountdown(false);
+      setNextItem(undefined);
+      clearAutoPlayTimers();
+    },
+    [config?.globalDrm, onDrmConfigChange, onItemChange, callbacks]
+  );
 
   // Handle auto-play confirmation
   const handleAutoPlayConfirm = useCallback(() => {
@@ -258,7 +271,7 @@ const PlaylistManagerComponent: React.FC<PlaylistManagerProps> = ({
     // You would typically listen to media player events here
     // This is a simplified example - in real implementation, you'd
     // listen to the actual media player's 'ended' event
-    
+
     return () => {
       // Clean up event listeners
     };

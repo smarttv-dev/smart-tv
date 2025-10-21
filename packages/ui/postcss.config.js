@@ -1,23 +1,19 @@
-import autoprefixer from 'autoprefixer'
-import tailwindcss from 'tailwindcss'
+import autoprefixer from "autoprefixer";
+import tailwindcss from "tailwindcss";
 
 // Custom plugin to unwrap layers
 function unwrapLayers() {
   return {
-    postcssPlugin: 'unwrap-layers',
+    postcssPlugin: "unwrap-layers",
     AtRule: {
       layer(rule) {
-        rule.replaceWith(rule.nodes) // flatten
+        rule.replaceWith(rule.nodes); // flatten
       },
     },
-  }
+  };
 }
-unwrapLayers.postcss = true
+unwrapLayers.postcss = true;
 
 export default {
-  plugins: [
-    tailwindcss,
-    autoprefixer,
-    unwrapLayers(),
-  ],
-}
+  plugins: [tailwindcss, autoprefixer, unwrapLayers()],
+};

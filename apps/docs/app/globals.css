@@ -29,7 +29,8 @@ body {
 }
 
 /* explicit theme overrides using data-theme attribute */
-html[data-theme="dark"], .dark {
+html[data-theme="dark"],
+.dark {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 6, 7, 10;
   --background-end-rgb: 12, 14, 19;
@@ -37,7 +38,8 @@ html[data-theme="dark"], .dark {
   --muted-rgb: 99, 102, 241;
 }
 
-html[data-theme="light"], .light {
+html[data-theme="light"],
+.light {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 240, 242, 245;
   --background-end-rgb: 255, 255, 255;
@@ -55,8 +57,11 @@ html[data-theme="light"], .light {
 }
 
 /* make pre/code monospace */
-pre, code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+pre,
+code {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New",
+    monospace;
 }
 
 /* surface helpers */
@@ -64,15 +69,18 @@ pre, code {
   background-color: rgb(var(--surface-rgb));
 }
 
-.text-accent { color: rgb(var(--muted-rgb)); }
+.text-accent {
+  color: rgb(var(--muted-rgb));
+}
 
 /* elevated content panel used in layout */
 .content-panel {
   background: white;
-  color: rgb(0,0,0);
+  color: rgb(0, 0, 0);
 }
 
-html[data-theme="dark"] .content-panel, .dark .content-panel {
+html[data-theme="dark"] .content-panel,
+.dark .content-panel {
   background: transparent;
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
 }

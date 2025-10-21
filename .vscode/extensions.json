@@ -1,0 +1,32 @@
+{
+  "recommendations": [
+    // Code formatting and linting
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+
+    // Tailwind CSS support
+    "bradlc.vscode-tailwindcss",
+
+    // TypeScript and JavaScript
+    "ms-vscode.vscode-typescript-next",
+
+    // Better comments
+    "aaron-bond.better-comments",
+
+    // Auto rename tag
+    "formulahendry.auto-rename-tag",
+
+    // Import cost
+    "wix.vscode-import-cost",
+
+    // Error lens
+    "usernamehw.errorlens",
+
+    // Turbo console log (for debugging)
+    "chakrounanas.turbo-console-log",
+
+    // EditorConfig support
+    "editorconfig.editorconfig"
+  ],
+  "unwantedRecommendations": []
+}

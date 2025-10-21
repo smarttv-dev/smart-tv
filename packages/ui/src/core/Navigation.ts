@@ -1029,7 +1029,6 @@ class SmartTvNavigationService {
 
     if (!fromParentFocusKey) {
       forOwn(this.focusableComponents, (component) => {
-         
         component.layoutUpdated = false;
       });
     }
@@ -1169,14 +1168,12 @@ class SmartTvNavigationService {
         focusKey
       );
 
-       
       component.lastFocusedChildKey = focusKey;
     }
   }
 
   log(functionName: string, debugString: string, ...rest: unknown[]) {
     if (this.debug) {
-       
       console.log(
         `%c${functionName}%c${debugString}`,
         `background: ${
@@ -1380,7 +1377,6 @@ class SmartTvNavigationService {
     };
 
     if (!node) {
-       
       console.warn(
         'Component added without a node reference. This will result in its coordinates being empty and may cause lost focus. Check the "ref" passed to "useFocusable": ',
         this.focusableComponents[focusKey]
@@ -1674,7 +1670,6 @@ class SmartTvNavigationService {
      * A component closest to the top left viewport corner (0,0) is force-focused.
      */
     if (!focusKey || focusKey === ROOT_FOCUS_KEY) {
-       
       focusKey = this.getForcedFocusKey();
     }
 

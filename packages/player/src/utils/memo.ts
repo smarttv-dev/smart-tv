@@ -36,8 +36,12 @@ export function compareIgnoringFunctions<T extends Record<string, any>>(
   const nextKeys = Object.keys(nextProps);
 
   // Get non-function keys
-  const prevNonFunctionKeys = prevKeys.filter(key => typeof prevProps[key] !== 'function');
-  const nextNonFunctionKeys = nextKeys.filter(key => typeof nextProps[key] !== 'function');
+  const prevNonFunctionKeys = prevKeys.filter(
+    (key) => typeof prevProps[key] !== "function"
+  );
+  const nextNonFunctionKeys = nextKeys.filter(
+    (key) => typeof nextProps[key] !== "function"
+  );
 
   if (prevNonFunctionKeys.length !== nextNonFunctionKeys.length) {
     return false;
@@ -73,7 +77,7 @@ export function compareTrackProps<T extends Record<string, any>>(
     const nextValue = nextProps[key];
 
     // Skip function comparisons (they change frequently)
-    if (typeof prevValue === 'function' || typeof nextValue === 'function') {
+    if (typeof prevValue === "function" || typeof nextValue === "function") {
       continue;
     }
 

@@ -1,26 +1,32 @@
-import { CodePreview } from '../../../../../components';
+import { CodePreview } from "@/components";
 
 export default function QueryUsage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">Usage & Configuration</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-          Learn how to configure and use Smart TV Query for optimal data fetching in your Smart TV applications.
+        <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Usage & Configuration
+        </h1>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-300">
+          Learn how to configure and use Smart TV Query for optimal data
+          fetching in your Smart TV applications.
         </p>
       </div>
 
       {/* Query Client Configuration */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Query Client Configuration</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          The QueryClient is the central manager for all your queries. Configure it to match your app&apos;s needs:
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Query Client Configuration
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          The QueryClient is the central manager for all your queries. Configure
+          it to match your app&apos;s needs:
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Basic Configuration</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Basic Configuration</h3>
+            <CodePreview
               code={`import { QueryClient } from '@smart-tv/query';
 
 const queryClient = new QueryClient({
@@ -32,7 +38,7 @@ const queryClient = new QueryClient({
     refetchOnWindowFocus: false,        // Don't refetch on TV focus
     retry: 2,                           // Retry failed requests 2 times
     retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000),
-    
+
     // Mutation options
     onError: (error) => {
       console.error('Query error:', error);
@@ -47,8 +53,10 @@ const queryClient = new QueryClient({
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Smart TV Optimized Configuration</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Smart TV Optimized Configuration
+            </h3>
+            <CodePreview
               code={`import { QueryClient } from '@smart-tv/query';
 
 const queryClient = new QueryClient({
@@ -56,12 +64,12 @@ const queryClient = new QueryClient({
     // Aggressive caching for TV performance
     staleTime: 10 * 60 * 1000,         // 10 minutes fresh time
     cacheTime: 60 * 60 * 1000,         // 1 hour cache time
-    
+
     // TV-specific behavior
     refetchOnWindowFocus: false,        // TV apps don't lose focus
     refetchOnMount: false,              // Prevent unnecessary refetches
     refetchOnReconnect: true,           // Refetch on network reconnect
-    
+
     // Error handling for unreliable TV networks
     retry: 3,
     retryDelay: attemptIndex => {
@@ -69,7 +77,7 @@ const queryClient = new QueryClient({
       console.log(\`Retrying in \${delay}ms (attempt \${attemptIndex + 1})\`);
       return delay;
     },
-    
+
     // Network timeout for TV environments
     timeout: 10000,                     // 10 second timeout
   }
@@ -95,15 +103,20 @@ if (typeof window !== 'undefined') {
 
       {/* Query Keys */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Query Keys</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Query keys uniquely identify your queries and are used for caching, invalidation, and refetching.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Query Keys
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Query keys uniquely identify your queries and are used for caching,
+          invalidation, and refetching.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Simple Keys</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              Simple Keys
+            </h3>
+            <CodePreview
               code={`// String keys for simple queries
 useQuery('movies', fetchMovies);
 useQuery('user-profile', fetchUserProfile);
@@ -113,8 +126,8 @@ useQuery('tv-channels', fetchChannels);`}
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Array Keys</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Array Keys</h3>
+            <CodePreview
               code={`// Array keys for complex queries with parameters
 useQuery(['movie', movieId], () => fetchMovie(movieId));
 useQuery(['movies', { genre: 'action', year: 2024 }], () => fetchMovies({ genre: 'action', year: 2024 }));
@@ -129,16 +142,28 @@ useQuery(['content', 'tv-shows', 'season', showId, seasonNumber], () => fetchSea
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Key Best Practices</h3>
-            <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4 rounded-lg">
+            <h3 className="mb-3 text-lg font-semibold">Key Best Practices</h3>
+            <div className="rounded-lg border-l-4 border-blue-400 bg-blue-50 p-4 dark:border-blue-500 dark:bg-blue-900/20">
               <div className="space-y-2 text-blue-800 dark:text-blue-300">
-                <p>• <strong>Hierarchical:</strong> Structure keys from general to specific</p>
-                <p>• <strong>Consistent:</strong> Use the same key format across your app</p>
-                <p>• <strong>Descriptive:</strong> Make keys readable and meaningful</p>
-                <p>• <strong>Serializable:</strong> Ensure key objects can be serialized</p>
+                <p>
+                  • <strong>Hierarchical:</strong> Structure keys from general
+                  to specific
+                </p>
+                <p>
+                  • <strong>Consistent:</strong> Use the same key format across
+                  your app
+                </p>
+                <p>
+                  • <strong>Descriptive:</strong> Make keys readable and
+                  meaningful
+                </p>
+                <p>
+                  • <strong>Serializable:</strong> Ensure key objects can be
+                  serialized
+                </p>
               </div>
             </div>
-            <CodePreview 
+            <CodePreview
               code={`// Good: Hierarchical and descriptive
 const QUERY_KEYS = {
   movies: {
@@ -166,15 +191,18 @@ useQuery(QUERY_KEYS.movies.detail(123), () => fetchMovie(123));`}
 
       {/* Query Functions */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Query Functions</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Query functions are responsible for fetching your data. They should be pure functions that return a Promise.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Query Functions
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Query functions are responsible for fetching your data. They should be
+          pure functions that return a Promise.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Basic Query Function</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Basic Query Function</h3>
+            <CodePreview
               code={`// Simple fetch function
 const fetchMovies = async (): Promise<Movie[]> => {
   const response = await fetch('/api/movies');
@@ -187,10 +215,10 @@ const fetchMovies = async (): Promise<Movie[]> => {
 // Usage in component
 function MovieList() {
   const { data, error, status } = useQuery('movies', fetchMovies);
-  
+
   if (status === 'loading') return <div>Loading...</div>;
   if (status === 'error') return <div>Error: {error?.message}</div>;
-  
+
   return (
     <ul>
       {data?.map(movie => <li key={movie.id}>{movie.title}</li>)}
@@ -202,8 +230,10 @@ function MovieList() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Parameterized Query Function</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Parameterized Query Function
+            </h3>
+            <CodePreview
               code={`// Query function with parameters
 const fetchMovie = async (id: number): Promise<Movie> => {
   const response = await fetch(\`/api/movies/\${id}\`);
@@ -221,7 +251,7 @@ const fetchMovies = async (filters: MovieFilters): Promise<MovieResponse> => {
     page: filters.page?.toString() || '1',
     limit: filters.limit?.toString() || '20'
   });
-  
+
   const response = await fetch(\`/api/movies?\${params}\`);
   if (!response.ok) {
     throw new Error('Failed to fetch movies');
@@ -235,7 +265,7 @@ function MovieDetail({ movieId }: { movieId: number }) {
     ['movie', movieId],
     () => fetchMovie(movieId)
   );
-  
+
   return <div>{movie?.title}</div>;
 }
 
@@ -244,7 +274,7 @@ function FilteredMovies({ filters }: { filters: MovieFilters }) {
     ['movies', filters],
     () => fetchMovies(filters)
   );
-  
+
   return <div>{data?.movies.length} movies found</div>;
 }`}
               language="tsx"
@@ -252,8 +282,10 @@ function FilteredMovies({ filters }: { filters: MovieFilters }) {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">XHR Fetcher for Legacy TV Support</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              XHR Fetcher for Legacy TV Support
+            </h3>
+            <CodePreview
               code={`// Import XHR fetcher for older Smart TV compatibility
 import { xhrFetcher, tvFetch } from '@smart-tv/query';
 
@@ -289,7 +321,7 @@ const fetchMovieWithProgress = async (id: number): Promise<Movie> => {
   if (!response.ok) {
     throw new Error(\`Failed to fetch movie \${id}: \${response.status} \${response.statusText}\`);
   }
-  
+
   return response.json();
 };
 
@@ -310,7 +342,7 @@ const createWatchlistItemXHR = async (movieId: number): Promise<WatchlistItem> =
   if (!response.ok) {
     throw new Error('Failed to add to watchlist');
   }
-  
+
   return response.json();
 };
 
@@ -351,8 +383,10 @@ const legacyQuery = useQuery(['movies-legacy'], legacyFetch);`}
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Error Handling in Query Functions</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Error Handling in Query Functions
+            </h3>
+            <CodePreview
               code={`// Robust error handling
 const fetchWithRetry = async (url: string, options?: RequestInit): Promise<any> => {
   const response = await fetch(url, {
@@ -366,7 +400,7 @@ const fetchWithRetry = async (url: string, options?: RequestInit): Promise<any> 
   // Handle different error types
   if (!response.ok) {
     let errorMessage = 'Network request failed';
-    
+
     try {
       const errorData = await response.json();
       errorMessage = errorData.message || errorMessage;
@@ -374,7 +408,7 @@ const fetchWithRetry = async (url: string, options?: RequestInit): Promise<any> 
       // If response is not JSON, use status text
       errorMessage = response.statusText || errorMessage;
     }
-    
+
     // Throw error with status for better error handling
     const error = new Error(errorMessage) as any;
     error.status = response.status;
@@ -411,9 +445,9 @@ function MovieDetailsWithError({ movieId }: { movieId: number }) {
       retryDelay: 1000, // Wait 1 second between retries
     }
   );
-  
+
   if (status === 'loading') return <div>Loading movie details...</div>;
-  
+
   if (status === 'error') {
     return (
       <div className="error-container">
@@ -422,7 +456,7 @@ function MovieDetailsWithError({ movieId }: { movieId: number }) {
       </div>
     );
   }
-  
+
   return <div>{data?.title}</div>;
 }`}
               language="tsx"
@@ -433,15 +467,18 @@ function MovieDetailsWithError({ movieId }: { movieId: number }) {
 
       {/* Query Options */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Query Options</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Customize query behavior with various options to optimize performance and user experience.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Query Options
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Customize query behavior with various options to optimize performance
+          and user experience.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Caching Options</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Caching Options</h3>
+            <CodePreview
               code={`// Custom caching behavior
 useQuery('trending-movies', fetchTrendingMovies, {
   staleTime: 15 * 60 * 1000,    // Fresh for 15 minutes
@@ -471,8 +508,10 @@ useQuery('app-config', fetchAppConfig, {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Loading States & Placeholders</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Loading States & Placeholders
+            </h3>
+            <CodePreview
               code={`// Initial data and placeholders
 useQuery('user-preferences', fetchUserPreferences, {
   initialData: {
@@ -482,7 +521,7 @@ useQuery('user-preferences', fetchUserPreferences, {
   },
   placeholderData: {
     theme: 'dark',
-    language: 'en', 
+    language: 'en',
     autoplay: false
   }
 });
@@ -511,8 +550,8 @@ function MovieList({ genre }: { genre: string }) {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Conditional Queries</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Conditional Queries</h3>
+            <CodePreview
               code={`// Enable/disable queries conditionally
 function UserDashboard({ userId }: { userId?: number }) {
   // Only fetch user data if userId is available
@@ -549,7 +588,7 @@ function UserDashboard({ userId }: { userId?: number }) {
 // Query based on app state
 function ContentFeed() {
   const { isOnline } = useNetworkStatus();
-  
+
   const { data } = useQuery(
     'content-feed',
     fetchContentFeed,
@@ -573,15 +612,18 @@ function ContentFeed() {
 
       {/* Query Invalidation */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Query Invalidation</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
-          Manually invalidate and refetch queries when data changes or after mutations.
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Query Invalidation
+        </h2>
+        <p className="mb-4 text-gray-600 dark:text-gray-300">
+          Manually invalidate and refetch queries when data changes or after
+          mutations.
         </p>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Manual Invalidation</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">Manual Invalidation</h3>
+            <CodePreview
               code={`import { useQueryClient } from '@smart-tv/query';
 
 function MovieManager() {
@@ -590,13 +632,13 @@ function MovieManager() {
   const handleMovieUpdate = async (movieId: number) => {
     // Update movie on server
     await updateMovie(movieId);
-    
+
     // Invalidate specific movie query
     await queryClient.invalidateQueries(['movie', movieId]);
-    
+
     // Invalidate all movie-related queries
     await queryClient.invalidateQueries(['movies']);
-    
+
     // Invalidate queries by pattern
     await queryClient.invalidateQueries({
       queryKey: ['movies'],
@@ -633,12 +675,14 @@ function MovieManager() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Automatic Invalidation</h3>
-            <CodePreview 
+            <h3 className="mb-3 text-lg font-semibold">
+              Automatic Invalidation
+            </h3>
+            <CodePreview
               code={`// Invalidate queries after successful mutations
 const useAddMovie = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation(
     (newMovie: CreateMovieRequest) => createMovie(newMovie),
     {
@@ -656,18 +700,18 @@ const useAddMovie = () => {
 // Smart invalidation based on mutation result
 const useUpdateMovie = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation(
-    ({ id, updates }: { id: number; updates: Partial<Movie> }) => 
+    ({ id, updates }: { id: number; updates: Partial<Movie> }) =>
       updateMovie(id, updates),
     {
       onSuccess: (updatedMovie, { id }) => {
         // Update the specific movie in cache
         queryClient.setQueryData(['movie', id], updatedMovie);
-        
+
         // Invalidate movie lists to show updated data
         queryClient.invalidateQueries(['movies']);
-        
+
         // If genre changed, invalidate genre-specific queries
         if (updates.genre) {
           queryClient.invalidateQueries(['movies', 'genre']);
@@ -684,32 +728,56 @@ const useUpdateMovie = () => {
 
       {/* Performance Tips */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Performance Tips</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          Performance Tips
+        </h2>
         <div className="space-y-4">
-          <div className="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-400 dark:border-green-500 p-4 rounded-lg">
-            <h3 className="font-semibold text-green-900 dark:text-green-200 mb-2">Smart TV Optimizations</h3>
-            <ul className="text-green-800 dark:text-green-300 text-sm space-y-1">
-              <li>• Use longer <code className="bg-green-100 px-1 rounded">staleTime</code> for better TV performance</li>
-              <li>• Disable <code className="bg-green-100 px-1 rounded">refetchOnWindowFocus</code> for TV apps</li>
+          <div className="rounded-lg border-l-4 border-green-400 bg-green-50 p-4 dark:border-green-500 dark:bg-green-900/20">
+            <h3 className="mb-2 font-semibold text-green-900 dark:text-green-200">
+              Smart TV Optimizations
+            </h3>
+            <ul className="space-y-1 text-sm text-green-800 dark:text-green-300">
+              <li>
+                • Use longer{" "}
+                <code className="rounded bg-green-100 px-1">staleTime</code> for
+                better TV performance
+              </li>
+              <li>
+                • Disable{" "}
+                <code className="rounded bg-green-100 px-1">
+                  refetchOnWindowFocus
+                </code>{" "}
+                for TV apps
+              </li>
               <li>• Implement aggressive caching for content metadata</li>
-              <li>• Use <code className="bg-green-100 px-1 rounded">keepPreviousData</code> for smooth transitions</li>
+              <li>
+                • Use{" "}
+                <code className="rounded bg-green-100 px-1">
+                  keepPreviousData
+                </code>{" "}
+                for smooth transitions
+              </li>
               <li>• Cancel queries when device goes to sleep</li>
             </ul>
           </div>
-          
-          <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 dark:border-blue-500 p-4 rounded-lg">
-            <h3 className="font-semibold text-blue-900 dark:text-blue-200 mb-2">Query Key Strategies</h3>
-            <ul className="text-blue-800 dark:text-blue-300 text-sm space-y-1">
+
+          <div className="rounded-lg border-l-4 border-blue-400 bg-blue-50 p-4 dark:border-blue-500 dark:bg-blue-900/20">
+            <h3 className="mb-2 font-semibold text-blue-900 dark:text-blue-200">
+              Query Key Strategies
+            </h3>
+            <ul className="space-y-1 text-sm text-blue-800 dark:text-blue-300">
               <li>• Use hierarchical keys for better cache management</li>
               <li>• Keep query keys consistent across components</li>
               <li>• Use TypeScript for query key type safety</li>
               <li>• Create query key factories for complex apps</li>
             </ul>
           </div>
-          
-          <div className="bg-purple-50 dark:bg-purple-900/20 border-l-4 border-purple-400 dark:border-purple-500 p-4 rounded-lg">
-            <h3 className="font-semibold text-purple-900 mb-2">Error Handling</h3>
-            <ul className="text-purple-800 text-sm space-y-1">
+
+          <div className="rounded-lg border-l-4 border-purple-400 bg-purple-50 p-4 dark:border-purple-500 dark:bg-purple-900/20">
+            <h3 className="mb-2 font-semibold text-purple-900">
+              Error Handling
+            </h3>
+            <ul className="space-y-1 text-sm text-purple-800">
               <li>• Implement proper retry logic for network issues</li>
               <li>• Use error boundaries for graceful error handling</li>
               <li>• Provide fallback data for critical queries</li>

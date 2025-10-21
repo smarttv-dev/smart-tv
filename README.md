@@ -2,7 +2,7 @@
 
 A comprehensive toolkit for building Smart TV applications with React, TypeScript, and modern web technologies.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org/)
 [![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg)](https://pnpm.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
@@ -28,12 +28,12 @@ This monorepo contains the following packages:
 
 ### Published Packages (Available on npm)
 
-| Package | Version | Description | Documentation |
-|---------|---------|-------------|---------------|
-| [`@smart-tv/ui`](./packages/ui) | ![npm](https://img.shields.io/npm/v/@smart-tv/ui) | React components with navigation | [Docs](https://smart-tv-docs.vercel.app/components/ui) |
-| [`@smart-tv/player`](./packages/player) | ![npm](https://img.shields.io/npm/v/@smart-tv/player) | Video player with Shaka Player integration | [Docs](https://smart-tv-docs.vercel.app/components/player) |
-| [`@smart-tv/query`](./packages/query) | ![npm](https://img.shields.io/npm/v/@smart-tv/query) | Data fetching and caching utilities | [Docs](https://smart-tv-docs.vercel.app/components/query) |
-| [`create-smart-tv`](./packages/create-smart-tv) | ![npm](https://img.shields.io/npm/v/create-smart-tv-app) | CLI tool to scaffold Smart TV applications | [README](./packages/create-smart-tv) |
+| Package                                         | Version                                                  | Description                                | Documentation                                              |
+| ----------------------------------------------- | -------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------- |
+| [`@smart-tv/ui`](./packages/ui)                 | ![npm](https://img.shields.io/npm/v/@smart-tv/ui)        | React components with navigation           | [Docs](https://smart-tv-docs.vercel.app/components/ui)     |
+| [`@smart-tv/player`](./packages/player)         | ![npm](https://img.shields.io/npm/v/@smart-tv/player)    | Video player with Shaka Player integration | [Docs](https://smart-tv-docs.vercel.app/components/player) |
+| [`@smart-tv/query`](./packages/query)           | ![npm](https://img.shields.io/npm/v/@smart-tv/query)     | Data fetching and caching utilities        | [Docs](https://smart-tv-docs.vercel.app/components/query)  |
+| [`create-smart-tv`](./packages/create-smart-tv) | ![npm](https://img.shields.io/npm/v/create-smart-tv-app) | CLI tool to scaffold Smart TV applications | [README](./packages/create-smart-tv)                       |
 
 ### Internal Packages
 
@@ -85,8 +85,8 @@ yarn add @smart-tv/ui
 **Usage:**
 
 ```tsx
-import { AppProvider, RouterProvider, Route, Button } from '@smart-tv/ui'
-import '@smart-tv/ui/styles.css'
+import { AppProvider, RouterProvider, Route, Button } from "@smart-tv/ui";
+import "@smart-tv/ui/styles.css";
 
 function App() {
   return (
@@ -96,7 +96,7 @@ function App() {
         <Route path="/details/:id" component={DetailsPage} />
       </RouterProvider>
     </AppProvider>
-  )
+  );
 }
 ```
 
@@ -115,13 +115,13 @@ pnpm add @smart-tv/player @smart-tv/ui shaka-player
 **Usage:**
 
 ```tsx
-import { MediaProvider, VideoPlayer, PlayerController } from '@smart-tv/player'
-import '@smart-tv/player/styles.css'
+import { MediaProvider, VideoPlayer, PlayerController } from "@smart-tv/player";
+import "@smart-tv/player/styles.css";
 
 function App() {
   return (
     <MediaProvider>
-      <div className="relative w-full h-screen bg-black">
+      <div className="relative h-screen w-full bg-black">
         <VideoPlayer
           src="https://example.com/video.m3u8"
           poster="https://example.com/poster.jpg"
@@ -130,7 +130,7 @@ function App() {
         <PlayerController layout="netflix" />
       </div>
     </MediaProvider>
-  )
+  );
 }
 ```
 
@@ -149,29 +149,28 @@ pnpm add @smart-tv/query
 **Usage:**
 
 ```tsx
-import { QueryClient, QueryClientProvider, useQuery } from '@smart-tv/query'
+import { QueryClient, QueryClientProvider, useQuery } from "@smart-tv/query";
 
 const queryClient = new QueryClient({
   staleTime: 1000 * 60 * 5,
   cacheTime: 1000 * 60 * 10,
-})
+});
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MovieList />
     </QueryClientProvider>
-  )
+  );
 }
 
 function MovieList() {
-  const { data, status } = useQuery(
-    ['movies'],
-    () => fetch('/api/movies').then(res => res.json())
-  )
+  const { data, status } = useQuery(["movies"], () =>
+    fetch("/api/movies").then((res) => res.json())
+  );
 
-  if (status === 'loading') return <div>Loading...</div>
-  if (status === 'error') return <div>Error loading movies</div>
+  if (status === "loading") return <div>Loading...</div>;
+  if (status === "error") return <div>Error loading movies</div>;
 
   return (
     <div>
@@ -179,7 +178,7 @@ function MovieList() {
         <MovieCard key={movie.id} movie={movie} />
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -190,32 +189,38 @@ function MovieList() {
 Here's a complete example showing all three packages working together:
 
 ```tsx
-import { AppProvider, RouterProvider, Route, Screen, Grid, Card } from '@smart-tv/ui'
-import { QueryClient, QueryClientProvider, useQuery } from '@smart-tv/query'
-import { MediaProvider, VideoPlayer, PlayerController } from '@smart-tv/player'
-import '@smart-tv/ui/styles.css'
-import '@smart-tv/player/styles.css'
+import {
+  AppProvider,
+  RouterProvider,
+  Route,
+  Screen,
+  Grid,
+  Card,
+} from "@smart-tv/ui";
+import { QueryClient, QueryClientProvider, useQuery } from "@smart-tv/query";
+import { MediaProvider, VideoPlayer, PlayerController } from "@smart-tv/player";
+import "@smart-tv/ui/styles.css";
+import "@smart-tv/player/styles.css";
 
 // Initialize query client
 const queryClient = new QueryClient({
   staleTime: 1000 * 60 * 5,
   cacheTime: 1000 * 60 * 10,
-})
+});
 
 // Movie List Component
 function MovieList() {
-  const { data, status } = useQuery(
-    ['movies'],
-    () => fetch('/api/movies').then(res => res.json())
-  )
+  const { data, status } = useQuery(["movies"], () =>
+    fetch("/api/movies").then((res) => res.json())
+  );
 
-  if (status === 'loading') return <div>Loading movies...</div>
-  if (status === 'error') return <div>Error loading movies</div>
+  if (status === "loading") return <div>Loading movies...</div>;
+  if (status === "error") return <div>Error loading movies</div>;
 
   return (
     <Screen id="home" title="Movies">
       <Grid columns={4} gap={20}>
-        {data.map(movie => (
+        {data.map((movie) => (
           <Card
             key={movie.id}
             focusKey={`movie-${movie.id}`}
@@ -227,24 +232,19 @@ function MovieList() {
         ))}
       </Grid>
     </Screen>
-  )
+  );
 }
 
 // Movie Player Component
 function MoviePlayer({ movieId }) {
-  const { data: movie } = useQuery(
-    ['movie', movieId],
-    () => fetch(`/api/movies/${movieId}`).then(res => res.json())
-  )
+  const { data: movie } = useQuery(["movie", movieId], () =>
+    fetch(`/api/movies/${movieId}`).then((res) => res.json())
+  );
 
   return (
     <MediaProvider>
-      <div className="relative w-full h-screen bg-black">
-        <VideoPlayer
-          src={movie.videoUrl}
-          poster={movie.poster}
-          autoPlay
-        />
+      <div className="relative h-screen w-full bg-black">
+        <VideoPlayer src={movie.videoUrl} poster={movie.poster} autoPlay />
         <PlayerController
           layout="netflix"
           title={movie.title}
@@ -252,7 +252,7 @@ function MoviePlayer({ movieId }) {
         />
       </div>
     </MediaProvider>
-  )
+  );
 }
 
 // Main App
@@ -266,13 +266,14 @@ function App() {
         </RouterProvider>
       </QueryClientProvider>
     </AppProvider>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 This example demonstrates:
+
 - **navigation** with AppProvider and RouterProvider
 - **Data fetching** with useQuery
 - **Video playback** with VideoPlayer and PlayerController
@@ -297,7 +298,7 @@ smart-tv/
 ├── CODE_OF_CONDUCT.md     # Code of conduct
 ├── SECURITY.md            # Security policy
 ├── CHANGELOG.md           # Version history
-└── LICENSE                # MIT License
+└── LICENSE                # BSD 3-Clause License
 ```
 
 ## 🛠️ Development
@@ -310,36 +311,40 @@ smart-tv/
 ### Setup
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/smarttv-dev/smart-tv.git
 cd smart-tv
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 3. Build all packages:
+
 ```bash
 pnpm build
 ```
 
 4. Start development:
+
 ```bash
 pnpm dev
 ```
 
 ### Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `pnpm dev` | Start development mode for all apps |
-| `pnpm build` | Build all packages and apps |
-| `pnpm lint` | Lint all packages |
-| `pnpm check-types` | Type-check all packages |
-| `pnpm format` | Format code with Prettier |
-| `pnpm clean` | Clean all build artifacts |
+| Script             | Description                         |
+| ------------------ | ----------------------------------- |
+| `pnpm dev`         | Start development mode for all apps |
+| `pnpm build`       | Build all packages and apps         |
+| `pnpm lint`        | Lint all packages                   |
+| `pnpm check-types` | Type-check all packages             |
+| `pnpm format`      | Format code with Prettier           |
+| `pnpm clean`       | Clean all build artifacts           |
 
 ## 📖 Documentation
 
@@ -439,6 +444,7 @@ Security is a top priority. If you discover a security vulnerability, please fol
 ## 🗺️ Roadmap
 
 ### Completed
+
 - [x] Core UI components with navigation
 - [x] Video player with Shaka Player integration
 - [x] Data fetching and caching utilities
@@ -446,6 +452,7 @@ Security is a top priority. If you discover a security vulnerability, please fol
 - [x] Comprehensive documentation
 
 ### Planned Features
+
 - [ ] Enhanced keyboard shortcuts and accessibility
 - [ ] Additional Smart TV platform integrations (Roku, Apple TV)
 - [ ] Advanced DRM and content protection features
@@ -495,9 +502,10 @@ For business inquiries, partnership opportunities, or commercial support, please
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE) file for details.
+This project is licensed under the **BSD 3-Clause License** - see the [LICENSE](./LICENSE) file for details.
 
 ### What this means:
+
 - ✅ Commercial use allowed
 - ✅ Modification allowed
 - ✅ Distribution allowed

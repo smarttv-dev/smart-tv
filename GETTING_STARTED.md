@@ -87,19 +87,19 @@ npm install react react-dom
 **App.tsx**
 
 ```tsx
-import React from 'react';
-import { Player } from '@smart-tv/player';
-import { QueryClient, QueryClientProvider, useQuery } from '@smart-tv/query';
-import '@smart-tv/player/styles.css';
+import React from "react";
+import { Player } from "@smart-tv/player";
+import { QueryClient, QueryClientProvider, useQuery } from "@smart-tv/query";
+import "@smart-tv/player/styles.css";
 
 // Create a client
 const queryClient = new QueryClient();
 
 function VideoPage() {
   const { data, loading } = useQuery({
-    queryKey: ['video-info'],
+    queryKey: ["video-info"],
     queryFn: async () => {
-      const response = await fetch('/api/video');
+      const response = await fetch("/api/video");
       return response.json();
     },
   });
@@ -142,8 +142,8 @@ Open your browser at `http://localhost:5173` (or the port shown in your terminal
 ### Using the Player
 
 ```tsx
-import { Player } from '@smart-tv/player';
-import '@smart-tv/player/styles.css';
+import { Player } from "@smart-tv/player";
+import "@smart-tv/player/styles.css";
 
 function MyPlayer() {
   return (
@@ -151,9 +151,9 @@ function MyPlayer() {
       src="https://example.com/video.m3u8"
       poster="https://example.com/poster.jpg"
       autoPlay={false}
-      onPlay={() => console.log('Playing')}
-      onPause={() => console.log('Paused')}
-      onEnded={() => console.log('Ended')}
+      onPlay={() => console.log("Playing")}
+      onPause={() => console.log("Paused")}
+      onEnded={() => console.log("Ended")}
     />
   );
 }
@@ -162,13 +162,13 @@ function MyPlayer() {
 ### Using the Query Hook
 
 ```tsx
-import { useQuery } from '@smart-tv/query';
+import { useQuery } from "@smart-tv/query";
 
 function MovieList() {
   const { data, loading, error, refetch } = useQuery({
-    queryKey: ['movies'],
+    queryKey: ["movies"],
     queryFn: async () => {
-      const response = await fetch('/api/movies');
+      const response = await fetch("/api/movies");
       return response.json();
     },
   });
@@ -193,29 +193,29 @@ function MovieList() {
 ### Using Mutations
 
 ```tsx
-import { useMutation } from '@smart-tv/query';
+import { useMutation } from "@smart-tv/query";
 
 function AddMovie() {
   const mutation = useMutation({
     mutationFn: async (newMovie) => {
-      const response = await fetch('/api/movies', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/movies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newMovie),
       });
       return response.json();
     },
     onSuccess: () => {
-      console.log('Movie added successfully!');
+      console.log("Movie added successfully!");
     },
   });
 
   return (
     <button
-      onClick={() => mutation.mutate({ title: 'New Movie', year: 2025 })}
+      onClick={() => mutation.mutate({ title: "New Movie", year: 2025 })}
       disabled={mutation.loading}
     >
-      {mutation.loading ? 'Adding...' : 'Add Movie'}
+      {mutation.loading ? "Adding..." : "Add Movie"}
     </button>
   );
 }
@@ -294,6 +294,7 @@ npm run build
 ```
 
 Recommended hosting providers:
+
 - Vercel
 - Netlify
 - AWS S3 + CloudFront

@@ -136,6 +136,9 @@ importers:
       '@smart-tv/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       next:
         specifier: ^15.4.2
         version: 15.5.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -148,6 +151,9 @@ importers:
       react-dom:
         specifier: ^19.1.0
         version: 19.1.1(react@19.1.1)
+      tailwind-merge:
+        specifier: ^3.3.1
+        version: 3.3.1
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^15.4.6

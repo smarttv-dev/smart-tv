@@ -6,18 +6,21 @@ This document summarizes all the community standards, guidelines, and publishing
 
 ### 1. Core Documentation Files
 
-#### LICENSE (MIT)
-- Standard MIT license for open-source projects
+#### LICENSE (BSD 3-Clause)
+
+- Standard BSD 3-Clause license for open-source projects
 - Allows commercial use, modification, distribution
 - Location: `/LICENSE`
 
 #### CODE_OF_CONDUCT.md
+
 - Contributor Covenant Code of Conduct v2.1
 - Defines community standards and behavior expectations
 - Outlines enforcement process
 - Location: `/CODE_OF_CONDUCT.md`
 
 #### CONTRIBUTING.md
+
 - Comprehensive contribution guidelines
 - Development setup instructions
 - Coding standards and best practices
@@ -26,6 +29,7 @@ This document summarizes all the community standards, guidelines, and publishing
 - Location: `/CONTRIBUTING.md`
 
 #### SECURITY.md
+
 - Security policy and vulnerability reporting process
 - Supported versions
 - Security best practices for users
@@ -33,11 +37,13 @@ This document summarizes all the community standards, guidelines, and publishing
 - Location: `/SECURITY.md`
 
 #### CHANGELOG.md
+
 - Version history following Keep a Changelog format
 - Semantic versioning adherence
 - Location: `/CHANGELOG.md`
 
 #### PUBLISHING.md
+
 - Complete publishing guide for npm packages
 - Pre-publishing checklist
 - Step-by-step publishing instructions
@@ -46,6 +52,7 @@ This document summarizes all the community standards, guidelines, and publishing
 - Location: `/PUBLISHING.md`
 
 #### GETTING_STARTED.md
+
 - Quick start guide for new users
 - Installation instructions
 - Basic usage examples
@@ -58,6 +65,7 @@ This document summarizes all the community standards, guidelines, and publishing
 #### GitHub Actions Workflows
 
 **CI Workflow** (`.github/workflows/ci.yml`)
+
 - Runs on push and pull requests
 - Lints code
 - Type checks
@@ -65,6 +73,7 @@ This document summarizes all the community standards, guidelines, and publishing
 - Runs tests
 
 **Publish Workflow** (`.github/workflows/publish.yml`)
+
 - Manual workflow dispatch
 - Publishes to npm
 - Creates git tags
@@ -73,22 +82,26 @@ This document summarizes all the community standards, guidelines, and publishing
 #### Issue Templates
 
 **Bug Report** (`.github/ISSUE_TEMPLATE/bug_report.md`)
+
 - Structured bug reporting
 - Environment details collection
 - Reproduction steps
 
 **Feature Request** (`.github/ISSUE_TEMPLATE/feature_request.md`)
+
 - Feature proposals
 - Use case descriptions
 - Implementation willingness
 
 #### Pull Request Template
+
 - PR description template
 - Checklist for contributors
 - Type of change selection
 - Location: `.github/pull_request_template.md`
 
 #### Release Checklist
+
 - Complete pre-release checklist
 - Publishing steps
 - Post-release tasks
@@ -98,7 +111,9 @@ This document summarizes all the community standards, guidelines, and publishing
 ### 3. Package Configuration Updates
 
 #### Root package.json
+
 Added scripts:
+
 - `clean` - Clean all build artifacts
 - `test` - Run all tests
 - `version:patch/minor/major` - Version bumping
@@ -109,6 +124,7 @@ Added scripts:
 - `publish:cli` - Publish CLI only
 
 Added metadata:
+
 - Description
 - Author
 - License
@@ -117,7 +133,9 @@ Added metadata:
 - Homepage
 
 #### @smart-tv/player package.json
+
 Updates:
+
 - ✅ Added license, author, repository fields
 - ✅ Added bug tracker and homepage URLs
 - ✅ Enhanced keywords for npm discoverability
@@ -126,7 +144,9 @@ Updates:
 - ✅ Updated files array to include LICENSE
 
 #### @smart-tv/query package.json
+
 Updates:
+
 - ✅ Removed `private: true` flag (now publishable)
 - ✅ Added complete metadata (author, license, repository)
 - ✅ Added exports field for better module resolution
@@ -136,7 +156,9 @@ Updates:
 - ✅ Added dev and clean scripts
 
 #### create-smart-tv-app package.json
+
 Updates:
+
 - ✅ Enhanced description
 - ✅ Added bug tracker and homepage URLs
 - ✅ Added more keywords for discoverability
@@ -147,6 +169,7 @@ Updates:
 ### 4. npm Configuration
 
 #### .npmrc
+
 - Workspace protocol enabled
 - Dependency hoisting configured
 - Public access for scoped packages
@@ -155,6 +178,7 @@ Updates:
 ### 5. Updated Main README.md
 
 The main README now includes:
+
 - ✅ Professional project description
 - ✅ Feature highlights with emojis
 - ✅ Package overview table
@@ -203,6 +227,7 @@ pnpm test
 For each package, verify:
 
 #### @smart-tv/player
+
 ```bash
 cd packages/player
 # Build and verify
@@ -215,6 +240,7 @@ npm pack --dry-run
 ```
 
 #### @smart-tv/query
+
 ```bash
 cd packages/query
 # Remove private flag if still present
@@ -228,6 +254,7 @@ npm pack --dry-run
 ```
 
 #### create-smart-tv-app
+
 ```bash
 cd packages/create-smart-tv
 # Verify CLI works
@@ -241,12 +268,14 @@ npm pack --dry-run
 ### 3. Publishing Commands
 
 #### Option 1: Publish All at Once
+
 ```bash
 # From root directory
 pnpm publish:packages
 ```
 
 #### Option 2: Publish Individually
+
 ```bash
 # Player
 pnpm publish:player
@@ -259,6 +288,7 @@ pnpm publish:cli
 ```
 
 #### Option 3: Manual Publishing
+
 ```bash
 cd packages/player
 npm publish --access public
@@ -291,12 +321,14 @@ npm install @smart-tv/player@latest
 To enable automated publishing:
 
 ### 1. Generate npm Token
+
 1. Go to https://www.npmjs.com/settings/YOUR_USERNAME/tokens
 2. Click "Generate New Token"
 3. Select "Automation" type
 4. Copy the token
 
 ### 2. Add Token to GitHub
+
 1. Go to your repository on GitHub
 2. Settings → Secrets and variables → Actions
 3. Click "New repository secret"
@@ -305,6 +337,7 @@ To enable automated publishing:
 6. Click "Add secret"
 
 ### 3. Using GitHub Actions
+
 1. Go to "Actions" tab
 2. Select "Publish Packages" workflow
 3. Click "Run workflow"
@@ -381,6 +414,7 @@ pnpm publish:cli        # Publish CLI only
 ## 🆘 Support
 
 For questions about:
+
 - **Publishing**: See [PUBLISHING.md](./PUBLISHING.md)
 - **Contributing**: See [CONTRIBUTING.md](./CONTRIBUTING.md)
 - **Getting Started**: See [GETTING_STARTED.md](./GETTING_STARTED.md)

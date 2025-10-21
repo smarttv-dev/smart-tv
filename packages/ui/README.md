@@ -34,7 +34,7 @@ yarn add @smart-tv/ui
 Don't forget to import the CSS file in your app:
 
 ```ts
-import '@smart-tv/ui/styles.css'
+import "@smart-tv/ui/styles.css";
 ```
 
 ## Quick Start
@@ -44,25 +44,27 @@ import '@smart-tv/ui/styles.css'
 Wrap your app with the required providers. **`AppProvider` is mandatory** and must be the outermost provider:
 
 ```tsx
-import { AppProvider, RouterProvider, Route, Button } from '@smart-tv/ui'
-import '@smart-tv/ui/styles.css'
+import { AppProvider, RouterProvider, Route, Button } from "@smart-tv/ui";
+import "@smart-tv/ui/styles.css";
 
 function App() {
   return (
-    <AppProvider init={{
-      debug: false,
-      visualDebug: false,
-      distanceCalculationMethod: 'center',
-    }}>
+    <AppProvider
+      init={{
+        debug: false,
+        visualDebug: false,
+        distanceCalculationMethod: "center",
+      }}
+    >
       <RouterProvider>
         <Route path="/" component={HomePage} />
         <Route path="/details/:id" component={DetailsPage} />
       </RouterProvider>
     </AppProvider>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 ### With Query Client (for data fetching)
@@ -70,31 +72,33 @@ export default App
 If you're using `@smart-tv/query` for data management:
 
 ```tsx
-import { QueryClient, QueryClientProvider } from '@smart-tv/query'
-import { AppProvider, RouterProvider, Route } from '@smart-tv/ui'
-import '@smart-tv/ui/styles.css'
+import { QueryClient, QueryClientProvider } from "@smart-tv/query";
+import { AppProvider, RouterProvider, Route } from "@smart-tv/ui";
+import "@smart-tv/ui/styles.css";
 
 const queryClient = new QueryClient({
   staleTime: 1000 * 60 * 5, // 5 minutes
   cacheTime: 1000 * 60 * 10, // 10 minutes
-})
+});
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AppProvider init={{
-        debug: false,
-        visualDebug: false,
-      }}>
+      <AppProvider
+        init={{
+          debug: false,
+          visualDebug: false,
+        }}
+      >
         <RouterProvider>
           <Route path="/" component={HomePage} />
         </RouterProvider>
       </AppProvider>
     </QueryClientProvider>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 ## Core Providers
@@ -104,19 +108,21 @@ export default App
 The main provider that initializes the spatial navigation system. **This provider is mandatory** for the library to work.
 
 ```tsx
-import { AppProvider } from '@smart-tv/ui'
+import { AppProvider } from "@smart-tv/ui";
 
-<AppProvider init={{
-  debug: false,              // Enable debug logging
-  visualDebug: false,        // Show visual focus indicators
-  nativeMode: false,         // Use native focus behavior
-  throttle: 0,              // Throttle navigation in milliseconds
-  shouldFocusDOMNode: true, // Focus actual DOM nodes
-  rtl: false,               // Right-to-left support
-  distanceCalculationMethod: 'center', // 'center' | 'edges' | 'corners'
-}}>
+<AppProvider
+  init={{
+    debug: false, // Enable debug logging
+    visualDebug: false, // Show visual focus indicators
+    nativeMode: false, // Use native focus behavior
+    throttle: 0, // Throttle navigation in milliseconds
+    shouldFocusDOMNode: true, // Focus actual DOM nodes
+    rtl: false, // Right-to-left support
+    distanceCalculationMethod: "center", // 'center' | 'edges' | 'corners'
+  }}
+>
   {/* Your app */}
-</AppProvider>
+</AppProvider>;
 ```
 
 ### RouterProvider (Recommended)
@@ -124,16 +130,17 @@ import { AppProvider } from '@smart-tv/ui'
 Built-in routing system with navigation stack management:
 
 ```tsx
-import { RouterProvider, Route, Link, useRouter } from '@smart-tv/ui'
+import { RouterProvider, Route, Link, useRouter } from "@smart-tv/ui";
 
 <RouterProvider initial="/" maxStack={50}>
   <Route path="/" component={HomePage} />
   <Route path="/movies" component={MoviesPage} />
   <Route path="/movie/:id" component={MovieDetails} />
-</RouterProvider>
+</RouterProvider>;
 ```
 
 **Router hooks:**
+
 - `useRouter()` - Access navigation methods (push, back, replace)
 - `useParams()` - Get route parameters
 - `useLocation()` - Get current route state
@@ -160,135 +167,142 @@ const queryClient = new QueryClient({
 ### Core Components
 
 #### Screen
+
 Main screen wrapper component:
+
 ```tsx
-import { Screen } from '@smart-tv/ui'
+import { Screen } from "@smart-tv/ui";
 
 <Screen id="home" title="Home">
   {/* Screen content */}
-</Screen>
+</Screen>;
 ```
 
 #### Section
-Focusable section within a screen:
-```tsx
-import { Section } from '@smart-tv/ui'
 
-<Section focusKey="hero-section">
-  {/* Section content */}
-</Section>
+Focusable section within a screen:
+
+```tsx
+import { Section } from "@smart-tv/ui";
+
+<Section focusKey="hero-section">{/* Section content */}</Section>;
 ```
 
 ### UI Components
 
 #### Button
-```tsx
-import { Button } from '@smart-tv/ui'
 
-<Button 
-  onPress={() => console.log('Pressed')}
-  variant="primary"
->
+```tsx
+import { Button } from "@smart-tv/ui";
+
+<Button onPress={() => console.log("Pressed")} variant="primary">
   Play Now
-</Button>
+</Button>;
 ```
 
 #### Card
-```tsx
-import { Card } from '@smart-tv/ui'
 
-<Card 
-  focusKey="card-1"
-  onPress={() => navigate('/details/1')}
->
+```tsx
+import { Card } from "@smart-tv/ui";
+
+<Card focusKey="card-1" onPress={() => navigate("/details/1")}>
   <img src="poster.jpg" alt="Movie" />
   <h3>Movie Title</h3>
-</Card>
+</Card>;
 ```
 
 #### Menu & Navbar
+
 ```tsx
-import { Menu, Navbar } from '@smart-tv/ui'
+import { Menu, Navbar } from "@smart-tv/ui";
 
 <Navbar>
   <Menu items={menuItems} />
-</Navbar>
+</Navbar>;
 ```
 
 #### Sidebar
+
 ```tsx
-import { Sidebar } from '@smart-tv/ui'
+import { Sidebar } from "@smart-tv/ui";
 
 <Sidebar position="left" width={250}>
   {/* Sidebar content */}
-</Sidebar>
+</Sidebar>;
 ```
 
 ### Layout Components
 
 #### Grid
+
 ```tsx
-import { Grid } from '@smart-tv/ui'
+import { Grid } from "@smart-tv/ui";
 
 <Grid columns={4} gap={16}>
-  {items.map(item => (
+  {items.map((item) => (
     <Card key={item.id} {...item} />
   ))}
-</Grid>
+</Grid>;
 ```
 
 #### Row
+
 ```tsx
-import { Row } from '@smart-tv/ui'
+import { Row } from "@smart-tv/ui";
 
 <Row gap={12} align="center">
   {/* Row items */}
-</Row>
+</Row>;
 ```
 
 ### Overlay Components
 
 #### Dialog
+
 ```tsx
-import { Dialog } from '@smart-tv/ui'
+import { Dialog } from "@smart-tv/ui";
 
 <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
   <h2>Confirm Action</h2>
   <p>Are you sure?</p>
   <Button onPress={handleConfirm}>Yes</Button>
-</Dialog>
+</Dialog>;
 ```
 
 #### Drawer
+
 ```tsx
-import { Drawer } from '@smart-tv/ui'
+import { Drawer } from "@smart-tv/ui";
 
 <Drawer open={isOpen} position="right">
   {/* Drawer content */}
-</Drawer>
+</Drawer>;
 ```
 
 #### Snackbar
-```tsx
-import { Snackbar } from '@smart-tv/ui'
 
-<Snackbar message="Action completed" duration={3000} />
+```tsx
+import { Snackbar } from "@smart-tv/ui";
+
+<Snackbar message="Action completed" duration={3000} />;
 ```
 
 #### Tooltip
+
 ```tsx
-import { Tooltip } from '@smart-tv/ui'
+import { Tooltip } from "@smart-tv/ui";
 
 <Tooltip content="More information">
   <Button>Help</Button>
-</Tooltip>
+</Tooltip>;
 ```
 
 ### Search Components
 
 #### Keyboard (On-Screen Keyboard)
+
 ```tsx
-import { Keyboard } from '@smart-tv/ui'
+import { Keyboard } from "@smart-tv/ui";
 
 <Keyboard
   value={searchQuery}
@@ -296,109 +310,112 @@ import { Keyboard } from '@smart-tv/ui'
   onSubmit={handleSearch}
   layout="qwerty" // 'qwerty' | 'abc' | 'numeric'
   theme="dark"
-/>
+/>;
 ```
 
 ## Hooks
 
 ### useFocusable
+
 Register a component as focusable:
 
 ```tsx
-import { useFocusable } from '@smart-tv/ui'
+import { useFocusable } from "@smart-tv/ui";
 
 function CustomComponent() {
   const { ref, focused } = useFocusable({
-    focusKey: 'my-component',
-    onEnterPress: () => console.log('Enter pressed'),
+    focusKey: "my-component",
+    onEnterPress: () => console.log("Enter pressed"),
     onArrowPress: (direction) => console.log(direction),
-    onFocus: () => console.log('Focused'),
-    onBlur: () => console.log('Blurred'),
-  })
+    onFocus: () => console.log("Focused"),
+    onBlur: () => console.log("Blurred"),
+  });
 
   return (
-    <div ref={ref} className={focused ? 'focused' : ''}>
+    <div ref={ref} className={focused ? "focused" : ""}>
       {/* Component content */}
     </div>
-  )
+  );
 }
 ```
 
 ### useFocusContext
+
 Access focus context in nested components:
 
 ```tsx
-import { useFocusContext } from '@smart-tv/ui'
+import { useFocusContext } from "@smart-tv/ui";
 
 function NestedComponent() {
-  const { focusKey, focused } = useFocusContext()
-  return <div>Focus Key: {focusKey}</div>
+  const { focusKey, focused } = useFocusContext();
+  return <div>Focus Key: {focusKey}</div>;
 }
 ```
 
 ### useRouter
+
 Navigate between routes:
 
 ```tsx
-import { useRouter } from '@smart-tv/ui'
+import { useRouter } from "@smart-tv/ui";
 
 function MovieCard() {
-  const router = useRouter()
+  const router = useRouter();
 
   const handlePress = () => {
-    router.push('/movie/123', { from: 'home' })
-  }
+    router.push("/movie/123", { from: "home" });
+  };
 
-  return <Button onPress={handlePress}>View Details</Button>
+  return <Button onPress={handlePress}>View Details</Button>;
 }
 ```
 
 ### useParams
+
 Access route parameters:
 
 ```tsx
-import { useParams } from '@smart-tv/ui'
+import { useParams } from "@smart-tv/ui";
 
 function MovieDetails() {
-  const { id } = useParams()
-  return <div>Movie ID: {id}</div>
+  const { id } = useParams();
+  return <div>Movie ID: {id}</div>;
 }
 ```
 
 ## Utilities
 
 ### measureLayout
+
 Measure component dimensions:
 
 ```tsx
-import { measureLayout } from '@smart-tv/ui'
+import { measureLayout } from "@smart-tv/ui";
 
-const layout = measureLayout(element)
+const layout = measureLayout(element);
 // { left, top, right, bottom, width, height, x, y }
 ```
 
 ### VisualDebugger
+
 Enable visual debugging during development:
 
 ```tsx
-import { VisualDebugger } from '@smart-tv/ui'
+import { VisualDebugger } from "@smart-tv/ui";
 
 // Enable in AppProvider
-<AppProvider init={{ visualDebug: true }}>
-  {/* Your app */}
-</AppProvider>
+<AppProvider init={{ visualDebug: true }}>{/* Your app */}</AppProvider>;
 ```
 
 ### WritingDirection
+
 Support for RTL layouts:
 
 ```tsx
-import { WritingDirection } from '@smart-tv/ui'
+import { WritingDirection } from "@smart-tv/ui";
 
 // Enable RTL
-<AppProvider init={{ rtl: true }}>
-  {/* Your app */}
-</AppProvider>
+<AppProvider init={{ rtl: true }}>{/* Your app */}</AppProvider>;
 ```
 
 ## Complete Example
@@ -406,25 +423,32 @@ import { WritingDirection } from '@smart-tv/ui'
 Here's a complete example showing all the main providers working together:
 
 ```tsx
-import { QueryClient, QueryClientProvider } from '@smart-tv/query'
-import { AppProvider, RouterProvider, Route, Screen, Grid, Card } from '@smart-tv/ui'
-import '@smart-tv/ui/styles.css'
+import { QueryClient, QueryClientProvider } from "@smart-tv/query";
+import {
+  AppProvider,
+  RouterProvider,
+  Route,
+  Screen,
+  Grid,
+  Card,
+} from "@smart-tv/ui";
+import "@smart-tv/ui/styles.css";
 
 const queryClient = new QueryClient({
   staleTime: 1000 * 60 * 5,
   cacheTime: 1000 * 60 * 10,
-})
+});
 
 function HomePage() {
   const movies = [
-    { id: 1, title: 'Movie 1', poster: '/poster1.jpg' },
-    { id: 2, title: 'Movie 2', poster: '/poster2.jpg' },
-  ]
+    { id: 1, title: "Movie 1", poster: "/poster1.jpg" },
+    { id: 2, title: "Movie 2", poster: "/poster2.jpg" },
+  ];
 
   return (
     <Screen id="home" title="Home">
       <Grid columns={4} gap={20}>
-        {movies.map(movie => (
+        {movies.map((movie) => (
           <Card
             key={movie.id}
             focusKey={`movie-${movie.id}`}
@@ -436,32 +460,35 @@ function HomePage() {
         ))}
       </Grid>
     </Screen>
-  )
+  );
 }
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AppProvider init={{
-        debug: false,
-        visualDebug: false,
-        distanceCalculationMethod: 'center',
-      }}>
+      <AppProvider
+        init={{
+          debug: false,
+          visualDebug: false,
+          distanceCalculationMethod: "center",
+        }}
+      >
         <RouterProvider>
           <Route path="/" component={HomePage} />
           <Route path="/movie/:id" component={MovieDetails} />
         </RouterProvider>
       </AppProvider>
     </QueryClientProvider>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 ## Key Navigation
 
 The library automatically handles these keys:
+
 - **Arrow Keys** (↑ ↓ ← →): Navigate between focusable elements
 - **Enter**: Activate focused element (trigger onPress/onEnterPress)
 - **Back/Escape**: Go back in navigation stack
@@ -475,6 +502,7 @@ For comprehensive documentation, API references, and interactive examples, visit
 **📚 [https://smart-tv-docs.vercel.app/components/ui](https://smart-tv-docs.vercel.app/components/ui)**
 
 The documentation includes:
+
 - Complete component API references
 - Interactive examples and demos
 - Best practices for Smart TV development
@@ -496,11 +524,11 @@ The documentation includes:
 You can import from specific subpaths:
 
 ```tsx
-import { AppProvider } from '@smart-tv/ui/core'
-import { Button, Card } from '@smart-tv/ui/components'
-import { Grid } from '@smart-tv/ui/layout'
-import { Dialog } from '@smart-tv/ui/overlay'
-import { useFocusable } from '@smart-tv/ui/hooks'
+import { AppProvider } from "@smart-tv/ui/core";
+import { Button, Card } from "@smart-tv/ui/components";
+import { Grid } from "@smart-tv/ui/layout";
+import { Dialog } from "@smart-tv/ui/overlay";
+import { useFocusable } from "@smart-tv/ui/hooks";
 ```
 
 ## Development
@@ -538,15 +566,19 @@ pnpm --filter=@smart-tv/ui dev:styles
 ## Debugging Tips
 
 1. **Enable Visual Debug Mode:**
+
    ```tsx
    <AppProvider init={{ visualDebug: true }}>
    ```
+
    This will show focus boundaries around focusable elements.
 
 2. **Enable Debug Logging:**
+
    ```tsx
    <AppProvider init={{ debug: true }}>
    ```
+
    This will log navigation events to the console.
 
 3. **Check Focus Key:**
@@ -569,7 +601,11 @@ pnpm --filter=@smart-tv/ui dev:styles
 The library is written in TypeScript and includes full type definitions. No additional `@types` packages are needed.
 
 ```tsx
-import type { InitOptions, Direction, FocusableComponentLayout } from '@smart-tv/ui'
+import type {
+  InitOptions,
+  Direction,
+  FocusableComponentLayout,
+} from "@smart-tv/ui";
 ```
 
 ## Contributing
@@ -585,7 +621,7 @@ See [CONTRIBUTING.md](../../CONTRIBUTING.md) for more details.
 
 ## License
 
-MIT License - see [LICENSE](../../LICENSE) for details.
+BSD 3-Clause License - see [LICENSE](../../LICENSE) for details.
 
 ## Related Packages
 
