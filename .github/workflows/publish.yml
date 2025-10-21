@@ -91,17 +91,18 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Version to be released: v$VERSION"
 
-      - name: Commit version changes
+      - name: Commit version changes and create tag
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
           git commit -m "chore: bump version to v${{ steps.get_version.outputs.version }}" || echo "No changes to commit"
 
-      - name: Create and push tag
-        run: |
           echo "Creating tag v${{ steps.get_version.outputs.version }}"
           git tag -a "v${{ steps.get_version.outputs.version }}" -m "Release v${{ steps.get_version.outputs.version }}"
+
+          echo "Pushing changes to main and tag"
+          git push origin main
           git push origin "v${{ steps.get_version.outputs.version }}"
 
       - name: Create GitHub Release
@@ -148,32 +149,3 @@ jobs:
         run: pnpm publish:cli --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Create Pull Request for version changes
-        if: success()
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: bump version to v${{ steps.get_version.outputs.version }}"
-          branch: release-v${{ steps.get_version.outputs.version }}
-          title: "chore: Release v${{ steps.get_version.outputs.version }}"
-          body: |
-            ## 🚀 Release v${{ steps.get_version.outputs.version }}
-
-            This PR updates package versions after successful publishing to npm.
-
-            ### Published Packages
-            ${{ github.event.inputs.packages == 'all' && '- @smart-tv/player\n- @smart-tv/query\n- create-smart-tv' || format('- {0}', github.event.inputs.packages) }}
-
-            ### Version Bump
-            - Type: **${{ github.event.inputs.version }}**
-            - Version: **v${{ steps.get_version.outputs.version }}**
-
-            ### What's Completed
-            - ✅ Git tag `v${{ steps.get_version.outputs.version }}` created
-            - ✅ GitHub Release created
-            - ✅ Packages published to npm
-
-            Please review and merge to update the main branch with the new versions.
-          labels: release
-          assignees: ${{ github.actor }}

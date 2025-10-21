@@ -1,6 +1,6 @@
 {
   "name": "smart-tv",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "A comprehensive toolkit for building Smart TV applications with React and TypeScript",
   "author": "ForidPathan",
