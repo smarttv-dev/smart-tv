@@ -12,9 +12,9 @@
   "dependencies": {
     "@babel/runtime": "^7.28.3",
     "@babel/runtime-corejs3": "^7.28.3",
-    "@smart-tv/player": "../../player",
-    "@smart-tv/query": "../../query",
-    "@smart-tv/ui": "../../ui",
+    "@smart-tv/player": "latest",
+    "@smart-tv/query": "latest",
+    "@smart-tv/ui": "latest",
     "core-js": "^3.45.1",
     "react": "^18.2.0",
     "react-dom": "^18.3.1",

@@ -5,13 +5,13 @@ const nodeVersion = process.versions.node;
 const majorVersion = parseInt(nodeVersion.split(".")[0], 10);
 
 if (majorVersion < 16) {
-  console.error("❌ Error: Node.js version 16 or higher is required.");
-  console.error(`   Current version: ${nodeVersion}`);
+  console.error("Error: Node.js version 16 or higher is required.");
+  console.error(`Current version: ${nodeVersion}`);
   console.error("");
   console.error("Please update Node.js:");
-  console.error("  • Visit https://nodejs.org/");
-  console.error("  • Use nvm: nvm install 18 && nvm use 18");
-  console.error("  • Use brew: brew install node");
+  console.error("  Visit https://nodejs.org/");
+  console.error("  Use nvm: nvm install 18 && nvm use 18");
+  console.error("  Use brew: brew install node");
   process.exit(1);
 }
 
@@ -66,36 +66,6 @@ async function copyRecursive(src, dest, excludePatterns = []) {
   }
 }
 
-async function getPackageVersion(packagePath) {
-  try {
-    const packageJsonPath = path.join(packagePath, "package.json");
-    if (await exists(packageJsonPath)) {
-      const content = await readFile(packageJsonPath, "utf8");
-      const packageData = JSON.parse(content);
-      return packageData.version || "1.0.0";
-    }
-  } catch (err) {
-    console.warn(`⚠ Could not read version from ${packagePath}:`, err.message);
-  }
-  return "1.0.0"; // fallback version
-}
-
-async function getSmartTvPackageVersions() {
-  // Try to find the packages directory relative to this CLI
-  const packagesDir = path.resolve(__dirname, "..", "..");
-
-  const versions = {};
-  const packageNames = ["player", "query", "ui"];
-
-  for (const packageName of packageNames) {
-    const packagePath = path.join(packagesDir, packageName);
-    const version = await getPackageVersion(packagePath);
-    versions[`@smart-tv/${packageName}`] = `^${version}`;
-  }
-
-  return versions;
-}
-
 async function updatePackageJson(packageJsonPath, projectName, destPath) {
   try {
     const content = await readFile(packageJsonPath, "utf8");
@@ -104,12 +74,7 @@ async function updatePackageJson(packageJsonPath, projectName, destPath) {
     // Update the package name
     packageData.name = projectName;
 
-    // Add smart-tv dependencies if they don't exist
-    if (!packageData.dependencies) {
-      packageData.dependencies = {};
-    }
-
-    // Check if we're in a workspace environment
+    // Check if we're in a workspace environment (for local development)
     const workspaceRoot = path.resolve(__dirname, "..", "..", "..");
     const destInWorkspace = destPath.startsWith(workspaceRoot);
     const isWorkspace =
@@ -119,26 +84,12 @@ async function updatePackageJson(packageJsonPath, projectName, destPath) {
 
     if (isWorkspace) {
       // We're in a workspace environment, use workspace references
-      packageData.dependencies = {
-        ...packageData.dependencies,
-        "@smart-tv/player": "workspace:*",
-        "@smart-tv/query": "workspace:*",
-        "@smart-tv/ui": "workspace:*",
-      };
-      console.log("✓ Using workspace dependencies");
-    } else {
-      // We're using the published version, get actual versions from package.json files
-      const smartTvVersions = await getSmartTvPackageVersions();
-      packageData.dependencies = {
-        ...packageData.dependencies,
-        ...smartTvVersions,
-      };
-      console.log(
-        "✓ Using package versions:",
-        Object.entries(smartTvVersions)
-          .map(([pkg, ver]) => `${pkg}@${ver}`)
-          .join(", ")
-      );
+      if (!packageData.dependencies) {
+        packageData.dependencies = {};
+      }
+      packageData.dependencies["@smart-tv/player"] = "workspace:*";
+      packageData.dependencies["@smart-tv/query"] = "workspace:*";
+      packageData.dependencies["@smart-tv/ui"] = "workspace:*";
     }
 
     // Write back the updated package.json
@@ -146,9 +97,8 @@ async function updatePackageJson(packageJsonPath, projectName, destPath) {
       packageJsonPath,
       JSON.stringify(packageData, null, 2) + "\n"
     );
-    console.log("✓ Updated package.json with smart-tv dependencies");
   } catch (err) {
-    console.warn("⚠ Could not update package.json:", err.message);
+    console.warn("Warning: Could not update package.json:", err.message);
   }
 }
 
@@ -171,7 +121,7 @@ async function main() {
 
   // Handle help flag
   if (argv.help || argv.h) {
-    console.log("🚀 Create Smart TV App");
+    console.log("create-smart-tv-app");
     console.log("");
     console.log("Usage: create-smart-tv-app <project-name> [options]");
     console.log("");
@@ -188,40 +138,29 @@ async function main() {
     console.log("  pnpm create smart-tv-app streaming-platform");
     console.log("  yarn create smart-tv-app cinema-hub");
     console.log("");
-    console.log("Visit https://smart-tv-docs.vercel.app for documentation");
+    console.log("Documentation: https://smart-tv-docs.vercel.app");
     process.exit(0);
   }
 
   if (!name) {
-    console.error("❌ Error: Project name is required");
+    console.error("Error: Project name is required");
     console.error("");
-    console.error("Usage: create-smart-tv-app <project-name>");
+    console.error("Usage:");
+    console.error("  create-smart-tv-app <project-name>");
     console.error("");
-    console.error("Examples:");
+    console.error("Example:");
     console.error("  npx create-smart-tv-app my-smart-tv-app");
-    console.error("  npm create smart-tv-app@latest my-app");
-    console.error("  pnpm create smart-tv-app my-streaming-app");
-    console.error("  yarn create smart-tv-app my-cinema-app");
-    console.error("");
-    console.error("The project name should be:");
-    console.error("  - lowercase (recommended)");
-    console.error("  - without spaces (use hyphens or underscores)");
-    console.error("  - valid npm package name");
-    console.error("");
-    console.error(
-      '💡 Tip: Use descriptive names like "netflix-clone", "streaming-app", or "smart-tv-dashboard"'
-    );
     process.exit(2);
   }
 
   // Validate project name
   if (!/^[a-z0-9_-]+$/i.test(name)) {
-    console.error("❌ Error: Invalid project name");
+    console.error("Error: Invalid project name");
     console.error(
       "Project name can only contain letters, numbers, hyphens, and underscores."
     );
     console.error("");
-    console.error("Valid examples: my-app, smart_tv_app, myapp123");
+    console.error("Example: my-app, smart-tv-app, myapp123");
     process.exit(2);
   }
 
@@ -230,62 +169,46 @@ async function main() {
   const dest = path.join(cwd, name);
 
   if (await exists(dest)) {
-    console.error(`❌ Destination ${dest} already exists. Aborting.`);
+    console.error(`Error: Directory ${name} already exists.`);
     process.exit(3);
   }
 
   console.log("");
-  console.log("🚀 Creating Smart TV project...");
-  console.log(`📦 Project name: ${name}`);
-  console.log(`📁 Destination: ${dest}`);
+  console.log(`Creating a new Smart TV app in ${dest}`);
   console.log("");
 
   // Check if template exists
   if (!(await exists(templatePath))) {
-    console.error(`❌ Template not found at ${templatePath}`);
-    console.error("Please reinstall create-smart-tv-app or report this issue.");
+    console.error(`Error: Template not found at ${templatePath}`);
+    console.error("Please reinstall create-smart-tv-app.");
     process.exit(4);
   }
 
   try {
-    console.log("📋 Copying template files...");
+    console.log("Installing packages. This might take a couple of minutes.");
+    console.log("");
+
     // Copy template files
     await copyRecursive(templatePath, dest);
-    console.log("✅ Template files copied successfully");
 
-    console.log("📝 Updating project configuration...");
     // Update package.json with project name and dependencies
     const packageJsonPath = path.join(dest, "package.json");
     await updatePackageJson(packageJsonPath, name, dest);
 
+    console.log("Success! Created", name, "at", dest);
     console.log("");
-    console.log("Smart TV project created successfully!");
+    console.log("We suggest that you begin by typing:");
     console.log("");
-    console.log("Get started:");
-    console.log(`  cd ${name}`);
-    console.log("  npm install     # Install dependencies");
-    console.log("  npm run dev     # Start development server");
+    console.log("  cd", name);
+    console.log("  npm install");
+    console.log("  npm run dev");
     console.log("");
+    console.log("Happy coding!");
   } catch (err) {
     console.error("");
-    console.error("❌ Failed to create project:");
-    console.error(`   ${err.message}`);
+    console.error("Error: Failed to create project");
+    console.error(err.message);
     console.error("");
-    console.error("🔧 Troubleshooting:");
-    console.error(
-      "  • Make sure you have write permissions in the current directory"
-    );
-    console.error(
-      "  • Ensure the project name doesn't contain special characters"
-    );
-    console.error(
-      "  • Try running with sudo if permission issues persist (not recommended)"
-    );
-    console.error("  • Check if the destination folder already exists");
-    console.error("");
-    console.error(
-      "💬 Need help? Visit https://github.com/smarttv-dev/smart-tv/issues"
-    );
     process.exit(4);
   }
 }
