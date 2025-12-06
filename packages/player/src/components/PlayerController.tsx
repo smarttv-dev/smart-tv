@@ -457,7 +457,10 @@ const PlayerController: React.FC<PlayerControllerProps> = ({
 
           if (config.action === "title" || config.action === "time") {
             return (
-              <div key={index} className="player-flex player-items-center">
+              <div
+                key={index}
+                className="player-flex player-items-center player-flex-1"
+              >
                 {content}
               </div>
             );
@@ -541,7 +544,7 @@ const PlayerController: React.FC<PlayerControllerProps> = ({
             <div className="player-flex player-items-center">
               {renderButtons("top", "left")}
             </div>
-            <div className="player-flex player-items-center">
+            <div className="player-flex player-items-center player-flex-1">
               {renderButtons("top", "center")}
             </div>
             <div className="player-flex player-items-center">
@@ -555,7 +558,7 @@ const PlayerController: React.FC<PlayerControllerProps> = ({
               <div className="player-flex player-items-center">
                 {renderButtons("center", "left")}
               </div>
-              <div className="player-flex player-items-center">
+              <div className="player-flex player-items-center player-flex-1">
                 {renderButtons("center", "center")}
               </div>
               <div className="player-flex player-items-center">
@@ -576,7 +579,7 @@ const PlayerController: React.FC<PlayerControllerProps> = ({
               <div className="player-flex player-items-center">
                 {renderButtons("bottom", "left")}
               </div>
-              <div className="player-flex player-items-center">
+              <div className="player-flex player-items-center player-flex-1">
                 {renderButtons("bottom", "center")}
               </div>
               <div className="player-flex player-items-center">

@@ -332,7 +332,7 @@ export const minimalLayout: PlayerControllerLayout = {
       position: "center",
       align: "center",
       size: "xl",
-      className: "player-rounded-full player-bg-white/20",
+      className: "player-rounded-full player-bg-white/20 player-mx-auto",
     },
     {
       action: "progressbar",
