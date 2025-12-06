@@ -100,10 +100,18 @@ jobs:
 
           # Create and push release branch
           BRANCH_NAME="release-v${{ steps.get_version.outputs.version }}"
+
+          # Delete remote branch if it exists
+          git push origin --delete $BRANCH_NAME 2>/dev/null || true
+
           git checkout -b $BRANCH_NAME
           git push origin $BRANCH_NAME
 
           echo "Creating tag v${{ steps.get_version.outputs.version }}"
+
+          # Delete remote tag if it exists
+          git push origin --delete "v${{ steps.get_version.outputs.version }}" 2>/dev/null || true
+
           git tag -a "v${{ steps.get_version.outputs.version }}" -m "Release v${{ steps.get_version.outputs.version }}"
           git push origin "v${{ steps.get_version.outputs.version }}"
 
