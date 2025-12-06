@@ -3,12 +3,13 @@ import React, {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  ReactNode,
 } from "react";
 import { FocusContext, useFocusable, UseFocusableConfig } from "../hooks";
 import { cn } from "../utils";
 
 interface ScreenProps extends UseFocusableConfig {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   selFocus?: boolean; // when true, focus this screen on mount
   as?: ElementType; // allow different root element
@@ -48,7 +49,7 @@ export const Screen = forwardRef<HTMLElement, ScreenProps>(
     return (
       <FocusContext.Provider value={focusKey}>
         <Element
-          ref={internalRef as any}
+          ref={internalRef as React.RefObject<HTMLElement>}
           className={cn("ui-h-screen ui-overflow-hidden", className)}
           style={style}
         >

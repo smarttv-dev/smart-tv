@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { navigateByDirection } from "../core";
 import { FocusContext, useFocusable, UseFocusableConfig } from "../hooks";
+import { cn } from "../utils";
 
 type RowProps = {
   children?: React.ReactNode;
@@ -28,6 +29,9 @@ type RowProps = {
     hasNext?: boolean;
     threshold?: number;
   };
+  width?: string | number;
+  height?: string | number;
+  containerClass?: string;
 } & Partial<UseFocusableConfig>;
 
 export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
@@ -39,6 +43,9 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
     trackChildren = true,
     saveLastFocusedChild = true,
     scrollProps,
+    width,
+    height,
+    containerClass = "",
     ...rest
   },
   ref
@@ -231,11 +238,12 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
       <FocusContext.Provider value={providedFocusKey}>
         <div
           ref={containerRef}
-          className="ui-row overflow-x-auto"
+          className={cn("ui-row ui-overflow-x-auto", containerClass)}
           style={
             {
               WebkitOverflowScrolling: "touch",
-              width: "calc(98vw - var(--ui-sidebar-width, 0px))",
+              width: width || "calc(98vw - var(--ui-sidebar-width, 0px))",
+              height: height || "auto",
             } as React.CSSProperties
           }
         >
@@ -248,7 +256,7 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
           </div>
           <div
             ref={fRef}
-            className={`flex flex-nowrap ${className} ${focused ? "focused" : ""}`}
+            className={cn("ui-flex ui-flex-nowrap", className, { focused })}
             style={style}
           >
             {rendered}
@@ -262,17 +270,18 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
     <FocusContext.Provider value={providedFocusKey}>
       <div
         ref={containerRef}
-        className="ui-row overflow-x-auto"
+        className={cn("ui-row ui-overflow-x-auto", containerClass)}
         style={
           {
             WebkitOverflowScrolling: "touch",
-            width: "calc(98vw - var(--ui-sidebar-width, 0px))",
+            width: width || "calc(98vw - var(--ui-sidebar-width, 0px))",
+            height: height || "auto",
           } as React.CSSProperties
         }
       >
         <div
           ref={fRef}
-          className={`flex flex-nowrap ${className} ${focused ? "focused" : ""}`}
+          className={cn("ui-flex ui-flex-nowrap", className, { focused })}
           style={style}
         >
           {children}

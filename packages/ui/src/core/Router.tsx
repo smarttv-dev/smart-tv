@@ -4,7 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -31,6 +31,7 @@ interface RouterContextValue {
     opts?: { skippable?: boolean }
   ) => () => void;
   getParamsForPath: (path: string) => Params;
+  getMatchingRoute: (path: string) => string | null;
 }
 
 const RouterContext = createContext<RouterContextValue | undefined>(undefined);
@@ -91,23 +92,23 @@ export function RouterProvider({
   const stackRef = useRef<RouteEntry[]>([
     { path: initial, state: undefined, base: pathToSegments(initial)[0] ?? "" },
   ]);
-  const [, tick] = useState(0);
-
-  // current is always defined because stackRef is initialized with at least one entry
-  const current: RouteEntry = stackRef.current[stackRef.current.length - 1] || {
-    path: initial,
-    state: undefined,
-  };
+  const [currentTick, tick] = useState(0);
 
   const push = useCallback(
     (path: string, state?: RouteState) => {
       const top = stackRef.current[stackRef.current.length - 1];
       const base = pathToSegments(path)[0] ?? "";
 
-      // If pushing the same path as current, replace the state instead of adding a duplicate
+      // Prevent pushing duplicate path (regardless of state)
       if (top && top.path === path) {
+        // Optionally update state if different
         if (top.state !== state) {
-          stackRef.current[stackRef.current.length - 1] = { path, state, base };
+          stackRef.current[stackRef.current.length - 1] = {
+            ...top,
+            path,
+            state,
+            base,
+          };
           tick((n) => n + 1);
         }
         return;
@@ -120,21 +121,26 @@ export function RouterProvider({
         if (topBase && newBase && topBase === newBase) {
           // Two options: replace top (current simple behavior) OR mark older entries skippable.
           if (skipDuplicates) {
-            // Mark any earlier entries with same base as skippable to avoid loops when going back
-            for (let i = 0; i < stackRef.current.length - 1; i++) {
-              if (stackRef.current[i].base === newBase) {
-                stackRef.current[i].skippable = true;
-              }
-            }
             const entrySkippable =
               skippableRoutesRef.current.has(path) ||
               skippableRoutesRef.current.has(base);
-            stackRef.current.push({
-              path,
-              state,
-              base,
-              skippable: entrySkippable,
-            });
+            // Only mark earlier entries skippable if the new entry is skippable
+            if (entrySkippable) {
+              for (let i = 0; i < stackRef.current.length - 1; i++) {
+                if (stackRef.current[i].base === newBase) {
+                  stackRef.current[i].skippable = true;
+                }
+              }
+            }
+            // Prevent pushing duplicate path
+            if (top.path !== path) {
+              stackRef.current.push({
+                path,
+                state,
+                base,
+                skippable: entrySkippable,
+              });
+            }
           } else {
             // default: replace top so stack doesn't grow
             const entrySkippable =
@@ -152,9 +158,50 @@ export function RouterProvider({
         }
       }
 
-      const entrySkippable =
-        skippableRoutesRef.current.has(path) ||
-        skippableRoutesRef.current.has(base);
+      // Determine skippable using the best matching registered route pattern (prefer static/specific)
+      const sortedPatterns = Array.from(routesRef.current).sort((a, b) => {
+        const aHasParams = a.includes(":");
+        const bHasParams = b.includes(":");
+        const aIsWildcard = a.includes("*");
+        const bIsWildcard = b.includes("*");
+
+        // Wildcard routes last
+        if (aIsWildcard && !bIsWildcard) return 1;
+        if (!aIsWildcard && bIsWildcard) return -1;
+
+        // Static routes before dynamic routes
+        if (!aHasParams && bHasParams) return -1;
+        if (aHasParams && !bHasParams) return 1;
+
+        // Both static or both dynamic: longer paths first (more specific)
+        return b.split("/").length - a.split("/").length;
+      });
+
+      let bestMatchPattern: string | null = null;
+      for (const pattern of sortedPatterns) {
+        const { matched } = matchPath(pattern, path);
+        if (matched) {
+          bestMatchPattern = pattern;
+          break;
+        }
+      }
+
+      const entrySkippable = bestMatchPattern
+        ? skippableRoutesRef.current.has(bestMatchPattern)
+        : false;
+
+      // Remove any existing entries with same path so route is moved to top instead of duplicated
+      stackRef.current = stackRef.current.filter((e) => e.path !== path);
+
+      // If the new entry is skippable and we have a matching registered pattern, remove previous entries
+      // that match the same best pattern (so dynamic patterns only affect routes that matched that pattern)
+      if (entrySkippable && bestMatchPattern) {
+        stackRef.current = stackRef.current.filter((e) => {
+          return !matchPath(bestMatchPattern as string, e.path).matched;
+        });
+      }
+
+      // Push the new entry
       stackRef.current.push({ path, state, base, skippable: entrySkippable });
 
       // enforce max stack depth to avoid unbounded memory usage on long sessions
@@ -169,7 +216,16 @@ export function RouterProvider({
   );
 
   const replace = useCallback((path: string, state?: RouteState) => {
-    stackRef.current[stackRef.current.length - 1] = { path, state };
+    const base = pathToSegments(path)[0] ?? "";
+    const entrySkippable =
+      skippableRoutesRef.current.has(path) ||
+      skippableRoutesRef.current.has(base);
+    stackRef.current[stackRef.current.length - 1] = {
+      path,
+      state,
+      base,
+      skippable: entrySkippable,
+    };
     tick((n) => n + 1);
   }, []);
 
@@ -179,7 +235,7 @@ export function RouterProvider({
     // pop current
     stackRef.current.pop();
 
-    // Skip entries marked skippable
+    // Only skip consecutive skippable entries at the top
     while (
       stackRef.current.length > 1 &&
       stackRef.current[stackRef.current.length - 1].skippable
@@ -217,12 +273,70 @@ export function RouterProvider({
   );
 
   const getParamsForPath = useCallback((path: string) => {
-    for (const pattern of Array.from(routesRef.current)) {
+    // Sort routes by specificity: static routes first, then dynamic routes
+    const sortedPatterns = Array.from(routesRef.current).sort((a, b) => {
+      const aHasParams = a.includes(":");
+      const bHasParams = b.includes(":");
+      const aIsWildcard = a.includes("*");
+      const bIsWildcard = b.includes("*");
+
+      // Wildcard routes last
+      if (aIsWildcard && !bIsWildcard) return 1;
+      if (!aIsWildcard && bIsWildcard) return -1;
+
+      // Static routes before dynamic routes
+      if (!aHasParams && bHasParams) return -1;
+      if (aHasParams && !bHasParams) return 1;
+
+      // Both static or both dynamic: longer paths first (more specific)
+      return b.split("/").length - a.split("/").length;
+    });
+
+    for (const pattern of sortedPatterns) {
       const { params, matched } = matchPath(pattern, path);
       if (matched) return params;
     }
     return {} as Params;
   }, []);
+
+  const getMatchingRoute = useCallback((path: string) => {
+    // Sort routes by specificity: static routes first, then dynamic routes
+    const sortedPatterns = Array.from(routesRef.current).sort((a, b) => {
+      const aHasParams = a.includes(":");
+      const bHasParams = b.includes(":");
+      const aIsWildcard = a.includes("*");
+      const bIsWildcard = b.includes("*");
+
+      // Wildcard routes last
+      if (aIsWildcard && !bIsWildcard) return 1;
+      if (!aIsWildcard && bIsWildcard) return -1;
+
+      // Static routes before dynamic routes
+      if (!aHasParams && bHasParams) return -1;
+      if (aHasParams && !bHasParams) return 1;
+
+      // Both static or both dynamic: longer paths first (more specific)
+      return b.split("/").length - a.split("/").length;
+    });
+
+    for (const pattern of sortedPatterns) {
+      const { matched } = matchPath(pattern, path);
+      if (matched) return pattern;
+    }
+    return null;
+  }, []);
+
+  // Compute current entry - depends on currentTick which changes when stack changes
+  const current: RouteEntry = useMemo(() => {
+    return (
+      stackRef.current[stackRef.current.length - 1] || {
+        path: initial,
+        state: undefined,
+      }
+    );
+    // currentTick is intentionally a dependency to trigger recomputation when stack changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTick, initial]);
 
   const value = useMemo(
     () => ({
@@ -233,8 +347,18 @@ export function RouterProvider({
       go,
       registerRoute,
       getParamsForPath,
+      getMatchingRoute,
     }),
-    [current, push, replace, back, go, registerRoute, getParamsForPath]
+    [
+      current,
+      push,
+      replace,
+      back,
+      go,
+      registerRoute,
+      getParamsForPath,
+      getMatchingRoute,
+    ]
   );
   return (
     <RouterContext.Provider value={value}>{children}</RouterContext.Provider>
@@ -303,29 +427,57 @@ export function Route({
     | ((props: { params: Params; state?: RouteState }) => ReactNode);
   skippable?: boolean;
 }) {
-  const { current } = useRouter();
-  const { registerRoute } = useRouter();
+  const { current, registerRoute, getMatchingRoute } = useRouter();
 
-  useEffect(
+  // Register route immediately using useLayoutEffect (runs before paint)
+  // This ensures routes are registered before rendering logic runs
+  useLayoutEffect(
     () => registerRoute(path, { skippable }),
     [path, registerRoute, skippable]
   );
 
+  // Check if this route matches
   const { params, matched } = matchPath(path, current.path);
 
+  // If this route doesn't match, don't render
   if (!matched) return null;
+
+  // Check if there's a more specific route that should take precedence
+  const bestMatch = getMatchingRoute(current.path);
+
+  // If no routes are registered yet (initial render), allow this route to render if it matches
+  // Otherwise, only render if this is the best matching route
+  if (bestMatch !== null && bestMatch !== path) return null;
 
   const state = current.state;
 
   if (Component) return <Component params={params} state={state} />;
 
   if (typeof element === "function")
-    return <>{(element as any)({ params, state })}</>;
+    return (
+      <>
+        {(
+          element as (props: {
+            params: Params;
+            state?: RouteState;
+          }) => ReactNode
+        )({ params, state })}
+      </>
+    );
 
   if (element) return <>{element}</>;
 
   if (typeof children === "function")
-    return <>{(children as any)({ params, state })}</>;
+    return (
+      <>
+        {(
+          children as (props: {
+            params: Params;
+            state?: RouteState;
+          }) => ReactNode
+        )({ params, state })}
+      </>
+    );
 
   return <>{children ?? null}</>;
 }
@@ -356,3 +508,14 @@ export default {
   useRouter,
   useLocation,
 };
+
+// DEV-ONLY: helper to inspect stackRef in tests or console
+// Remove or guard behind NODE_ENV before shipping
+export function __debug_getStack() {
+  try {
+    // @ts-expect-error accessing module-level ref for debug only
+    return JSON.parse(JSON.stringify(stackRef.current));
+  } catch {
+    return null;
+  }
+}
