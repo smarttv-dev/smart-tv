@@ -130,85 +130,99 @@ const PlayerController: React.FC<PlayerControllerProps> = ({
     saveLastFocusedChild: true,
   });
 
-  // Auto-hide logic
+  // Centralized function to start/restart hide timer
+  const startHideTimer = useCallback(() => {
+    if (!finalLayout.autoHide) return;
+
+    // Clear existing timer
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+
+    // Check if we should keep controls visible (paused, modals open, or has focus)
+    const shouldStayVisible =
+      paused ||
+      isTrackSelectorVisible ||
+      isSettingsPanelVisible ||
+      isPlaylistVisible;
+
+    if (shouldStayVisible) {
+      // Keep controls visible, don't start timer
+      setIsVisible(true);
+    } else {
+      // Start new hide timer
+      hideTimeoutRef.current = setTimeout(() => {
+        setIsVisible(false);
+      }, finalLayout.autoHideDelay || 4000);
+    }
+  }, [
+    finalLayout.autoHide,
+    finalLayout.autoHideDelay,
+    paused,
+    isTrackSelectorVisible,
+    isSettingsPanelVisible,
+    isPlaylistVisible,
+    focused,
+    hasFocusedChild,
+  ]);
+
+  // Auto-hide logic - show controls on any state change, then start timer
   useEffect(() => {
     if (!finalLayout.autoHide) return;
 
-    const shouldShow =
-      focused ||
-      hasFocusedChild ||
-      isTrackSelectorVisible ||
-      isSettingsPanelVisible ||
-      paused;
+    // Start/restart the hide timer
+    startHideTimer();
 
-    if (shouldShow) {
-      setIsVisible(true);
+    // Cleanup on unmount
+    return () => {
       if (hideTimeoutRef.current) {
         clearTimeout(hideTimeoutRef.current);
         hideTimeoutRef.current = null;
       }
-    } else {
-      if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-      }
-      const timeout = setTimeout(() => {
-        setIsVisible(false);
-      }, finalLayout.autoHideDelay || 4000);
-      hideTimeoutRef.current = timeout;
-    }
-
-    return () => {
-      if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-      }
     };
   }, [
+    finalLayout.autoHide,
+    startHideTimer,
     focused,
     hasFocusedChild,
     isTrackSelectorVisible,
     isSettingsPanelVisible,
+    isPlaylistVisible,
     paused,
-    finalLayout.autoHide,
-    finalLayout.autoHideDelay,
   ]);
 
-  // Show on mouse movement
+  // Show on mouse/keyboard activity
   useEffect(() => {
-    if (!finalLayout.showOnHover) return;
+    if (!finalLayout.showOnHover && !finalLayout.autoHide) return;
 
-    const handleMouseMove = () => {
+    const handleActivity = (e: Event) => {
+      // Show controls on any user interaction
       setIsVisible(true);
-      if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-      }
-
-      if (
-        finalLayout.autoHide &&
-        !focused &&
-        !hasFocusedChild &&
-        !isTrackSelectorVisible &&
-        !isSettingsPanelVisible
-      ) {
-        const timeout = setTimeout(() => {
-          setIsVisible(false);
-        }, finalLayout.autoHideDelay || 4000);
-        hideTimeoutRef.current = timeout;
-      }
+      // Restart hide timer
+      startHideTimer();
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Show controls on any key press
+      setIsVisible(true);
+      // Restart hide timer
+      startHideTimer();
+    };
+
+    // Listen for various user interactions
+    document.addEventListener("mousemove", handleActivity);
+    document.addEventListener("click", handleActivity);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("wheel", handleActivity);
+
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousemove", handleActivity);
+      document.removeEventListener("click", handleActivity);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("wheel", handleActivity);
     };
-  }, [
-    finalLayout.showOnHover,
-    finalLayout.autoHide,
-    finalLayout.autoHideDelay,
-    focused,
-    hasFocusedChild,
-    isTrackSelectorVisible,
-    isSettingsPanelVisible,
-  ]);
+  }, [finalLayout.showOnHover, finalLayout.autoHide, startHideTimer]);
 
   // Button action handlers
   const handleButtonAction = useCallback(
