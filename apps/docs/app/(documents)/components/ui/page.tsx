@@ -210,14 +210,56 @@ export default function UIComponentsIndex(): React.ReactElement {
 import '@smart-tv/ui/styles.css';
 
 function App() {
+  const movies = [
+    {
+      id: 1,
+      poster: "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?w=500",
+      title: "The Silent Horizon",
+    },
+    {
+      id: 2,
+      poster: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500",
+      title: "Neon Streets",
+    },
+    {
+      id: 3,
+      poster: "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?w=500",
+      title: "Lost in the Night",
+    },
+    {
+      id: 4,
+      poster: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500",
+      title: "Deep Frontier",
+    },
+    {
+      id: 5,
+      poster: "https://images.unsplash.com/photo-1505685296765-3a2736de412f?w=500",
+      title: "Desert Echoes",
+    },
+    {
+      id: 6,
+      poster: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500",
+      title: "Solar Drift",
+    },
+    {
+      id: 7,
+      poster: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500",
+      title: "Midnight Code",
+    },
+    {
+      id: 8,
+      poster: "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=500",
+      title: "Urban Phantom",
+    }
+  ]
   return (
     <AppProvider
       init={{
-        debug: false,
+        debug: true,
         throttle: 0
       }}
     >
-      <Screen focusKey="home" trackChildren>
+      <Screen focusKey="home" trackChildren selFocus>
         <h1>Welcome to Smart TV</h1>
 
         <Grid focusKey="content-grid" columns={4} gap={16}>
@@ -225,7 +267,7 @@ function App() {
             <Card
               key={movie.id}
               focusKey={\`movie-\${movie.id}\`}
-              onEnterPress={() => playMovie(movie)}
+              onEnterPress={() => console.log('ENTER ->', movie.title)}
             >
               <img src={movie.poster} alt={movie.title} />
               <h3>{movie.title}</h3>
@@ -235,7 +277,9 @@ function App() {
       </Screen>
     </AppProvider>
   );
-}`}
+}
+export default App
+`}
         />
       </div>
 
