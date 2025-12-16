@@ -296,6 +296,7 @@ const PlayerController: React.FC<PlayerControllerProps> = ({
           <SeekBar
             focusKey={config.focusKey || "seek-bar"}
             className={cn("player-w-full player-flex-1", config.className)}
+            stepTime={config.stepTime || undefined}
           />
         );
 
