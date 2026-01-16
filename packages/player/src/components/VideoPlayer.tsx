@@ -307,7 +307,8 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
       if (!videoRef.current) return;
 
       const video = videoRef.current;
-      const player = new shaka.Player(video);
+      const player = new shaka.Player();
+      player.attach(video);
       playerRef.current = player;
 
       // Set up error handling
