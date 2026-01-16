@@ -372,8 +372,12 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
           mediaContext?.actions.setLoading(false);
           mediaContext?.actions.setError(null);
         } catch (error) {
-          const err =
-            error instanceof Error ? error : new Error("Failed to load source");
+          let err;
+          if (error instanceof Error)
+            err = error;
+          else if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string')
+            err = new Error(error.message);
+          else err = new Error("Failed to load source");
           onError?.(err);
           mediaContext?.actions.setError(err);
           mediaContext?.actions.setLoading(false);
