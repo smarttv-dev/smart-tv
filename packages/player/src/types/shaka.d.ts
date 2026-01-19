@@ -7,7 +7,7 @@ declare module "shaka-player" {
       constructor(video: HTMLVideoElement);
       constructor();
       attach(video: HTMLVideoElement);
-      load(uri: string): Promise<void>;
+      load(uri: string, startTime ? : number | null , mimeType ? : string | null): Promise<void>;
       destroy(): Promise<void>;
       configure(config: any): void;
       getConfiguration(): any;

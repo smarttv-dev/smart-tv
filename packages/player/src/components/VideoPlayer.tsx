@@ -365,7 +365,7 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
                 },
               });
             }
-            await playerRef.current.load(source.src);
+            await playerRef.current.load(source.src, source.startTime, source.type);
           }
 
           onLoadedData?.();

@@ -58,6 +58,7 @@ export interface TextTrack {
 // Player source types
 export interface PlayerSource {
   src: string;
+  startTime?: number;
   type?: string;
   drm?: DrmConfig;
 }
