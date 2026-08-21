@@ -5,7 +5,9 @@ declare module "shaka-player" {
   namespace shaka {
     export class Player {
       constructor(video: HTMLVideoElement);
-      load(uri: string): Promise<void>;
+      constructor();
+      attach(video: HTMLVideoElement);
+      load(uri: string, startTime ? : number | null , mimeType ? : string | null): Promise<void>;
       destroy(): Promise<void>;
       configure(config: any): void;
       getConfiguration(): any;

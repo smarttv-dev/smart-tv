@@ -307,7 +307,8 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
       if (!videoRef.current) return;
 
       const video = videoRef.current;
-      const player = new shaka.Player(video);
+      const player = new shaka.Player();
+      player.attach(video);
       playerRef.current = player;
 
       // Set up error handling
@@ -364,15 +365,19 @@ export const VideoPlayer = forwardRef<MediaPlayerInstance, MediaPlayerProps>(
                 },
               });
             }
-            await playerRef.current.load(source.src);
+            await playerRef.current.load(source.src, source.startTime, source.type);
           }
 
           onLoadedData?.();
           mediaContext?.actions.setLoading(false);
           mediaContext?.actions.setError(null);
         } catch (error) {
-          const err =
-            error instanceof Error ? error : new Error("Failed to load source");
+          let err;
+          if (error instanceof Error)
+            err = error;
+          else if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string')
+            err = new Error(error.message);
+          else err = new Error("Failed to load source");
           onError?.(err);
           mediaContext?.actions.setError(err);
           mediaContext?.actions.setLoading(false);
